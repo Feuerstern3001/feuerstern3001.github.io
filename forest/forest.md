@@ -6,4 +6,4 @@
 [Water Drinking Place](./water.md)
 
 
-[Zurück](.)
+[Zurück](/.)
