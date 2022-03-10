@@ -4,7 +4,7 @@ title: Feuerstern3001/Personal Site
 ---
 
 ## Forest Map Locations
-[Directory](./forest.html).
+[Directory](./forest/forest.html)
 
 ## Wöchentlicher Essensplan
-[Essensplan](./foodplan.html).
+[Essensplan](./foodplan.html)
