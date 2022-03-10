@@ -1,9 +1,9 @@
 # Directory
-[Bunkers](./forest/bunker.html)
+[Bunkers](./bunker.md)
 
-[Hunter Seats and misc.](./forest/hunter.html)
+[Hunter Seats and misc.](./hunter.md)
 
-[Water Drinking Place](./forest/water.html)
+[Water Drinking Place](./water.md)
 
 
-[Zurück](./)
+[Zurück](.)
