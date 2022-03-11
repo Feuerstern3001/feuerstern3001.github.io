@@ -1,9 +1,12 @@
 # Directory
 [Bunkers](./bunker.md)
 
-[Hunter Seats and misc.](./hunter.md)
+[Hunter Seats](./hunter.md)
 
-[Water Drinking Place](./water.md)
+[Drinking Places](./water.md)
+
+[Misc](./misc.md)
+
 
 
 [Zurück](/.)
