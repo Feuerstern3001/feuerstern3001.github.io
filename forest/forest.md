@@ -1,3 +1,7 @@
+---
+layout: default
+title: Forest Locations
+---
 # Directory
 [Bunkers](./bunker.md)
 
