@@ -8,7 +8,4 @@
 [Misc](./misc.md)
 
 
-
-
-
 [Zurück](/.)
