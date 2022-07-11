@@ -130,8 +130,8 @@ input[type=color] { height:24px; }
 		var staticMode=true;
 		var hideSidebar=false;
 		var noCentering=false;
-		var defaultZoom=1.491;
-		var defaultDetail='b.d';
+		var defaultZoom=1.4722222010295;
+		var defaultDetail='b.r.d';
 		var defaultBirthName=1;
 		var defaultSurnameFirst=0;
 		var defaultMaleLeft=0;
@@ -147,11 +147,11 @@ input[type=color] { height:24px; }
 			deceased : '#777777',
 			borders : '#222222'
 		};
-		var defaultWidth=1.023;
+		var defaultWidth=1.425;
 		var defaultLines={
 			current : 'thick',
 			otherpartner : 'gray',
-			biological : 'medium',
+			biological : 'dashed',
 			otherparent : 'gray'
 		};
 		--></SCRIPT>
@@ -5241,13 +5241,13 @@ SHP();
 
 # Start of FamilyScript...
 
-iSTART	pAdam	z1	lBrechtel	gm	b18761002	d19670105	mQ0ALU	fUW8KT
+iSTART	pAdam	z1	lBrechtel	gm	b18761002	d19670105	mQ0ALU	fUW8KT	sNO93J
 iMKQJ0	^START	pCäcilia	lBrechtel	qKirchner	z1	gf	b18810926	d19080112	mA7JPY	fIDNRD
 iUW8KT	^START	gm	sQ0ALU	pPhilipp	lBrechtel II	z1	b18380510	d18991105
 iQ0ALU	^START	gf	sUW8KT	pBabara	lBrechtel	qRoth	z1	b18441010	d18790617
 iIDNRD	^MKQJ0	gm	lKirchner	sA7JPY	pFranz	qKirchner	z1	b18450128	d19221124
 iA7JPY	^MKQJ0	gf	sIDNRD	lKirchner	pKatharina	qMartin	z1	b18501027	d19290326
-iESOXW	^MKQJ0	mA7JPY	fIDNRD	lKirchner	qKirchner	gf	pMagdalena	z1
+iNO93J	^START	sSTART	lBrechtel	pMagdalena	qKirchner	gf	z1	b18790308	d19560302	mA7JPY	fIDNRD	Vb
 pMKQJ0 START	e1	gd
 
 # ...end of FamilyScript
@@ -5285,7 +5285,8 @@ pMKQJ0 START	e1	gd
 1 DEAT Y
 2 DATE 5 JAN 1967
 1 FAMS @F1@
-1 FAMC @F2@
+1 FAMS @F2@
+1 FAMC @F3@
 0 @I2@ INDI
 1 NAME Cäcilia /Kirchner/
 2 GIVN Cäcilia
@@ -5296,8 +5297,8 @@ pMKQJ0 START	e1	gd
 2 DATE 26 SEP 1881
 1 DEAT Y
 2 DATE 12 JAN 1908
-1 FAMS @F1@
-1 FAMC @F3@
+1 FAMS @F2@
+1 FAMC @F4@
 0 @I3@ INDI
 1 NAME Philipp /Brechtel II/
 2 GIVN Philipp
@@ -5308,7 +5309,7 @@ pMKQJ0 START	e1	gd
 2 DATE 10 MAY 1838
 1 DEAT Y
 2 DATE 5 NOV 1899
-1 FAMS @F2@
+1 FAMS @F3@
 0 @I4@ INDI
 1 NAME Babara /Roth/
 2 GIVN Babara
@@ -5319,7 +5320,7 @@ pMKQJ0 START	e1	gd
 2 DATE 10 OCT 1844
 1 DEAT Y
 2 DATE 17 JUN 1879
-1 FAMS @F2@
+1 FAMS @F3@
 0 @I5@ INDI
 1 NAME Franz /Kirchner/
 2 GIVN Franz
@@ -5330,7 +5331,7 @@ pMKQJ0 START	e1	gd
 2 DATE 28 JAN 1845
 1 DEAT Y
 2 DATE 24 NOV 1922
-1 FAMS @F3@
+1 FAMS @F4@
 0 @I6@ INDI
 1 NAME Katharina /Martin/
 2 GIVN Katharina
@@ -5341,29 +5342,39 @@ pMKQJ0 START	e1	gd
 2 DATE 27 OCT 1850
 1 DEAT Y
 2 DATE 26 MAR 1929
-1 FAMS @F3@
+1 FAMS @F4@
 0 @I7@ INDI
 1 NAME Magdalena /Kirchner/
 2 GIVN Magdalena
 2 SURN Kirchner
-2 _MARNM Kirchner
+2 _MARNM Brechtel
 1 SEX F
+1 BIRT
+2 DATE 8 MAR 1879
 1 DEAT Y
-1 FAMC @F3@
+2 DATE 2 MAR 1956
+1 FAMS @F1@
+1 FAMC @F4@
+2 PEDI birth
 0 @F1@ FAM
+1 HUSB @I1@
+1 WIFE @I7@
+1 _CURRENT Y
+1 _PRIMARY Y
+0 @F2@ FAM
 1 HUSB @I1@
 1 WIFE @I2@
 1 MARR
 1 DIV
 1 _CURRENT N
 1 _PRIMARY N
-0 @F2@ FAM
+0 @F3@ FAM
 1 HUSB @I3@
 1 WIFE @I4@
 1 CHIL @I1@
 1 _CURRENT Y
 1 _PRIMARY Y
-0 @F3@ FAM
+0 @F4@ FAM
 1 HUSB @I5@
 1 WIFE @I6@
 1 CHIL @I2@
@@ -5376,13 +5387,13 @@ pMKQJ0 START	e1	gd
 <INPUT TYPE="hidden" ID="csv" VALUE="
 
 ID,Full name,Given names,Nickname,Title,Suffix,Surname now,Surname at birth,Gender,Deceased,Mother ID,Mother name,Father ID,Father name,Parents type,Second mother ID,Second mother name,Second father ID,Second father name,Second type,Birth date type,Birth year,Birth month,Birth day,Birth range end,Death date type,Death year,Death month,Death day,Death range end,Partner ID,Partner name,Partner type,Partnership date type,Partnership year,Partnership month,Partnership day,Partnership range end,Ex-partner IDs,Extra partner IDs,Email,Website,Blog,Photo site,Home tel,Work tel,Mobile,Skype,Address,Other contact,Birth place,Death place,Cause of death,Burial place,Burial date type,Burial year,Burial month,Burial day,Burial range end,Profession,Company,Interests,Activities,Bio notes,
-START,Adam Brechtel,Adam,,,,Brechtel,,Male,Y,Q0ALU,Babara Brechtel,UW8KT,Philipp Brechtel II,,,,,,,Known,1876,10,2,,Known,1967,1,5,,,,,,,,,,MKQJ0,,,,,,,,,,,,,,,,,,,,,,,,,,
+START,Adam Brechtel,Adam,,,,Brechtel,,Male,Y,Q0ALU,Babara Brechtel,UW8KT,Philipp Brechtel II,,,,,,,Known,1876,10,2,,Known,1967,1,5,,NO93J,Magdalena Brechtel,Partner,,,,,,MKQJ0,,,,,,,,,,,,,,,,,,,,,,,,,,
 Q0ALU,Babara Brechtel,Babara,,,,Brechtel,Roth,Female,Y,,,,,,,,,,,Known,1844,10,10,,Known,1879,6,17,,UW8KT,Philipp Brechtel II,Partner,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 MKQJ0,Cäcilia Brechtel,Cäcilia,,,,Brechtel,Kirchner,Female,Y,A7JPY,Katharina Kirchner,IDNRD,Franz Kirchner,,,,,,,Known,1881,9,26,,Known,1908,1,12,,,,,,,,,,START,,,,,,,,,,,,,,,,,,,,,,,,,,
+NO93J,Magdalena Brechtel,Magdalena,,,,Brechtel,Kirchner,Female,Y,A7JPY,Katharina Kirchner,IDNRD,Franz Kirchner,Biological,,,,,,Known,1879,3,8,,Known,1956,3,2,,START,Adam Brechtel,Partner,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 UW8KT,Philipp Brechtel II,Philipp,,,,Brechtel II,,Male,Y,,,,,,,,,,,Known,1838,5,10,,Known,1899,11,5,,Q0ALU,Babara Brechtel,Partner,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 IDNRD,Franz Kirchner,Franz,,,,Kirchner,Kirchner,Male,Y,,,,,,,,,,,Known,1845,1,28,,Known,1922,11,24,,A7JPY,Katharina Kirchner,Partner,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 A7JPY,Katharina Kirchner,Katharina,,,,Kirchner,Martin,Female,Y,,,,,,,,,,,Known,1850,10,27,,Known,1929,3,26,,IDNRD,Franz Kirchner,Partner,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-ESOXW,Magdalena Kirchner,Magdalena,,,,Kirchner,Kirchner,Female,Y,A7JPY,Katharina Kirchner,IDNRD,Franz Kirchner,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 
 ">
 <INPUT TYPE="hidden" ID="text" VALUE="
@@ -5401,6 +5412,7 @@ Full name:          Adam Brechtel
 Gender:             Male (deceased)
 Mother:             Babara Brechtel
 Father:             Philipp Brechtel II
+Partner:            Magdalena Brechtel
 Ex-wife:            Cäcilia Brechtel (divorced)
 Birth date:         2 Oct 1876
 Death date:         5 Jan 1967
@@ -5427,6 +5439,17 @@ Death date:         12 Jan 1908
 
 ----------------------------------------------------------------------------
 
+Full name:          Magdalena Brechtel
+Surname at birth:   Kirchner
+Gender:             Female (deceased)
+Biological mother:  Katharina Kirchner
+Biological father:  Franz Kirchner
+Partner:            Adam Brechtel
+Birth date:         8 Mar 1879
+Death date:         2 Mar 1956
+
+----------------------------------------------------------------------------
+
 Full name:          Philipp Brechtel II
 Gender:             Male (deceased)
 Partner:            Babara Brechtel
@@ -5449,13 +5472,6 @@ Gender:             Female (deceased)
 Partner:            Franz Kirchner
 Birth date:         27 Oct 1850
 Death date:         26 Mar 1929
-
-----------------------------------------------------------------------------
-
-Full name:          Magdalena Kirchner
-Gender:             Female (deceased)
-Mother:             Katharina Kirchner
-Father:             Franz Kirchner
 
 ----------------------------------------------------------------------------
 
