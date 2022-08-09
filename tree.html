@@ -223,29 +223,32 @@ return v?v.replace(/(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\
 return "<a href=\""+url+"\" target=\"_blank\">"+url+"</a>";
 }):"";
 }
+function SB(v){
+return v.replace(/\//g,"/<wbr>");
+}
 function DT(){
 return (new Date()).getTime();
 }
-function BR(_1f,_20,_21){
-var url=_1f+"ap_"+_20+".php?";
-for(var j in _21){
-if(_21[j]!=null){
-url+=(j+"="+escape(_21[j])+"&");
+function BR(_20,_21,_22){
+var url=_20+"ap_"+_21+".php?";
+for(var j in _22){
+if(_22[j]!=null){
+url+=(j+"="+escape(_22[j])+"&");
 }
 }
 return url;
 }
-function BA(_24,_25,_26){
-return BR(_24,_25,_26)+"_="+(DT()+Math.random());
+function BA(_25,_26,_27){
+return BR(_25,_26,_27)+"_="+(DT()+Math.random());
 }
-function AG(_27,_28,_29,_2a){
-new Ajax.Request(BA("ap/",_27,_28),{method:"post",onComplete:function(_2b){
-_29(_27,_2a,((_2b.status==200)&&_2b.responseText)?eval("("+_2b.responseText+")"):{});
+function AG(_28,_29,_2a,_2b){
+new Ajax.Request(BA("ap/",_28,_29),{method:"post",onComplete:function(_2c){
+_2a(_28,_2b,((_2c.status==200)&&_2c.responseText)?eval("("+_2c.responseText+")"):{});
 }});
 }
-function AP(_2c,_2d,_2e,_2f,_30){
-new Ajax.Request(BA("ap/",_2c,_2d),{method:"post",postBody:_2e,onComplete:function(_31){
-_2f(_2c,_30,((_31.status==200)&&_31.responseText)?eval("("+_31.responseText+")"):{});
+function AP(_2d,_2e,_2f,_30,_31){
+new Ajax.Request(BA("ap/",_2d,_2e),{method:"post",postBody:_2f,onComplete:function(_32){
+_30(_2d,_31,((_32.status==200)&&_32.responseText)?eval("("+_32.responseText+")"):{});
 }});
 }
 var Bw=null;
@@ -1095,7 +1098,7 @@ s=pl?"Late partner":(cp?"Partner":"Ex-partner");
 }
 return s;
 }
-function FCP(f,fi,ti,m){
+function FCP(f,fi,ti,m,a){
 var p={};
 var s={};
 var i=null;
@@ -1103,12 +1106,14 @@ p[fi]=".";
 s[fi]=true;
 while(!p[ti]){
 var sn={};
+if(a){
 for(var si in s){
 var pc=f[si].pc;
 for(var i in pc){
 if(i&&f[i]&&!p[i]){
 p[i]="p"+si;
 sn[i]=true;
+}
 }
 }
 }
@@ -1352,7 +1357,7 @@ var d=(new Date(t.y+10000,t.m-1,t.d)-new Date(b.y+10000,b.m-1,b.d))/86400000;
 if(d>0){
 var a={"t":"d","v":d};
 }else{
-var a={"t":"","v":0};
+var a={"t":"d","v":0};
 }
 }
 }
@@ -1733,7 +1738,7 @@ if(i||m){
 ESB(viewMode+":"+Evp);
 }
 if(d||(Evp!=pi)){
-TRT(Efa,Evp,GV("personid"),Esd,NGB(),NGS(),NGR(),NGL(),NGM(),NGH(),NGA(),NGC(),pi,GV("showzoom"),GV("showwidth"),s);
+TRT(Efa,Evp,GV("personid"),Esd,NGD(),NGB(),NGS(),NGR(),NGL(),NGM(),NGH(),NGA(),NGC(),pi,GV("showzoom"),GV("showwidth"),s);
 NRT();
 }
 if(m=="path"){
@@ -2049,19 +2054,52 @@ SC("showdetail",Esd);
 ERF();
 }
 }
-function ECR(_7b){
-var i=_7b.id;
+function ECA(){
+var e=GE("otherage");
+var v=GV("otherage");
+if(v=="on"){
+if(e.options.length>2){
+var p=FPD(e.options[2].value);
+}else{
+var d=new Date();
+var p={y:d.getFullYear(),m:1+d.getMonth(),d:d.getDate()};
+}
+var f=FDE(p.y,9999,4)+"-"+FDE(p.m,12,2)+"-"+FDE(p.d,31,2);
+while(true){
+var f=prompt("Show ages on which date? (YYYY-MM-DD format)",f);
+if(f===null){
+SV("otherage","");
+break;
+}
+var s=f.split("-");
+if(s.length==3){
+var y=parseInt(s[0]);
+var m=parseInt(s[1]);
+var o=parseInt(s[2]);
+if((y>=1)&&(y<=9999)&&(m>=1)&&(m<=12)&&(o>=1)&&(o<=31)){
+var d=new Date(y,m-1,o);
+e.options[2]=new Option("on "+FET(o,m,y),FDS(o,m,y));
+e.selectedIndex=2;
+break;
+}
+}
+}
+}
+ERF();
+}
+function ECR(_84){
+var i=_84.id;
 if(i.substr(0,5)=="color"){
 var f=i.substr(5);
-SC("color"+f,_7b.value);
+SC("color"+f,_84.value);
 ERF();
 }
 }
-function ECE(_7e){
-var i=_7e.id;
+function ECE(_87){
+var i=_87.id;
 if(i.substr(0,4)=="line"){
 var f=i.substr(4);
-SC("line"+f,_7e.value);
+SC("line"+f,_87.value);
 ERF();
 }
 }
@@ -2174,7 +2212,7 @@ TAE(d,"z",{h:"Deceased are faded",z:1},5,0,false);
 TAE(d,"o",{h:"Dotted lines lead to more"},5,1,false);
 TAL(d,5,1,5,0.6,0);
 TAL(d,5,1,4.55,1,0);
-TRD(d,"",false,NGR(),NGL(),o,null,false,false,1,1,null);
+TRD(d,"",NGD(),false,NGR(),NGL(),o,null,false,false,1,1,null);
 }
 function ESL(){
 return {s:Ess.length,i:Eis.length,n:GV("newscript").length};
@@ -2758,7 +2796,10 @@ e.checked=(ds[i].substr(0,1)=="0")?false:true;
 }
 }
 SD("detail_pm",db["0p"]);
+SD("detail_N",db["0p"]);
+SD("detail_TJ",db["0p"]);
 SD("detail_0lq",db["0p"]);
+SS("otherage",db["age"]);
 }
 function NGR(){
 var c={};
@@ -2775,6 +2816,11 @@ var f=Elf[j];
 l[f]=GV("line"+f);
 }
 return l;
+}
+function NGD(){
+var v=GV("otherage");
+var p=FPD(v);
+return p.y?v:FNS();
 }
 function NGB(){
 return parseInt(GO("showbirthname"));
@@ -2832,8 +2878,9 @@ return;
 NUL(GE("findlist"),ev,null,null,false);
 }
 function NUL(e,sv,ai,si,no){
-var ss=sv.trim().toLowerCase().split(" ");
+var ss=sv.trim().toLowerCase().split(/[ \-]/);
 var bn=NGB();
+var bn1=(bn==1);
 var sf=NGS();
 if(ai===null){
 ai=[];
@@ -2857,7 +2904,7 @@ jn[jn.length]={i:"",n:m};
 }
 for(var j=0;j<ai.length;j++){
 var p=Efa[ai[j]];
-var n=FDN(p,true,2,sf,bn,true,true,true,true);
+var n=(FDN(p,true,2,sf,bn1,true,true,true,true)+FYS(p)).trim();
 var m=n.toLowerCase();
 var i=true;
 for(var k=0;k<ss.length;k++){
@@ -2867,12 +2914,12 @@ break;
 }
 }
 if(i){
-var sn1=(bn?(p.q||p.l):(p.l||p.q))||"";
-var sn2=(sn1?(bn?p.l:p.q):"")||"";
+var sn1=(bn1?(p.q||p.l):(p.l||p.q))||"";
+var sn2=(sn1?(bn1?p.l:p.q):"")||"";
 if(sn1==sn2){
 sn2="";
 }
-jn[jn.length]={i:ai[j],l:sn1,q:sn2,p:(p.p||""),n:(n+FYS(p)).trim()};
+jn[jn.length]={i:ai[j],l:sn1,q:sn2,p:(p.p||""),n:n};
 }
 }
 jn.sort(NSB);
@@ -2992,22 +3039,22 @@ var e=d.e[i];
 TAE(od,e.p.i,e.p,e.x+dx,e.y+dy,e.k);
 }
 }
-function TDS(yb,zf,wf){
-var ya=[yb.N,yb.age,yb.bd,yb.j,yb.b,yb.v,yb.d,yb.y,yb.F,yb.U,yb.e,yb.e,yb.tku,yb.tku,yb.a,yb.a,yb.E,yb.I,yb.A];
+function TDS(yb,zf,wf,bn){
+var ya=[yb.age,yb.bd,yb.j,yb.b,yb.v,yb.d,yb.y,yb.Z,yb.F,yb.U,yb.e,yb.e,yb.tku,yb.tku,yb.a,yb.a,yb.E,yb.I,yb.A];
 var yc=0;
 for(var j=0;j<ya.length;j++){
 if(ya[j]){
 yc++;
 }
 }
-var sz={Tew:parseInt(((yc||yb.r||yb.pm||yb.TJ)?100:80)*zf*wf),Tnh:parseInt((yb["0p"]?0:40)*zf),Tph:parseInt((yb.r?100:0)*zf),Tdh:parseInt(20*yc*zf),Tmh:parseInt(40*zf),Ths:parseInt(20*zf),Tvs:parseInt(40*zf),Tfs:(12*zf),Tds:(10*zf),partnerfontsize:(9*zf)};
+var sz={Tew:parseInt(((yc||yb.r||yb.pm||yb.TJ)?100:80)*zf*wf),Tnh:parseInt((yb["0p"]?0:(((bn==2)||yb.N)?50:40))*zf),Tph:parseInt((yb.r?100:0)*zf),Tdh:parseInt(20*yc*zf),Tmh:parseInt(40*zf),Ths:parseInt(20*zf),Tvs:parseInt(40*zf),Tfs:(12*zf),Tds:(10*zf),partnerfontsize:(9*zf)};
 sz.Teh=parseInt(Math.max(sz.Tnh+sz.Tph+sz.Tdh,sz.Tmh));
 sz.Tep=Math.max(0,sz.Tew*0.04);
 return sz;
 }
-function TRD(d,y,bn,sf,c,ls,o,oi,wp,pr,zf,wf,_31){
-var _32=wp?(ios?1920:19200):0;
-var _33=wp?(ios?1200:12000):0;
+function TRD(d,y,ad,bn,sf,c,ls,o,oi,wp,pr,zf,wf,_33){
+var _34=wp?(ios?1920:19200):0;
+var _35=wp?(ios?1200:12000):0;
 var yb={};
 var ys=y.split(".");
 for(var j=0;j<ys.length;j++){
@@ -3019,7 +3066,7 @@ var spn=!yb["0p"];
 var ssn=!yb["0lq"];
 var ni=yb["N"];
 var ts=yb["TJ"];
-var sz=TDS(yb,zf,wf);
+var sz=TDS(yb,zf,wf,bn);
 var tw=(sz.Tew+sz.Ths)*d.w-sz.Ths;
 var th=(sz.Teh+sz.Tvs)*d.h-sz.Tvs;
 if(!wp){
@@ -3031,17 +3078,17 @@ if(!(o.ios_width&&o.ios_height)){
 o.ios_width=GE("treebg").offsetWidth;
 o.ios_height=GE("treebg").offsetHeight;
 }
-ox=o.ios_width/2+_32/2;
-oy=o.ios_height/2+_33/2;
-o.style.left=(-_32/2)+"px";
-o.style.top=(-_33/2)+"px";
+ox=o.ios_width/2+_34/2;
+oy=o.ios_height/2+_35/2;
+o.style.left=(-_34/2)+"px";
+o.style.top=(-_35/2)+"px";
 }else{
 if(oi&&o.ps[oi]&&d.e[oi]){
 ox=o.ps[oi].x-d.e[oi].x*(sz.Tew+sz.Ths);
 oy=o.ps[oi].y-d.e[oi].y*(sz.Teh+sz.Tvs);
 }else{
-ox=_32-d.l*(sz.Tew+sz.Ths);
-oy=_33-d.t*(sz.Teh+sz.Tvs);
+ox=_34-d.l*(sz.Tew+sz.Ths);
+oy=_35-d.t*(sz.Teh+sz.Tvs);
 }
 }
 }
@@ -3050,8 +3097,8 @@ o.ps={};
 o.es={l:(ox+(d.l-0.5)*(sz.Tew+sz.Ths)),t:(oy+(d.t-0.5)*(sz.Teh+sz.Tvs)),r:(ox+(d.r-0.5)*(sz.Tew+sz.Ths)),b:(oy+(d.b-0.5)*(sz.Teh+sz.Tvs))};
 var s=o.style;
 if(!wp){
-s.width=(tw+_32*2)+"px";
-s.height=(th+_33*2)+"px";
+s.width=(tw+_34*2)+"px";
+s.height=(th+_35*2)+"px";
 }
 for(var g=1;g>=0;g--){
 for(var j=0;j<d.n.length;j++){
@@ -3100,10 +3147,10 @@ o.appendChild(v);
 for(var i in d.e){
 var e=d.e[i];
 var rs="";
-var fn=FDN(e.p,true,1,sf,bn,true,true,true,true);
-var _4f=((e.p.z=="1")&&!pr)?c.deceased:c.living;
+var fn=FDN(e.p,true,(bn==2)?2:1,sf,(bn==1),true,true,true,true);
+var _51=((e.p.z=="1")&&!pr)?c.deceased:c.living;
 var sh=sz.Tnh;
-var ey=y?TGL(yb,e.p):null;
+var ey=y?TGL(yb,ad,e.p):null;
 if(sp&&e.p.r){
 var er=e.p.r.split(" ");
 var uf=EIU||(opener&&opener.top&&opener.top.EIU);
@@ -3118,12 +3165,12 @@ eh=Math.floor(ew*er[2]/er[1]);
 ew=Math.floor(eh*er[1]/er[2]);
 }
 }
-rs+="<TR HEIGHT=\""+(ey?sz.Tph:(sz.Tph+sz.Tep*2))+"\"><TD CLASS=\"dcell\" style=\"color:"+_4f+"; padding:0 "+sz.Tep+"px;\"><IMG SRC=\""+u+"\" WIDTH=\""+ew+"\" HEIGHT=\""+eh+"\" TITLE=\""+EH(fn)+"\"></TD></TR>";
+rs+="<TR HEIGHT=\""+(ey?sz.Tph:(sz.Tph+sz.Tep*2))+"\"><TD CLASS=\"dcell\" style=\"color:"+_51+"; padding:0 "+sz.Tep+"px;\"><IMG SRC=\""+u+"\" WIDTH=\""+ew+"\" HEIGHT=\""+eh+"\" TITLE=\""+EH(fn)+"\"></TD></TR>";
 sh+=sz.Tph+sz.Tep*2;
 }
 }
 if(ey){
-rs+="<TR><TD CLASS=\"dcell\" STYLE=\"font-size:"+sz.Tds+"px;color:"+_4f+"; padding:0 "+sz.Tep+"px;\" TITLE=\""+EH(ey.replace(/\n/g,", "))+"\">"+EL(ey)+"</TD></TR>";
+rs+="<TR><TD CLASS=\"dcell\" STYLE=\"font-size:"+sz.Tds+"px;color:"+_51+"; padding:0 "+sz.Tep+"px;\" TITLE=\""+EH(ey.replace(/\n/g,", "))+"\">"+EL(ey)+"</TD></TR>";
 sh+=sz.Tdh;
 }
 var sx=ox+(e.x)*(sz.Tew+sz.Ths);
@@ -3144,8 +3191,8 @@ v.pid=e.p.i;
 o.ps[i]={x:sx,y:sy};
 }
 if(spn){
-var tn=FDN(e.p,mn,ssn,sf,bn,true,ni,ts,ts);
-var ns="<TR><TD CLASS=\"dcell\" STYLE=\"font-size:"+(e.d?sz.Tds:sz.Tfs)+"px;color:"+_4f+"; padding:0 "+sz.Tep+"px;\""+" TITLE=\""+(e.d?"Duplicate: ":"")+EH(fn)+"\">"+(e.d?"<I>Duplicate:</I><BR>":"")+(spn?((e.m?"<B>":"")+EL(tn)+(e.m?"</B>":"")):"")+"</TD></TR>";
+var tn=FDN(e.p,mn,ssn?((bn==2)?2:1):0,sf,(bn==1),true,ni,ts,ts);
+var ns="<TR><TD CLASS=\"dcell\" STYLE=\"font-size:"+(e.d?sz.Tds:sz.Tfs)+"px;color:"+_51+"; padding:0 "+sz.Tep+"px;\""+" TITLE=\""+(e.d?"Duplicate: ":"")+EH(fn)+"\">"+(e.d?"<I>Duplicate:</I><BR>":"")+(spn?((e.m?"<B>":"")+SB(EL(tn))+(e.m?"</B>":"")):"")+"</TD></TR>";
 }else{
 var ns="";
 }
@@ -3191,12 +3238,26 @@ s.k=Math.min(2,s.k);
 }
 return s;
 }
-function TGL(yb,p){
+function TGL(yb,ad,p){
 var ey="";
-if(p.z!="1"){
-var aa=yb["age"]?FDR(p.b,FNS()):null;
+if(yb["age"]){
+var ae=false;
+if((p.z==1)&&p.d){
+var dl=FSL(p.d);
+if(dl&&(FCD(dl,FPD(ad))>0)){
+ae=true;
+}
+}
+if((p.z!="1")||ae){
+var de=p.b?FSE(p.b):null;
+if(de&&(FCD(de,FPD(ad))>0)){
+ey+="Not yet born\n";
+}else{
+var aa=FDR(p.b,ad);
 if(aa){
 ey+=aa+" old\n";
+}
+}
 }
 }
 if(yb["bd"]){
@@ -3224,13 +3285,13 @@ if(bs||vs){
 ey+="Born "+bs+((bs&&vs)?", ":"")+vs+"\n";
 }
 }
-var ad=(yb["age"]&&(p.z=="1"))?FDR(p.b,p.d):null;
-if((yb["d"]||ad||yb["y"]||yb["Z"])&&(p.z=="1")){
+var az=(yb["age"]&&(p.z=="1")&&!ae)?FDR(p.b,p.d):null;
+if((yb["d"]||az||yb["y"]||yb["Z"])&&(p.z=="1")){
 var ds=yb["d"]?FDT(p.d,false):"";
 var ys=yb["y"]?(p.y||""):"";
 var Zs=yb["Z"]?(p.Z||""):"";
-if(ds||ad||ys||Zs){
-ey+="Died "+ds+((ds&&ad)?(" ("+ad+")"):(ad?(ad+" old"):""))+(((ds||ad)&&ys)?", ":"")+ys+(Zs?(" ("+Zs+")"):"")+"\n";
+if(ds||az||ys||Zs){
+ey+="Died "+ds+((ds&&az)?(" ("+az+")"):(az?(az+" old"):""))+(((ds||az)&&ys)?", ":"")+ys+(Zs?(" ("+Zs+")"):"")+"\n";
 }
 }
 if((yb["F"]||yb["U"])&&(p.z=="1")){
@@ -3313,13 +3374,13 @@ var scs=DT();
 TSS(sx,sy,scs,scs+t,"_sel");
 }
 }
-function TRB(o,l,t,w,h,k,bg,bo,_84){
+function TRB(o,l,t,w,h,k,bg,bo,_8a){
 v=document.createElement("div");
 v.className="dbox";
 var s=v.style;
-if(_84){
+if(_8a){
 s.visibility="hidden";
-v.id=_84;
+v.id=_8a;
 }
 s.position="absolute";
 s.width=(w)+"px";
@@ -3353,56 +3414,56 @@ return {top:-(e.offsetTop-e.parentNode.offsetTop),left:-(e.offsetLeft-e.parentNo
 }
 function TIS(o){
 moveobject=o;
-o.onmousedown=function(_88){
+o.onmousedown=function(_8e){
 NHF();
-_88=_88?_88:window.event;
+_8e=_8e?_8e:window.event;
 Tpd=true;
 scrollpos=TGS();
-Tdx=scrollpos.left+_88.screenX;
-Tdy=scrollpos.top+_88.screenY;
+Tdx=scrollpos.left+_8e.screenX;
+Tdy=scrollpos.top+_8e.screenY;
 };
-document.onmouseup=function(_89){
+document.onmouseup=function(_8f){
 Tpd=false;
 };
-document.onmousemove=function(_8a){
-_8a=_8a?_8a:window.event;
+document.onmousemove=function(_90){
+_90=_90?_90:window.event;
 if(Tpd){
-TSS(Tdx-_8a.screenX,Tdy-_8a.screenY,0,0,null);
+TSS(Tdx-_90.screenX,Tdy-_90.screenY,0,0,null);
 }
 };
-document.body.onselectstart=function(_8b){
+document.body.onselectstart=function(_91){
 if(Tpd){
 return false;
 }
 };
-o.ontouchstart=function(_8c){
-if((_8c.target==moveobject)&&(_8c.touches.length==1)){
+o.ontouchstart=function(_92){
+if((_92.target==moveobject)&&(_92.touches.length==1)){
 NHF();
 Tpd=true;
 scrollpos=TGS();
-Tdx=scrollpos.left+_8c.touches[0].screenX;
-Tdy=scrollpos.top+_8c.touches[0].screenY;
-_8c.preventDefault();
+Tdx=scrollpos.left+_92.touches[0].screenX;
+Tdy=scrollpos.top+_92.touches[0].screenY;
+_92.preventDefault();
 }
 };
-o.ontouchend=function(_8d){
+o.ontouchend=function(_93){
 if(Tpd){
 Tpd=false;
-_8d.preventDefault();
+_93.preventDefault();
 }
 };
-o.onwheel=function(_8e){
-var d=_8e.deltaY;
-if(_8e.deltaMode==1){
+o.onwheel=function(_94){
+var d=_94.deltaY;
+if(_94.deltaMode==1){
 d/=12;
 }
 EZD(1-d/120);
-_8e.preventDefault();
+_94.preventDefault();
 };
-document.ontouchmove=function(_90){
+document.ontouchmove=function(_96){
 if(Tpd){
-TSS(Tdx-_90.touches[0].screenX,Tdy-_90.touches[0].screenY,0,0,null);
-_90.preventDefault();
+TSS(Tdx-_96.touches[0].screenX,Tdy-_96.touches[0].screenY,0,0,null);
+_96.preventDefault();
 }
 };
 }
@@ -3452,16 +3513,16 @@ ESP(this.pid,true);
 function TFE(o,i){
 return (o.ps&&i)?o.ps[i]:null;
 }
-function TRT(f,i,m,y,bn,sf,c,l,fl,ch,ph,co,pi,zf,wf,s){
+function TRT(f,i,m,y,ad,bn,sf,c,l,fl,ch,ph,co,pi,zf,wf,s){
 var o=GE("treebg");
-var _ad=null;
+var _b4=null;
 if(TFE(o,i)){
 var oi=i;
 var sd=0;
 if(i!=pi){
-_ad="_sel";
-if(GE(_ad)){
-SI(_ad,false);
+_b4="_sel";
+if(GE(_b4)){
+SI(_b4,false);
 }
 }
 }else{
@@ -3469,10 +3530,10 @@ var oi=TFE(o,pi)?pi:null;
 var sd=oi?250:0;
 }
 var pg=TGG(y);
-TRD(BFT(f,i,m,ch,ph,co,fl,pg),y,bn,sf,c,l,o,oi,true,false,zf,wf,_ad);
+TRD(BFT(f,i,m,ch,ph,co,fl,pg),y,ad,bn,sf,c,l,o,oi,true,false,zf,wf,_b4);
 if(s&&noCentering){
-if(_ad&&GE(_ad)){
-SI(_ad,true);
+if(_b4&&GE(_b4)){
+SI(_b4,true);
 }
 }else{
 setTimeout("TCD('"+i+"', "+(s?250:0)+")",sd);
@@ -3487,7 +3548,7 @@ for(var j=0;j<p.length;j++){
 var t=p[j].t;
 var i=p[j].i;
 var e=f[i];
-var fn=FDN(e,true,1,sf,bn,true,true,true,true);
+var fn=FDN(e,true,1,sf,(bn==1),true,true,true,true);
 var nj=p[j+1]||s;
 var ni=nj?nj.i:null;
 var n=ni?f[ni]:{};
@@ -3752,7 +3813,7 @@ function SPW(i){
 return Ewr||(i&&(Ewp==i));
 }
 function SPN(p){
-return FDN(p,false,1,NGS(),NGB(),true);
+return FDN(p,false,1,NGS(),(NGB()==1),true);
 }
 function SSE(i,e){
 var pi=Spe;
@@ -3915,6 +3976,7 @@ SJR(e,"<INPUT TYPE=\"submit\" VALUE=\""+EH(t)+"\" ID=\""+EH(i+v)+"\" CLASS=\"sbu
 function SPP(i,ra,s,no,o){
 var f=Efa;
 var bn=NGB();
+var bn1=(bn==1);
 var sf=NGS();
 var v=GE(i);
 v.style.display="none";
@@ -3944,7 +4006,7 @@ v.personlist=x;
 }
 w.className="snameedit";
 w.style.cursor="pointer";
-w.value=(s&&f[s])?FDN(f[s],false,1,sf,bn,true):"(none)";
+w.value=(s&&f[s])?FDN(f[s],false,1,sf,bn1,true):"(none)";
 w.onfocus=function(){
 w.tohide=false;
 w.oldvalue=w.value;
@@ -3986,7 +4048,7 @@ if(i.substring(0,5)=="list_"){
 v.options.length=0;
 var z=i.substring(5);
 v.options[0]=new Option(z,z);
-w.oldvalue=(z&&f[z])?FDN(f[z],false,1,sf,bn,true):"(none)";
+w.oldvalue=(z&&f[z])?FDN(f[z],false,1,sf,bn1,true):"(none)";
 w.completed();
 if(v.onchange){
 v.onchange();
@@ -4177,9 +4239,10 @@ SV("othergender",(g.charAt(0)=="o")?p.g.substring(1):"");
 }else{
 SRR("personalview");
 var bn=NGB();
-SSR("personalview","Full name",FDN(p,true,1,NGS(),bn,false,true,true,true),false);
+var bn1=(bn==1);
+SSR("personalview","Full name",FDN(p,true,1,NGS(),bn1,false,true,true,true),false);
 if(p.q&&p.l&&(p.q!=p.l)){
-SSR("personalview",bn?"Surname now":"Surname at birth",bn?p.l:p.q,false);
+SSR("personalview",bn1?"Surname now":"Surname at birth",bn1?p.l:p.q,false);
 }
 SSR("personalview","Gender",Fgn[g]?Fgn[g]:((g.charAt(0)=="o")?g.substring(1):Fgn[""]),false);
 SSR("personalview","Birth date",FDT(p.b,true),false);
@@ -5178,7 +5241,7 @@ Sps=Efo;
 }
 Spd=i;
 }
-SH("pathcontent",TPH(Efa,FCP(Efa,Sps,Spd,true),NGB(),NGS(),false));
+SH("pathcontent",TPH(Efa,FCP(Efa,Sps,Spd,true,true||GE("pathmarried").checked),NGB(),NGS(),false));
 SSP(Spe);
 }
 function SSP(i){
@@ -5215,6 +5278,10 @@ e.style.display="none";
 }
 function SSS(){
 Sps=GO("pathstartid");
+SUP(null);
+SHP();
+}
+function STM(){
 SUP(null);
 SHP();
 }
@@ -5290,6 +5357,87 @@ iVIPS6	^WWVM2	gm	lPlatz Jr.	z1	sKQAZS	pGeorg Joh.	qPlatz Jr.	b16971126	d17660226
 iKQAZS	^WWVM2	gf	sVIPS6	lPlatz	z1	pMaria Magd.	qKercher	b17040316	d17850111
 iTJE68	^HZW86	gm	lSchorn	z1	sRPW6L	pKaspar Joh.	qSchorn	b16830808	d17400211
 iRPW6L	^HZW86	gf	sTJE68	lSchorn	z1	pMaria Franziska	qBraun	b16860000	d17520503
+iAYZO9	^START	mMKQJ0	fSTART	lBrechtel IV	qBrechtel IV	gm	pAdam	b19050422	z1	d19840225	sBW7QU
+iBW7QU	^AYZO9	sAYZO9	lBrechtel IV	pMagdalena	qWunder	gf	b19080921	z1	d19840409
+iDPXN0	^AYZO9	mBW7QU	fAYZO9	lBrechtel	qBrechtel	pJohanna	gf	b19341018	z1	d19970914	sVDEOD
+iVDEOD	^DPXN0	sDPXN0	lSchollmeier	pKarl	qSchollmeier	gm	b19270503	z1	d19900731
+iOY27Y	^DPXN0	mDPXN0	fVDEOD	lSchollmeier	qSchollmeier	pKlaus	gm	b19570307	sBU12N
+iBU12N	^OY27Y	sOY27Y	lSchollmeier	pGabi	qHalblaub	gf	b19570507
+iTP31S	^OY27Y	mBU12N	fOY27Y	lSchollmeier	qSchollmeier	pTanja	gf	b19880119
+iD7VKC	^BU12N	mBU12N	fOY27Y	lSchollmeier	qSchollmeier	pSina	gf	b19891217	sQ0OX5
+iQ0OX5	^D7VKC	sD7VKC	lSchollmeier	pTobias	qReinhardt	gm	b19860713
+iQ5OI5	^D7VKC	mD7VKC	fQ0OX5	lSchollmeier	qReinhardt	pAmina	gf	b20191126
+iXVLQ9	^D7VKC	mD7VKC	fQ0OX5	lSchollmeier	qSchollmeier	pJago	b20210717	gm
+iO7E7G	^VDEOD	mDPXN0	fVDEOD	lSchollmeier	qSchollmeier	pDieter	gm	b19600719	sWGI5L
+iWGI5L	^O7E7G	sO7E7G	lSchollmeier	pBarbara	qFuchs	gf	b19670701
+iPJFJ4	^O7E7G	mWGI5L	fO7E7G	lSchollmeier	qSchollmeier	pChristian	gm	b19920301
+iO92V5	^O7E7G	mWGI5L	fO7E7G	lSchollmeier	qSchollmeier	pCarina	gf	b19950902
+iYTPDP	^AYZO9	mBW7QU	fAYZO9	lBrechtel	qBrechtel	pChrista	gf	b19370811	sSK7BN
+iSK7BN	^YTPDP	sYTPDP	lFlessner	pGerd	qFlessner	gm	b19350719	z1	d20151013
+iY1SQ8	^YTPDP	mYTPDP	fSK7BN	lFlessner	qFlessner	pBärbel	gf	b19630311	sU2PHE
+iU2PHE	^Y1SQ8	sY1SQ8	lHook	pRoger	qHook	gm	b19610823
+iAFHQB	^Y1SQ8	mY1SQ8	fU2PHE	lHook	qHook	pLarissa	gf	b19891211	sUMI61
+iUMI61	^AFHQB	sAFHQB	lPreuß	pJulian	qPreuß	gm	b19890204
+iBXQBN	^AFHQB	mAFHQB	fUMI61	lPreuß	qPreuß	pMattheo	gm	b20190504
+iS8RB2	^BXQBN	mAFHQB	fUMI61	lPreuß	qPreuß	pJoshua	gm	b20201213
+iRUR4H	^U2PHE	mY1SQ8	fU2PHE	lHook	qHook	pFelix	b19920817	gm	sGA8W6
+iGA8W6	^RUR4H	sRUR4H	lBanzhaf	pHanna	qBanzhaf	gf	b19920716
+iQLCA4	^RUR4H	mGA8W6	fRUR4H	lHook	qHook	pOskar	gm	b20211226
+iC3MFU	^SK7BN	mYTPDP	fSK7BN	lFlessner	qFlessner	pUlrich	gm	b19651112	sX34UO
+iX34UO	^C3MFU	sC3MFU	lFlessner	pSabine	qSponagel	gf	b19650924
+iEJZEC	^C3MFU	mX34UO	fC3MFU	lFlessner	qFlessner	pTorben	gm	b20030610
+iVIRZB	^START	mMKQJ0	fSTART	lBrechtel	qBrechtel	pAnna	gf	b19060411	z1	d19690523	sGB6DV
+iGB6DV	^VIRZB	sVIRZB	lBrenner	pHeinrich	qBrenner	gm	b18990926	z1	d19680128
+iI35GU	^VIRZB	mVIRZB	fGB6DV	lBrenner	qBrenner	pIrene	gf	b19260808	z1	d20160508	sQJRZY
+iQJRZY	^I35GU	sI35GU	lHeckmann	pWilhelm	qHeckmann	gm	b19220604	z1	d20111218
+iW2RT1	^I35GU	mI35GU	fQJRZY	lHeckmann	qHeckmann	pHelga	gf	b19490820	sDSEEE
+iDSEEE	^W2RT1	sW2RT1	lHäussler	pWerner	qHäussler	gm	b19470812
+iXQG3Q	^W2RT1	mW2RT1	fDSEEE	lHäussler	pEva	qHäussler	gf	b19801018	sDMIWZ
+iDMIWZ	^XQG3Q	sXQG3Q	lBuchwald	pTobias	qBuchwald	gm	b19790810
+iNJXP6	^XQG3Q	mXQG3Q	fDMIWZ	lHäussler	qHäussler	pTom	gm	b20180809
+iI70C9	^QJRZY	mI35GU	fQJRZY	lHeckmann	qHeckmann	pHeinz	gm	b19560121	sTJ2GL
+iTJ2GL	^I70C9	sI70C9	lDörr	pEdith	qDörr	gf	b19570902
+iFZGD5	^I70C9	mTJ2GL	fI70C9	lHeckmann	qHeckmann	pStefan	b19820921	gm	sW27L9
+iQFNLP	^FZGD5	lGrandke	pSarah	qGrandke	gf	b19821015
+iW27L9	^FZGD5	sFZGD5	lFröscher	pKathrin	qFröscher	gf	b19820701
+iH8HYD	^FZGD5	mQFNLP	fFZGD5	pJoshua Finley	lHeckmann	qHeckmann	b20080501	gm
+iHZUVA	^FZGD5	mW27L9	fFZGD5	lFröscher	qFröscher	pJule Alicia	gf	b20180102
+iKUOML	^W27L9	mW27L9	fFZGD5	lFröscher	qFröscher	pJarle Malte	gm	b20200602
+iHZPWL	^QJRZY	mI35GU	fQJRZY	lHeckmann	qHeckmann	pBritta Zoe	gf	b19840625
+iLCJVD	^START	mNO93J	fSTART	lBrechtel	qBrechtel	pErnst Ludwig	gm	b19220302	z1	d19230204
+iDJBD5	^START	mNO93J	fSTART	lBrechtel	qBrechtel	pElisabeth	gf	b19181030	z1	d19881125	sADC3F
+iADC3F	^DJBD5	sDJBD5	lWeis	pAdolf	qWeis	gm	b19100705	z1	d19970506
+iDWVYN	^ADC3F	mDJBD5	fADC3F	lWeis	qWeis	pDoris	gf	b19430904	sSG32W
+iSG32W	^DWVYN	sDWVYN	lDewald	pWerner	qDewald	gm	b19440615	z1	d19981222
+iC72IZ	^SG32W	mDWVYN	fSG32W	lDewald	qDewald	pMichael	b19690809	gm	sE7BQ3
+iE7BQ3	^C72IZ	sC72IZ	lFanese	pBeate	qFanese	gf	b19710719
+iB8K2V	^C72IZ	mE7BQ3	fC72IZ	lDewald	qDewald	pMelanie	gf	b19930216
+iKGQ9J	^SG32W	mDWVYN	fSG32W	lDewald	qDewald	pLinda	gf	b19700818
+iZKG3N	^MKQJ0	mMKQJ0	fSTART	pPeter Philipp	lBrechtel	qBrechtel	gm	b19071204	z1	d19940914	sKGUDO
+iKGUDO	^ZKG3N	sZKG3N	lBrechtel	pWilhelmine	qDauenheimer	gf	b19231129	z1	d20000720
+iBAM1D	^ZKG3N	mKGUDO	fZKG3N	lBrechtel	qBrechtel	pHannelore	gf	b19520410	sLQU0A
+iLQU0A	^BAM1D	sBAM1D	lGaal	pHerbert	qGaal	gm	b19500818	z1	d20130113
+iDQX32	^LQU0A	mBAM1D	fLQU0A	lGaal	qGaal	pAndreas	gm	b19840320	sBQKZU
+iBQKZU	^DQX32	sDQX32	lGaal	pNicole	qPörschmann	b19880806	gf
+iMANHF	^DQX32	mBQKZU	fDQX32	lGaal	qGaal	pMagdalena	gf	b20170227
+iIMLK5	^ZKG3N	mKGUDO	fZKG3N	lBrechtel	qBrechtel	pHelena	gf	b19540105	z1	d20130810	sVNPTT
+iVNPTT	^IMLK5	sIMLK5	lHinz	pGerhard	qHinz	b19490329	gm
+iDPSOE	^VNPTT	mIMLK5	fVNPTT	lHinz	qHinz	pSandra	gf	b19800228	sV3507
+iV3507	^DPSOE	sDPSOE	lUsler	pSteffen	qUsler	gm	b19751120
+iAFKGQ	^DPSOE	mDPSOE	fV3507	lUsler	qUsler	pEmma Johanna	gf	b20060204
+iKVEG7	^V3507	mDPSOE	fV3507	lUsler	qUsler	pLuisa Valentina	gf	b20080708
+iQE4VU	^VNPTT	mIMLK5	fVNPTT	lHinz	qHinz	pJochen	gm	b19840204	sAXI2L
+iAXI2L	^QE4VU	sQE4VU	lHinz	pSarah	qNeumann	gf	b19841220
+iSPKUQ	^QE4VU	mAXI2L	fQE4VU	lHinz	qHinz	pJonas A. H.	b20150326	gm
+iC1WO0	^QE4VU	mAXI2L	fQE4VU	lHinz	qHinz	pNiklas Ph. A.	gm	b20160629
+iWVPEZ	^ZKG3N	mKGUDO	fZKG3N	lBrechtel	qBrechtel	pMichael	gm	b19600521	sZW7M6
+iZW7M6	^WVPEZ	sWVPEZ	lBrechtel	pMarion	qSchrimpf	gf	b19510126
+iZ70W3	^WVPEZ	mZW7M6	fWVPEZ	lBrechtel	qBrechtel	pPhillip	gf	b19880324
+iETHTF	^ZKG3N	mKGUDO	fZKG3N	lBrechtel	qBrechtel	pUrsula	gf	b19620104	sEPH8R
+iEPH8R	^ETHTF	sETHTF	lSchneidel	pEdmund	qSchneidel	gm	b19561221
+iXZLZV	^ETHTF	mETHTF	fEPH8R	lSchneidel	pBernd	qSchneidel	gm	b19860426
+iE4K3L	^EPH8R	mETHTF	fEPH8R	lSchneidel	qSchneidel	pPeter	gm	b19880321
+iJHKSF	^EPH8R	mETHTF	fEPH8R	lSchneidel	qSchneidel	pJörg	gm	b19910820
 pMKQJ0 START	e1	gd	m19050221
 pQ0ALU UW8KT	gm	m18670110
 pA7JPY IDNRD	gm	m18710112
@@ -5315,6 +5463,32 @@ pAKYBG KXXGL	gm	m18110721
 pHYY4S SZ2SW	gm	m17730202
 pKQAZS VIPS6	gm	m17221124
 pRPW6L TJE68	gm	m17110505
+pAYZO9 BW7QU	gm	m19311119
+pDPXN0 VDEOD	gm	m19550814
+pBU12N OY27Y	gm	m19860531
+pD7VKC Q0OX5	gm	m20161001
+pO7E7G WGI5L	gm	m19890505
+pSK7BN YTPDP	gm	m19610813
+pU2PHE Y1SQ8	gm	m19880409
+pAFHQB UMI61	gm	m20180901
+pGA8W6 RUR4H	gm	m20210924
+pC3MFU X34UO	gm	m19980627
+pGB6DV VIRZB	gm	m19260500
+pI35GU QJRZY	gm	m19480118
+pDSEEE W2RT1	gm	m19720318
+pDMIWZ XQG3Q	gm	m20150801
+pI70C9 TJ2GL	gm	m19800822
+pFZGD5 QFNLP	gd	m20071200	d20080101	e1
+pFZGD5 W27L9	gm	m20170801
+pDWVYN SG32W	gm	m19670901
+pC72IZ E7BQ3	gd	m19920815
+pKGUDO ZKG3N	gm	m19510707
+pBAM1D LQU0A	gm	m19820417
+pBQKZU DQX32	gd	m20180519
+pDPSOE V3507	gm	m20050617
+pAXI2L QE4VU	gm	m20090522
+pWVPEZ ZW7M6	gm	m19870901
+pEPH8R ETHTF	gm	m19841026
 
 # ...end of FamilyScript
 
@@ -5331,7 +5505,7 @@ pRPW6L TJE68	gm	m17110505
 1 SOUR Family Echo
 2 WWW http://www.familyecho.com/
 1 FILE My Family
-1 DATE 22 JUL 2022
+1 DATE 9 AUG 2022
 1 DEST ANSTFILE
 1 GEDC
 2 VERS 5.5.1
@@ -5903,9 +6077,802 @@ pRPW6L TJE68	gm	m17110505
 1 DEAT Y
 2 DATE 3 MAY 1752
 1 FAMS @F25@
+0 @I50@ INDI
+1 NAME Adam /Brechtel IV/
+2 GIVN Adam
+2 SURN Brechtel IV
+2 _MARNM Brechtel IV
+1 SEX M
+1 BIRT
+2 DATE 22 APR 1905
+1 DEAT Y
+2 DATE 25 FEB 1984
+1 FAMS @F26@
+1 FAMC @F2@
+0 @I51@ INDI
+1 NAME Magdalena /Wunder/
+2 GIVN Magdalena
+2 SURN Wunder
+2 _MARNM Brechtel IV
+1 SEX F
+1 BIRT
+2 DATE 21 SEP 1908
+1 DEAT Y
+2 DATE 9 APR 1984
+1 FAMS @F26@
+0 @I52@ INDI
+1 NAME Johanna /Brechtel/
+2 GIVN Johanna
+2 SURN Brechtel
+2 _MARNM Brechtel
+1 SEX F
+1 BIRT
+2 DATE 18 OCT 1934
+1 DEAT Y
+2 DATE 14 SEP 1997
+1 FAMS @F27@
+1 FAMC @F26@
+0 @I53@ INDI
+1 NAME Karl /Schollmeier/
+2 GIVN Karl
+2 SURN Schollmeier
+2 _MARNM Schollmeier
+1 SEX M
+1 BIRT
+2 DATE 3 MAY 1927
+1 DEAT Y
+2 DATE 31 JUL 1990
+1 FAMS @F27@
+0 @I54@ INDI
+1 NAME Klaus /Schollmeier/
+2 GIVN Klaus
+2 SURN Schollmeier
+2 _MARNM Schollmeier
+1 SEX M
+1 BIRT
+2 DATE 7 MAR 1957
+1 FAMS @F28@
+1 FAMC @F27@
+0 @I55@ INDI
+1 NAME Gabi /Halblaub/
+2 GIVN Gabi
+2 SURN Halblaub
+2 _MARNM Schollmeier
+1 SEX F
+1 BIRT
+2 DATE 7 MAY 1957
+1 FAMS @F28@
+0 @I56@ INDI
+1 NAME Tanja /Schollmeier/
+2 GIVN Tanja
+2 SURN Schollmeier
+2 _MARNM Schollmeier
+1 SEX F
+1 BIRT
+2 DATE 19 JAN 1988
+1 FAMC @F28@
+0 @I57@ INDI
+1 NAME Sina /Schollmeier/
+2 GIVN Sina
+2 SURN Schollmeier
+2 _MARNM Schollmeier
+1 SEX F
+1 BIRT
+2 DATE 17 DEC 1989
+1 FAMS @F29@
+1 FAMC @F28@
+0 @I58@ INDI
+1 NAME Tobias /Reinhardt/
+2 GIVN Tobias
+2 SURN Reinhardt
+2 _MARNM Schollmeier
+1 SEX M
+1 BIRT
+2 DATE 13 JUL 1986
+1 FAMS @F29@
+0 @I59@ INDI
+1 NAME Amina /Reinhardt/
+2 GIVN Amina
+2 SURN Reinhardt
+2 _MARNM Schollmeier
+1 SEX F
+1 BIRT
+2 DATE 26 NOV 2019
+1 FAMC @F29@
+0 @I60@ INDI
+1 NAME Jago /Schollmeier/
+2 GIVN Jago
+2 SURN Schollmeier
+2 _MARNM Schollmeier
+1 SEX M
+1 BIRT
+2 DATE 17 JUL 2021
+1 FAMC @F29@
+0 @I61@ INDI
+1 NAME Dieter /Schollmeier/
+2 GIVN Dieter
+2 SURN Schollmeier
+2 _MARNM Schollmeier
+1 SEX M
+1 BIRT
+2 DATE 19 JUL 1960
+1 FAMS @F30@
+1 FAMC @F27@
+0 @I62@ INDI
+1 NAME Barbara /Fuchs/
+2 GIVN Barbara
+2 SURN Fuchs
+2 _MARNM Schollmeier
+1 SEX F
+1 BIRT
+2 DATE 1 JUL 1967
+1 FAMS @F30@
+0 @I63@ INDI
+1 NAME Christian /Schollmeier/
+2 GIVN Christian
+2 SURN Schollmeier
+2 _MARNM Schollmeier
+1 SEX M
+1 BIRT
+2 DATE 1 MAR 1992
+1 FAMC @F30@
+0 @I64@ INDI
+1 NAME Carina /Schollmeier/
+2 GIVN Carina
+2 SURN Schollmeier
+2 _MARNM Schollmeier
+1 SEX F
+1 BIRT
+2 DATE 2 SEP 1995
+1 FAMC @F30@
+0 @I65@ INDI
+1 NAME Christa /Brechtel/
+2 GIVN Christa
+2 SURN Brechtel
+2 _MARNM Brechtel
+1 SEX F
+1 BIRT
+2 DATE 11 AUG 1937
+1 FAMS @F31@
+1 FAMC @F26@
+0 @I66@ INDI
+1 NAME Gerd /Flessner/
+2 GIVN Gerd
+2 SURN Flessner
+2 _MARNM Flessner
+1 SEX M
+1 BIRT
+2 DATE 19 JUL 1935
+1 DEAT Y
+2 DATE 13 OCT 2015
+1 FAMS @F31@
+0 @I67@ INDI
+1 NAME Bärbel /Flessner/
+2 GIVN Bärbel
+2 SURN Flessner
+2 _MARNM Flessner
+1 SEX F
+1 BIRT
+2 DATE 11 MAR 1963
+1 FAMS @F32@
+1 FAMC @F31@
+0 @I68@ INDI
+1 NAME Roger /Hook/
+2 GIVN Roger
+2 SURN Hook
+2 _MARNM Hook
+1 SEX M
+1 BIRT
+2 DATE 23 AUG 1961
+1 FAMS @F32@
+0 @I69@ INDI
+1 NAME Larissa /Hook/
+2 GIVN Larissa
+2 SURN Hook
+2 _MARNM Hook
+1 SEX F
+1 BIRT
+2 DATE 11 DEC 1989
+1 FAMS @F33@
+1 FAMC @F32@
+0 @I70@ INDI
+1 NAME Julian /Preuß/
+2 GIVN Julian
+2 SURN Preuß
+2 _MARNM Preuß
+1 SEX M
+1 BIRT
+2 DATE 4 FEB 1989
+1 FAMS @F33@
+0 @I71@ INDI
+1 NAME Mattheo /Preuß/
+2 GIVN Mattheo
+2 SURN Preuß
+2 _MARNM Preuß
+1 SEX M
+1 BIRT
+2 DATE 4 MAY 2019
+1 FAMC @F33@
+0 @I72@ INDI
+1 NAME Joshua /Preuß/
+2 GIVN Joshua
+2 SURN Preuß
+2 _MARNM Preuß
+1 SEX M
+1 BIRT
+2 DATE 13 DEC 2020
+1 FAMC @F33@
+0 @I73@ INDI
+1 NAME Felix /Hook/
+2 GIVN Felix
+2 SURN Hook
+2 _MARNM Hook
+1 SEX M
+1 BIRT
+2 DATE 17 AUG 1992
+1 FAMS @F34@
+1 FAMC @F32@
+0 @I74@ INDI
+1 NAME Hanna /Banzhaf/
+2 GIVN Hanna
+2 SURN Banzhaf
+2 _MARNM Banzhaf
+1 SEX F
+1 BIRT
+2 DATE 16 JUL 1992
+1 FAMS @F34@
+0 @I75@ INDI
+1 NAME Oskar /Hook/
+2 GIVN Oskar
+2 SURN Hook
+2 _MARNM Hook
+1 SEX M
+1 BIRT
+2 DATE 26 DEC 2021
+1 FAMC @F34@
+0 @I76@ INDI
+1 NAME Ulrich /Flessner/
+2 GIVN Ulrich
+2 SURN Flessner
+2 _MARNM Flessner
+1 SEX M
+1 BIRT
+2 DATE 12 NOV 1965
+1 FAMS @F35@
+1 FAMC @F31@
+0 @I77@ INDI
+1 NAME Sabine /Sponagel/
+2 GIVN Sabine
+2 SURN Sponagel
+2 _MARNM Flessner
+1 SEX F
+1 BIRT
+2 DATE 24 SEP 1965
+1 FAMS @F35@
+0 @I78@ INDI
+1 NAME Torben /Flessner/
+2 GIVN Torben
+2 SURN Flessner
+2 _MARNM Flessner
+1 SEX M
+1 BIRT
+2 DATE 10 JUN 2003
+1 FAMC @F35@
+0 @I79@ INDI
+1 NAME Anna /Brechtel/
+2 GIVN Anna
+2 SURN Brechtel
+2 _MARNM Brechtel
+1 SEX F
+1 BIRT
+2 DATE 11 APR 1906
+1 DEAT Y
+2 DATE 23 MAY 1969
+1 FAMS @F36@
+1 FAMC @F2@
+0 @I80@ INDI
+1 NAME Heinrich /Brenner/
+2 GIVN Heinrich
+2 SURN Brenner
+2 _MARNM Brenner
+1 SEX M
+1 BIRT
+2 DATE 26 SEP 1899
+1 DEAT Y
+2 DATE 28 JAN 1968
+1 FAMS @F36@
+0 @I81@ INDI
+1 NAME Irene /Brenner/
+2 GIVN Irene
+2 SURN Brenner
+2 _MARNM Brenner
+1 SEX F
+1 BIRT
+2 DATE 8 AUG 1926
+1 DEAT Y
+2 DATE 8 MAY 2016
+1 FAMS @F37@
+1 FAMC @F36@
+0 @I82@ INDI
+1 NAME Wilhelm /Heckmann/
+2 GIVN Wilhelm
+2 SURN Heckmann
+2 _MARNM Heckmann
+1 SEX M
+1 BIRT
+2 DATE 4 JUN 1922
+1 DEAT Y
+2 DATE 18 DEC 2011
+1 FAMS @F37@
+0 @I83@ INDI
+1 NAME Helga /Heckmann/
+2 GIVN Helga
+2 SURN Heckmann
+2 _MARNM Heckmann
+1 SEX F
+1 BIRT
+2 DATE 20 AUG 1949
+1 FAMS @F38@
+1 FAMC @F37@
+0 @I84@ INDI
+1 NAME Werner /Häussler/
+2 GIVN Werner
+2 SURN Häussler
+2 _MARNM Häussler
+1 SEX M
+1 BIRT
+2 DATE 12 AUG 1947
+1 FAMS @F38@
+0 @I85@ INDI
+1 NAME Eva /Häussler/
+2 GIVN Eva
+2 SURN Häussler
+2 _MARNM Häussler
+1 SEX F
+1 BIRT
+2 DATE 18 OCT 1980
+1 FAMS @F39@
+1 FAMC @F38@
+0 @I86@ INDI
+1 NAME Tobias /Buchwald/
+2 GIVN Tobias
+2 SURN Buchwald
+2 _MARNM Buchwald
+1 SEX M
+1 BIRT
+2 DATE 10 AUG 1979
+1 FAMS @F39@
+0 @I87@ INDI
+1 NAME Tom /Häussler/
+2 GIVN Tom
+2 SURN Häussler
+2 _MARNM Häussler
+1 SEX M
+1 BIRT
+2 DATE 9 AUG 2018
+1 FAMC @F39@
+0 @I88@ INDI
+1 NAME Heinz /Heckmann/
+2 GIVN Heinz
+2 SURN Heckmann
+2 _MARNM Heckmann
+1 SEX M
+1 BIRT
+2 DATE 21 JAN 1956
+1 FAMS @F40@
+1 FAMC @F37@
+0 @I89@ INDI
+1 NAME Edith /Dörr/
+2 GIVN Edith
+2 SURN Dörr
+2 _MARNM Dörr
+1 SEX F
+1 BIRT
+2 DATE 2 SEP 1957
+1 FAMS @F40@
+0 @I90@ INDI
+1 NAME Stefan /Heckmann/
+2 GIVN Stefan
+2 SURN Heckmann
+2 _MARNM Heckmann
+1 SEX M
+1 BIRT
+2 DATE 21 SEP 1982
+1 FAMS @F41@
+1 FAMS @F42@
+1 FAMC @F40@
+0 @I91@ INDI
+1 NAME Sarah /Grandke/
+2 GIVN Sarah
+2 SURN Grandke
+2 _MARNM Grandke
+1 SEX F
+1 BIRT
+2 DATE 15 OCT 1982
+1 FAMS @F42@
+0 @I92@ INDI
+1 NAME Kathrin /Fröscher/
+2 GIVN Kathrin
+2 SURN Fröscher
+2 _MARNM Fröscher
+1 SEX F
+1 BIRT
+2 DATE 1 JUL 1982
+1 FAMS @F41@
+0 @I93@ INDI
+1 NAME Joshua Finley /Heckmann/
+2 GIVN Joshua Finley
+2 SURN Heckmann
+2 _MARNM Heckmann
+1 SEX M
+1 BIRT
+2 DATE 1 MAY 2008
+1 FAMC @F42@
+0 @I94@ INDI
+1 NAME Jule Alicia /Fröscher/
+2 GIVN Jule Alicia
+2 SURN Fröscher
+2 _MARNM Fröscher
+1 SEX F
+1 BIRT
+2 DATE 2 JAN 2018
+1 FAMC @F41@
+0 @I95@ INDI
+1 NAME Jarle Malte /Fröscher/
+2 GIVN Jarle Malte
+2 SURN Fröscher
+2 _MARNM Fröscher
+1 SEX M
+1 BIRT
+2 DATE 2 JUN 2020
+1 FAMC @F41@
+0 @I96@ INDI
+1 NAME Britta Zoe /Heckmann/
+2 GIVN Britta Zoe
+2 SURN Heckmann
+2 _MARNM Heckmann
+1 SEX F
+1 BIRT
+2 DATE 25 JUN 1984
+1 FAMC @F37@
+0 @I97@ INDI
+1 NAME Ernst Ludwig /Brechtel/
+2 GIVN Ernst Ludwig
+2 SURN Brechtel
+2 _MARNM Brechtel
+1 SEX M
+1 BIRT
+2 DATE 2 MAR 1922
+1 DEAT Y
+2 DATE 4 FEB 1923
+1 FAMC @F1@
+0 @I98@ INDI
+1 NAME Elisabeth /Brechtel/
+2 GIVN Elisabeth
+2 SURN Brechtel
+2 _MARNM Brechtel
+1 SEX F
+1 BIRT
+2 DATE 30 OCT 1918
+1 DEAT Y
+2 DATE 25 NOV 1988
+1 FAMS @F43@
+1 FAMC @F1@
+0 @I99@ INDI
+1 NAME Adolf /Weis/
+2 GIVN Adolf
+2 SURN Weis
+2 _MARNM Weis
+1 SEX M
+1 BIRT
+2 DATE 5 JUL 1910
+1 DEAT Y
+2 DATE 6 MAY 1997
+1 FAMS @F43@
+0 @I100@ INDI
+1 NAME Doris /Weis/
+2 GIVN Doris
+2 SURN Weis
+2 _MARNM Weis
+1 SEX F
+1 BIRT
+2 DATE 4 SEP 1943
+1 FAMS @F44@
+1 FAMC @F43@
+0 @I101@ INDI
+1 NAME Werner /Dewald/
+2 GIVN Werner
+2 SURN Dewald
+2 _MARNM Dewald
+1 SEX M
+1 BIRT
+2 DATE 15 JUN 1944
+1 DEAT Y
+2 DATE 22 DEC 1998
+1 FAMS @F44@
+0 @I102@ INDI
+1 NAME Michael /Dewald/
+2 GIVN Michael
+2 SURN Dewald
+2 _MARNM Dewald
+1 SEX M
+1 BIRT
+2 DATE 9 AUG 1969
+1 FAMS @F45@
+1 FAMC @F44@
+0 @I103@ INDI
+1 NAME Beate /Fanese/
+2 GIVN Beate
+2 SURN Fanese
+2 _MARNM Fanese
+1 SEX F
+1 BIRT
+2 DATE 19 JUL 1971
+1 FAMS @F45@
+0 @I104@ INDI
+1 NAME Melanie /Dewald/
+2 GIVN Melanie
+2 SURN Dewald
+2 _MARNM Dewald
+1 SEX F
+1 BIRT
+2 DATE 16 FEB 1993
+1 FAMC @F45@
+0 @I105@ INDI
+1 NAME Linda /Dewald/
+2 GIVN Linda
+2 SURN Dewald
+2 _MARNM Dewald
+1 SEX F
+1 BIRT
+2 DATE 18 AUG 1970
+1 FAMC @F44@
+0 @I106@ INDI
+1 NAME Peter Philipp /Brechtel/
+2 GIVN Peter Philipp
+2 SURN Brechtel
+2 _MARNM Brechtel
+1 SEX M
+1 BIRT
+2 DATE 4 DEC 1907
+1 DEAT Y
+2 DATE 14 SEP 1994
+1 FAMS @F46@
+1 FAMC @F2@
+0 @I107@ INDI
+1 NAME Wilhelmine /Dauenheimer/
+2 GIVN Wilhelmine
+2 SURN Dauenheimer
+2 _MARNM Brechtel
+1 SEX F
+1 BIRT
+2 DATE 29 NOV 1923
+1 DEAT Y
+2 DATE 20 JUL 2000
+1 FAMS @F46@
+0 @I108@ INDI
+1 NAME Hannelore /Brechtel/
+2 GIVN Hannelore
+2 SURN Brechtel
+2 _MARNM Brechtel
+1 SEX F
+1 BIRT
+2 DATE 10 APR 1952
+1 FAMS @F47@
+1 FAMC @F46@
+0 @I109@ INDI
+1 NAME Herbert /Gaal/
+2 GIVN Herbert
+2 SURN Gaal
+2 _MARNM Gaal
+1 SEX M
+1 BIRT
+2 DATE 18 AUG 1950
+1 DEAT Y
+2 DATE 13 JAN 2013
+1 FAMS @F47@
+0 @I110@ INDI
+1 NAME Andreas /Gaal/
+2 GIVN Andreas
+2 SURN Gaal
+2 _MARNM Gaal
+1 SEX M
+1 BIRT
+2 DATE 20 MAR 1984
+1 FAMS @F48@
+1 FAMC @F47@
+0 @I111@ INDI
+1 NAME Nicole /Pörschmann/
+2 GIVN Nicole
+2 SURN Pörschmann
+2 _MARNM Gaal
+1 SEX F
+1 BIRT
+2 DATE 6 AUG 1988
+1 FAMS @F48@
+0 @I112@ INDI
+1 NAME Magdalena /Gaal/
+2 GIVN Magdalena
+2 SURN Gaal
+2 _MARNM Gaal
+1 SEX F
+1 BIRT
+2 DATE 27 FEB 2017
+1 FAMC @F48@
+0 @I113@ INDI
+1 NAME Helena /Brechtel/
+2 GIVN Helena
+2 SURN Brechtel
+2 _MARNM Brechtel
+1 SEX F
+1 BIRT
+2 DATE 5 JAN 1954
+1 DEAT Y
+2 DATE 10 AUG 2013
+1 FAMS @F49@
+1 FAMC @F46@
+0 @I114@ INDI
+1 NAME Gerhard /Hinz/
+2 GIVN Gerhard
+2 SURN Hinz
+2 _MARNM Hinz
+1 SEX M
+1 BIRT
+2 DATE 29 MAR 1949
+1 FAMS @F49@
+0 @I115@ INDI
+1 NAME Sandra /Hinz/
+2 GIVN Sandra
+2 SURN Hinz
+2 _MARNM Hinz
+1 SEX F
+1 BIRT
+2 DATE 28 FEB 1980
+1 FAMS @F50@
+1 FAMC @F49@
+0 @I116@ INDI
+1 NAME Steffen /Usler/
+2 GIVN Steffen
+2 SURN Usler
+2 _MARNM Usler
+1 SEX M
+1 BIRT
+2 DATE 20 NOV 1975
+1 FAMS @F50@
+0 @I117@ INDI
+1 NAME Emma Johanna /Usler/
+2 GIVN Emma Johanna
+2 SURN Usler
+2 _MARNM Usler
+1 SEX F
+1 BIRT
+2 DATE 4 FEB 2006
+1 FAMC @F50@
+0 @I118@ INDI
+1 NAME Luisa Valentina /Usler/
+2 GIVN Luisa Valentina
+2 SURN Usler
+2 _MARNM Usler
+1 SEX F
+1 BIRT
+2 DATE 8 JUL 2008
+1 FAMC @F50@
+0 @I119@ INDI
+1 NAME Jochen /Hinz/
+2 GIVN Jochen
+2 SURN Hinz
+2 _MARNM Hinz
+1 SEX M
+1 BIRT
+2 DATE 4 FEB 1984
+1 FAMS @F51@
+1 FAMC @F49@
+0 @I120@ INDI
+1 NAME Sarah /Neumann/
+2 GIVN Sarah
+2 SURN Neumann
+2 _MARNM Hinz
+1 SEX F
+1 BIRT
+2 DATE 20 DEC 1984
+1 FAMS @F51@
+0 @I121@ INDI
+1 NAME Jonas A. H. /Hinz/
+2 GIVN Jonas A. H.
+2 SURN Hinz
+2 _MARNM Hinz
+1 SEX M
+1 BIRT
+2 DATE 26 MAR 2015
+1 FAMC @F51@
+0 @I122@ INDI
+1 NAME Niklas Ph. A. /Hinz/
+2 GIVN Niklas Ph. A.
+2 SURN Hinz
+2 _MARNM Hinz
+1 SEX M
+1 BIRT
+2 DATE 29 JUN 2016
+1 FAMC @F51@
+0 @I123@ INDI
+1 NAME Michael /Brechtel/
+2 GIVN Michael
+2 SURN Brechtel
+2 _MARNM Brechtel
+1 SEX M
+1 BIRT
+2 DATE 21 MAY 1960
+1 FAMS @F52@
+1 FAMC @F46@
+0 @I124@ INDI
+1 NAME Marion /Schrimpf/
+2 GIVN Marion
+2 SURN Schrimpf
+2 _MARNM Brechtel
+1 SEX F
+1 BIRT
+2 DATE 26 JAN 1951
+1 FAMS @F52@
+0 @I125@ INDI
+1 NAME Phillip /Brechtel/
+2 GIVN Phillip
+2 SURN Brechtel
+2 _MARNM Brechtel
+1 SEX F
+1 BIRT
+2 DATE 24 MAR 1988
+1 FAMC @F52@
+0 @I126@ INDI
+1 NAME Ursula /Brechtel/
+2 GIVN Ursula
+2 SURN Brechtel
+2 _MARNM Brechtel
+1 SEX F
+1 BIRT
+2 DATE 4 JAN 1962
+1 FAMS @F53@
+1 FAMC @F46@
+0 @I127@ INDI
+1 NAME Edmund /Schneidel/
+2 GIVN Edmund
+2 SURN Schneidel
+2 _MARNM Schneidel
+1 SEX M
+1 BIRT
+2 DATE 21 DEC 1956
+1 FAMS @F53@
+0 @I128@ INDI
+1 NAME Bernd /Schneidel/
+2 GIVN Bernd
+2 SURN Schneidel
+2 _MARNM Schneidel
+1 SEX M
+1 BIRT
+2 DATE 26 APR 1986
+1 FAMC @F53@
+0 @I129@ INDI
+1 NAME Peter /Schneidel/
+2 GIVN Peter
+2 SURN Schneidel
+2 _MARNM Schneidel
+1 SEX M
+1 BIRT
+2 DATE 21 MAR 1988
+1 FAMC @F53@
+0 @I130@ INDI
+1 NAME Jörg /Schneidel/
+2 GIVN Jörg
+2 SURN Schneidel
+2 _MARNM Schneidel
+1 SEX M
+1 BIRT
+2 DATE 20 AUG 1991
+1 FAMC @F53@
 0 @F1@ FAM
 1 HUSB @I1@
 1 WIFE @I7@
+1 CHIL @I97@
+1 CHIL @I98@
 1 MARR
 2 DATE 4 MAY 1910
 1 _CURRENT Y
@@ -5913,6 +6880,9 @@ pRPW6L TJE68	gm	m17110505
 0 @F2@ FAM
 1 HUSB @I1@
 1 WIFE @I2@
+1 CHIL @I50@
+1 CHIL @I79@
+1 CHIL @I106@
 1 MARR
 2 DATE 21 FEB 1905
 1 DIV
@@ -6103,6 +7073,250 @@ pRPW6L TJE68	gm	m17110505
 2 DATE 5 MAY 1711
 1 _CURRENT Y
 1 _PRIMARY Y
+0 @F26@ FAM
+1 HUSB @I50@
+1 WIFE @I51@
+1 CHIL @I52@
+1 CHIL @I65@
+1 MARR
+2 DATE 19 NOV 1931
+1 _CURRENT Y
+1 _PRIMARY Y
+0 @F27@ FAM
+1 HUSB @I53@
+1 WIFE @I52@
+1 CHIL @I54@
+1 CHIL @I61@
+1 MARR
+2 DATE 14 AUG 1955
+1 _CURRENT Y
+1 _PRIMARY Y
+0 @F28@ FAM
+1 HUSB @I54@
+1 WIFE @I55@
+1 CHIL @I56@
+1 CHIL @I57@
+1 MARR
+2 DATE 31 MAY 1986
+1 _CURRENT Y
+1 _PRIMARY Y
+0 @F29@ FAM
+1 HUSB @I58@
+1 WIFE @I57@
+1 CHIL @I59@
+1 CHIL @I60@
+1 MARR
+2 DATE 1 OCT 2016
+1 _CURRENT Y
+1 _PRIMARY Y
+0 @F30@ FAM
+1 HUSB @I61@
+1 WIFE @I62@
+1 CHIL @I63@
+1 CHIL @I64@
+1 MARR
+2 DATE 5 MAY 1989
+1 _CURRENT Y
+1 _PRIMARY Y
+0 @F31@ FAM
+1 HUSB @I66@
+1 WIFE @I65@
+1 CHIL @I67@
+1 CHIL @I76@
+1 MARR
+2 DATE 13 AUG 1961
+1 _CURRENT Y
+1 _PRIMARY Y
+0 @F32@ FAM
+1 HUSB @I68@
+1 WIFE @I67@
+1 CHIL @I69@
+1 CHIL @I73@
+1 MARR
+2 DATE 9 APR 1988
+1 _CURRENT Y
+1 _PRIMARY Y
+0 @F33@ FAM
+1 HUSB @I70@
+1 WIFE @I69@
+1 CHIL @I71@
+1 CHIL @I72@
+1 MARR
+2 DATE 1 SEP 2018
+1 _CURRENT Y
+1 _PRIMARY Y
+0 @F34@ FAM
+1 HUSB @I73@
+1 WIFE @I74@
+1 CHIL @I75@
+1 MARR
+2 DATE 24 SEP 2021
+1 _CURRENT Y
+1 _PRIMARY Y
+0 @F35@ FAM
+1 HUSB @I76@
+1 WIFE @I77@
+1 CHIL @I78@
+1 MARR
+2 DATE 27 JUN 1998
+1 _CURRENT Y
+1 _PRIMARY Y
+0 @F36@ FAM
+1 HUSB @I80@
+1 WIFE @I79@
+1 CHIL @I81@
+1 MARR
+2 DATE MAY 1926
+1 _CURRENT Y
+1 _PRIMARY Y
+0 @F37@ FAM
+1 HUSB @I82@
+1 WIFE @I81@
+1 CHIL @I83@
+1 CHIL @I88@
+1 CHIL @I96@
+1 MARR
+2 DATE 18 JAN 1948
+1 _CURRENT Y
+1 _PRIMARY Y
+0 @F38@ FAM
+1 HUSB @I84@
+1 WIFE @I83@
+1 CHIL @I85@
+1 MARR
+2 DATE 18 MAR 1972
+1 _CURRENT Y
+1 _PRIMARY Y
+0 @F39@ FAM
+1 HUSB @I86@
+1 WIFE @I85@
+1 CHIL @I87@
+1 MARR
+2 DATE 1 AUG 2015
+1 _CURRENT Y
+1 _PRIMARY Y
+0 @F40@ FAM
+1 HUSB @I88@
+1 WIFE @I89@
+1 CHIL @I90@
+1 MARR
+2 DATE 22 AUG 1980
+1 _CURRENT Y
+1 _PRIMARY Y
+0 @F41@ FAM
+1 HUSB @I90@
+1 WIFE @I92@
+1 CHIL @I94@
+1 CHIL @I95@
+1 MARR
+2 DATE 1 AUG 2017
+1 _CURRENT Y
+1 _PRIMARY Y
+0 @F42@ FAM
+1 HUSB @I90@
+1 WIFE @I91@
+1 CHIL @I93@
+1 MARR
+2 DATE DEC 2007
+1 DIV
+2 DATE 1 JAN 2008
+1 _CURRENT N
+1 _PRIMARY N
+0 @F43@ FAM
+1 HUSB @I99@
+1 WIFE @I98@
+1 CHIL @I100@
+1 _CURRENT Y
+1 _PRIMARY Y
+0 @F44@ FAM
+1 HUSB @I101@
+1 WIFE @I100@
+1 CHIL @I102@
+1 CHIL @I105@
+1 MARR
+2 DATE 1 SEP 1967
+1 _CURRENT Y
+1 _PRIMARY Y
+0 @F45@ FAM
+1 HUSB @I102@
+1 WIFE @I103@
+1 CHIL @I104@
+1 MARR
+2 DATE 15 AUG 1992
+1 DIV
+1 _CURRENT Y
+1 _PRIMARY Y
+0 @F46@ FAM
+1 HUSB @I106@
+1 WIFE @I107@
+1 CHIL @I108@
+1 CHIL @I113@
+1 CHIL @I123@
+1 CHIL @I126@
+1 MARR
+2 DATE 7 JUL 1951
+1 _CURRENT Y
+1 _PRIMARY Y
+0 @F47@ FAM
+1 HUSB @I109@
+1 WIFE @I108@
+1 CHIL @I110@
+1 MARR
+2 DATE 17 APR 1982
+1 _CURRENT Y
+1 _PRIMARY Y
+0 @F48@ FAM
+1 HUSB @I110@
+1 WIFE @I111@
+1 CHIL @I112@
+1 MARR
+2 DATE 19 MAY 2018
+1 DIV
+1 _CURRENT Y
+1 _PRIMARY Y
+0 @F49@ FAM
+1 HUSB @I114@
+1 WIFE @I113@
+1 CHIL @I115@
+1 CHIL @I119@
+1 _CURRENT Y
+1 _PRIMARY Y
+0 @F50@ FAM
+1 HUSB @I116@
+1 WIFE @I115@
+1 CHIL @I117@
+1 CHIL @I118@
+1 MARR
+2 DATE 17 JUN 2005
+1 _CURRENT Y
+1 _PRIMARY Y
+0 @F51@ FAM
+1 HUSB @I119@
+1 WIFE @I120@
+1 CHIL @I121@
+1 CHIL @I122@
+1 MARR
+2 DATE 22 MAY 2009
+1 _CURRENT Y
+1 _PRIMARY Y
+0 @F52@ FAM
+1 HUSB @I123@
+1 WIFE @I124@
+1 CHIL @I125@
+1 MARR
+2 DATE 1 SEP 1987
+1 _CURRENT Y
+1 _PRIMARY Y
+0 @F53@ FAM
+1 HUSB @I127@
+1 WIFE @I126@
+1 CHIL @I128@
+1 CHIL @I129@
+1 CHIL @I130@
+1 MARR
+2 DATE 26 OCT 1984
+1 _CURRENT Y
+1 _PRIMARY Y
 0 TRLR
 
 ">
@@ -6110,26 +7324,83 @@ pRPW6L TJE68	gm	m17110505
 
 ID,Full name,Given names,Nickname,Title,Suffix,Surname now,Surname at birth,Gender,Deceased,Mother ID,Mother name,Father ID,Father name,Parents type,Second mother ID,Second mother name,Second father ID,Second father name,Second type,Birth date type,Birth year,Birth month,Birth day,Birth range end,Death date type,Death year,Death month,Death day,Death range end,Partner ID,Partner name,Partner type,Partnership date type,Partnership year,Partnership month,Partnership day,Partnership range end,Ex-partner IDs,Extra partner IDs,Email,Website,Blog,Photo site,Home tel,Work tel,Mobile,Skype,Address,Other contact,Birth place,Death place,Cause of death,Burial place,Burial date type,Burial year,Burial month,Burial day,Burial range end,Profession,Company,Interests,Activities,Bio notes,
 PO2AR,Dorothea,Dorothea,,,,,,Female,Y,,,,,,,,,,,Approximate,1619,,,,Known,1689,4,25,,Z3F5P,Johann Brechtel,Husband,Known,1647,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+GA8W6,Hanna Banzhaf,Hanna,,,,Banzhaf,Banzhaf,Female,,,,,,,,,,,,Known,1992,7,16,,,,,,,RUR4H,Felix Hook,Husband,Known,2021,9,24,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 START,Adam Brechtel,Adam,,,,Brechtel,,Male,Y,Q0ALU,Babara Brechtel,UW8KT,Philipp Brechtel II,,,,,,,Known,1876,10,2,,Known,1967,1,5,,NO93J,Magdalena Brechtel,Wife,Known,1910,5,4,,MKQJ0,,,,,,,,,,,,,,,,,,,,,,,,,,
 EBIJJ,Anna Brechtel,Anna,,,,Brechtel,Weber,Female,Y,,,,,,,,,,,Known,1656,,,,Known,1707,2,5,,PH2LV,Johannes Jakob Brechtel,Husband,Known,1682,4,7,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+VIRZB,Anna Brechtel,Anna,,,,Brechtel,Brechtel,Female,Y,MKQJ0,Cäcilia Brechtel,START,Adam Brechtel,,,,,,,Known,1906,4,11,,Known,1969,5,23,,GB6DV,Heinrich Brenner,Husband,Known,1926,5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 SWY8N,Anna Marg. Brechtel,Anna Marg.,,,,Brechtel,Platz,Female,Y,WI95K,Anna Marg. Platz,VNPHA,Johannes Gg. Platz,,,,,,,Known,1699,3,2,,Known,1758,1,26,,IHHDX,Johannes Philip Brechtel,Husband,Known,1721,2,3,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 N6ILF,Anna Maria Brechtel,Anna Maria,,,,Brechtel,Nägel,Female,Y,QW3BC,Anna Christina Nägel,BHH4C,Jakob Johannes Nägel,,,,,,,Known,1750,3,21,,Known,1795,4,2,,SQ6FF,Michael Brechtel,Husband,Known,1771,2,5,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 G84A3,Anna Maria Brechtel,Anna Maria,,,,Brechtel,Burkert,Female,Y,EUVHC,Anna Kath. Burkert,MWAN2,Jakob Burkert,,,,,,,Known,1779,3,20,,Known,1859,1,13,,GC6YD,Johann Brechtel II,Husband,Known,1797,11,14,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Q0ALU,Babara Brechtel,Babara,,,,Brechtel,Roth,Female,Y,WBA8H,Barbara Roth,M42E5,Franz Roth,,,,,,,Known,1844,10,10,,Known,1879,6,17,,UW8KT,Philipp Brechtel II,Husband,Known,1867,1,10,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-QZ113,Cäcilia Brechtel,Cäcilia,,,,Brechtel,Thomas,Female,Y,YHEWC,Magdalena Thomas,YJRZI,Johannes Barth. Thomas,,,,,,,Known,1804,11,9,,Known,1871,11,6,,UUTAS,Friedrich Brechtel,Husband,Known,1831,1,30,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+YTPDP,Christa Brechtel,Christa,,,,Brechtel,Brechtel,Female,,BW7QU,Magdalena Brechtel IV,AYZO9,Adam Brechtel IV,,,,,,,Known,1937,8,11,,,,,,,SK7BN,Gerd Flessner,Late husband,Known,1961,8,13,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 MKQJ0,Cäcilia Brechtel,Cäcilia,,,,Brechtel,Kirchner,Female,Y,A7JPY,Katharina Kirchner,IDNRD,Franz Kirchner,,,,,,,Known,1881,9,26,,Known,1908,1,12,,,,,,,,,,START,,,,,,,,,,,,,,,,,,,,,,,,,,
+QZ113,Cäcilia Brechtel,Cäcilia,,,,Brechtel,Thomas,Female,Y,YHEWC,Magdalena Thomas,YJRZI,Johannes Barth. Thomas,,,,,,,Known,1804,11,9,,Known,1871,11,6,,UUTAS,Friedrich Brechtel,Husband,Known,1831,1,30,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+DJBD5,Elisabeth Brechtel,Elisabeth,,,,Brechtel,Brechtel,Female,Y,NO93J,Magdalena Brechtel,START,Adam Brechtel,,,,,,,Known,1918,10,30,,Known,1988,11,25,,ADC3F,Adolf Weis,Partner,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+LCJVD,Ernst Ludwig Brechtel,Ernst Ludwig,,,,Brechtel,Brechtel,Male,Y,NO93J,Magdalena Brechtel,START,Adam Brechtel,,,,,,,Known,1922,3,2,,Known,1923,2,4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 UUTAS,Friedrich Brechtel,Friedrich,,,,Brechtel,Brechtel,Male,Y,G84A3,Anna Maria Brechtel,GC6YD,Johann Brechtel II,,,,,,,Known,1804,4,17,,Known,1895,11,11,,QZ113,Cäcilia Brechtel,Wife,Known,1831,1,30,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+BAM1D,Hannelore Brechtel,Hannelore,,,,Brechtel,Brechtel,Female,,KGUDO,Wilhelmine Brechtel,ZKG3N,Peter Philipp Brechtel,,,,,,,Known,1952,4,10,,,,,,,LQU0A,Herbert Gaal,Late husband,Known,1982,4,17,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+IMLK5,Helena Brechtel,Helena,,,,Brechtel,Brechtel,Female,Y,KGUDO,Wilhelmine Brechtel,ZKG3N,Peter Philipp Brechtel,,,,,,,Known,1954,1,5,,Known,2013,8,10,,VNPTT,Gerhard Hinz,Partner,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Z3F5P,Johann Brechtel,Johann,,,,Brechtel,,Male,Y,,,,,,,,,,,Approximate,1615,,,,Approximate,1668,,,,PO2AR,Dorothea,Wife,Known,1647,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+DPXN0,Johanna Brechtel,Johanna,,,,Brechtel,Brechtel,Female,Y,BW7QU,Magdalena Brechtel IV,AYZO9,Adam Brechtel IV,,,,,,,Known,1934,10,18,,Known,1997,9,14,,VDEOD,Karl Schollmeier,Husband,Known,1955,8,14,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 PH2LV,Johannes Jakob Brechtel,Johannes Jakob,,,,Brechtel,Brechtel,Male,Y,PO2AR,Dorothea,Z3F5P,Johann Brechtel,,,,,,,Known,1656,11,26,,Known,1724,11,25,,EBIJJ,Anna Brechtel,Wife,Known,1682,4,7,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 IHHDX,Johannes Philip Brechtel,Johannes Philip,,,,Brechtel,Brechtel,Male,Y,EBIJJ,Anna Brechtel,PH2LV,Johannes Jakob Brechtel,,,,,,,Known,1695,9,29,,Known,1774,8,12,,SWY8N,Anna Marg. Brechtel,Wife,Known,1721,2,3,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 NO93J,Magdalena Brechtel,Magdalena,,,,Brechtel,Kirchner,Female,Y,A7JPY,Katharina Kirchner,IDNRD,Franz Kirchner,Biological,,,,,,Known,1879,3,8,,Known,1956,3,2,,START,Adam Brechtel,Husband,Known,1910,5,4,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+ZW7M6,Marion Brechtel,Marion,,,,Brechtel,Schrimpf,Female,,,,,,,,,,,,Known,1951,1,26,,,,,,,WVPEZ,Michael Brechtel,Husband,Known,1987,9,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+WVPEZ,Michael Brechtel,Michael,,,,Brechtel,Brechtel,Male,,KGUDO,Wilhelmine Brechtel,ZKG3N,Peter Philipp Brechtel,,,,,,,Known,1960,5,21,,,,,,,ZW7M6,Marion Brechtel,Wife,Known,1987,9,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 SQ6FF,Michael Brechtel,Michael,,,,Brechtel,Brechtel,Male,Y,SWY8N,Anna Marg. Brechtel,IHHDX,Johannes Philip Brechtel,,,,,,,Known,1723,7,15,,Known,1776,11,24,,N6ILF,Anna Maria Brechtel,Wife,Known,1771,2,5,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+ZKG3N,Peter Philipp Brechtel,Peter Philipp,,,,Brechtel,Brechtel,Male,Y,MKQJ0,Cäcilia Brechtel,START,Adam Brechtel,,,,,,,Known,1907,12,4,,Known,1994,9,14,,KGUDO,Wilhelmine Brechtel,Wife,Known,1951,7,7,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Z70W3,Phillip Brechtel,Phillip,,,,Brechtel,Brechtel,Female,,ZW7M6,Marion Brechtel,WVPEZ,Michael Brechtel,,,,,,,Known,1988,3,24,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+ETHTF,Ursula Brechtel,Ursula,,,,Brechtel,Brechtel,Female,,KGUDO,Wilhelmine Brechtel,ZKG3N,Peter Philipp Brechtel,,,,,,,Known,1962,1,4,,,,,,,EPH8R,Edmund Schneidel,Husband,Known,1984,10,26,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+KGUDO,Wilhelmine Brechtel,Wilhelmine,,,,Brechtel,Dauenheimer,Female,Y,,,,,,,,,,,Known,1923,11,29,,Known,2000,7,20,,ZKG3N,Peter Philipp Brechtel,Husband,Known,1951,7,7,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 GC6YD,Johann Brechtel II,Johann,,,,Brechtel II,,Male,Y,N6ILF,Anna Maria Brechtel,SQ6FF,Michael Brechtel,,,,,,,Known,1773,1,24,,Known,1850,10,10,,G84A3,Anna Maria Brechtel,Wife,Known,1797,11,14,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 UW8KT,Philipp Brechtel II,Philipp,,,,Brechtel II,,Male,Y,QZ113,Cäcilia Brechtel,UUTAS,Friedrich Brechtel,,,,,,,Known,1838,5,10,,Known,1899,11,5,,Q0ALU,Babara Brechtel,Wife,Known,1867,1,10,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+AYZO9,Adam Brechtel IV,Adam,,,,Brechtel IV,Brechtel IV,Male,Y,MKQJ0,Cäcilia Brechtel,START,Adam Brechtel,,,,,,,Known,1905,4,22,,Known,1984,2,25,,BW7QU,Magdalena Brechtel IV,Wife,Known,1931,11,19,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+BW7QU,Magdalena Brechtel IV,Magdalena,,,,Brechtel IV,Wunder,Female,Y,,,,,,,,,,,Known,1908,9,21,,Known,1984,4,9,,AYZO9,Adam Brechtel IV,Husband,Known,1931,11,19,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+GB6DV,Heinrich Brenner,Heinrich,,,,Brenner,Brenner,Male,Y,,,,,,,,,,,Known,1899,9,26,,Known,1968,1,28,,VIRZB,Anna Brechtel,Wife,Known,1926,5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+I35GU,Irene Brenner,Irene,,,,Brenner,Brenner,Female,Y,VIRZB,Anna Brechtel,GB6DV,Heinrich Brenner,,,,,,,Known,1926,8,8,,Known,2016,5,8,,QJRZY,Wilhelm Heckmann,Husband,Known,1948,1,18,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+DMIWZ,Tobias Buchwald,Tobias,,,,Buchwald,Buchwald,Male,,,,,,,,,,,,Known,1979,8,10,,,,,,,XQG3Q,Eva Häussler,Wife,Known,2015,8,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 EUVHC,Anna Kath. Burkert,Anna Kath.,,,,Burkert,Adler,Female,Y,,,,,,,,,,,Known,1749,2,3,,Known,1810,8,3,,MWAN2,Jakob Burkert,Husband,Known,1773,7,27,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 MWAN2,Jakob Burkert,Jakob,,,,Burkert,Burkert,Male,Y,,,,,,,,,,,Known,1749,8,5,,Known,1796,1,9,,EUVHC,Anna Kath. Burkert,Wife,Known,1773,7,27,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-HZW86,Anna Kirchner,Anna,,,,Kirchner,Schorn,Female,Y,RPW6L,Maria Franziska Schorn,TJE68,Kaspar Joh. Schorn,,,,,,,Known,1713,8,7,,Known,1777,3,12,,EQQ8Z,Leonhard Joh. Kirchner,Husband,Known,1731,3,28,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+KGQ9J,Linda Dewald,Linda,,,,Dewald,Dewald,Female,,DWVYN,Doris Weis,SG32W,Werner Dewald,,,,,,,Known,1970,8,18,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+B8K2V,Melanie Dewald,Melanie,,,,Dewald,Dewald,Female,,E7BQ3,Beate Fanese,C72IZ,Michael Dewald,,,,,,,Known,1993,2,16,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+C72IZ,Michael Dewald,Michael,,,,Dewald,Dewald,Male,,DWVYN,Doris Weis,SG32W,Werner Dewald,,,,,,,Known,1969,8,9,,,,,,,E7BQ3,Beate Fanese,Ex-wife,Known,1992,8,15,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+SG32W,Werner Dewald,Werner,,,,Dewald,Dewald,Male,Y,,,,,,,,,,,Known,1944,6,15,,Known,1998,12,22,,DWVYN,Doris Weis,Widow,Known,1967,9,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+TJ2GL,Edith Dörr,Edith,,,,Dörr,Dörr,Female,,,,,,,,,,,,Known,1957,9,2,,,,,,,I70C9,Heinz Heckmann,Husband,Known,1980,8,22,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+E7BQ3,Beate Fanese,Beate,,,,Fanese,Fanese,Female,,,,,,,,,,,,Known,1971,7,19,,,,,,,C72IZ,Michael Dewald,Ex-husband,Known,1992,8,15,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Y1SQ8,Bärbel Flessner,Bärbel,,,,Flessner,Flessner,Female,,YTPDP,Christa Brechtel,SK7BN,Gerd Flessner,,,,,,,Known,1963,3,11,,,,,,,U2PHE,Roger Hook,Husband,Known,1988,4,9,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+SK7BN,Gerd Flessner,Gerd,,,,Flessner,Flessner,Male,Y,,,,,,,,,,,Known,1935,7,19,,Known,2015,10,13,,YTPDP,Christa Brechtel,Widow,Known,1961,8,13,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+X34UO,Sabine Flessner,Sabine,,,,Flessner,Sponagel,Female,,,,,,,,,,,,Known,1965,9,24,,,,,,,C3MFU,Ulrich Flessner,Husband,Known,1998,6,27,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+EJZEC,Torben Flessner,Torben,,,,Flessner,Flessner,Male,,X34UO,Sabine Flessner,C3MFU,Ulrich Flessner,,,,,,,Known,2003,6,10,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+C3MFU,Ulrich Flessner,Ulrich,,,,Flessner,Flessner,Male,,YTPDP,Christa Brechtel,SK7BN,Gerd Flessner,,,,,,,Known,1965,11,12,,,,,,,X34UO,Sabine Flessner,Wife,Known,1998,6,27,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+KUOML,Jarle Malte Fröscher,Jarle Malte,,,,Fröscher,Fröscher,Male,,W27L9,Kathrin Fröscher,FZGD5,Stefan Heckmann,,,,,,,Known,2020,6,2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+HZUVA,Jule Alicia Fröscher,Jule Alicia,,,,Fröscher,Fröscher,Female,,W27L9,Kathrin Fröscher,FZGD5,Stefan Heckmann,,,,,,,Known,2018,1,2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+W27L9,Kathrin Fröscher,Kathrin,,,,Fröscher,Fröscher,Female,,,,,,,,,,,,Known,1982,7,1,,,,,,,FZGD5,Stefan Heckmann,Husband,Known,2017,8,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+DQX32,Andreas Gaal,Andreas,,,,Gaal,Gaal,Male,,BAM1D,Hannelore Brechtel,LQU0A,Herbert Gaal,,,,,,,Known,1984,3,20,,,,,,,BQKZU,Nicole Gaal,Ex-wife,Known,2018,5,19,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+LQU0A,Herbert Gaal,Herbert,,,,Gaal,Gaal,Male,Y,,,,,,,,,,,Known,1950,8,18,,Known,2013,1,13,,BAM1D,Hannelore Brechtel,Widow,Known,1982,4,17,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+MANHF,Magdalena Gaal,Magdalena,,,,Gaal,Gaal,Female,,BQKZU,Nicole Gaal,DQX32,Andreas Gaal,,,,,,,Known,2017,2,27,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+BQKZU,Nicole Gaal,Nicole,,,,Gaal,Pörschmann,Female,,,,,,,,,,,,Known,1988,8,6,,,,,,,DQX32,Andreas Gaal,Ex-husband,Known,2018,5,19,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+QFNLP,Sarah Grandke,Sarah,,,,Grandke,Grandke,Female,,,,,,,,,,,,Known,1982,10,15,,,,,,,,,,,,,,,FZGD5,,,,,,,,,,,,,,,,,,,,,,,,,,
+HZPWL,Britta Zoe Heckmann,Britta Zoe,,,,Heckmann,Heckmann,Female,,I35GU,Irene Brenner,QJRZY,Wilhelm Heckmann,,,,,,,Known,1984,6,25,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+I70C9,Heinz Heckmann,Heinz,,,,Heckmann,Heckmann,Male,,I35GU,Irene Brenner,QJRZY,Wilhelm Heckmann,,,,,,,Known,1956,1,21,,,,,,,TJ2GL,Edith Dörr,Wife,Known,1980,8,22,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+W2RT1,Helga Heckmann,Helga,,,,Heckmann,Heckmann,Female,,I35GU,Irene Brenner,QJRZY,Wilhelm Heckmann,,,,,,,Known,1949,8,20,,,,,,,DSEEE,Werner Häussler,Husband,Known,1972,3,18,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+H8HYD,Joshua Finley Heckmann,Joshua Finley,,,,Heckmann,Heckmann,Male,,QFNLP,Sarah Grandke,FZGD5,Stefan Heckmann,,,,,,,Known,2008,5,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+FZGD5,Stefan Heckmann,Stefan,,,,Heckmann,Heckmann,Male,,TJ2GL,Edith Dörr,I70C9,Heinz Heckmann,,,,,,,Known,1982,9,21,,,,,,,W27L9,Kathrin Fröscher,Wife,Known,2017,8,1,,QFNLP,,,,,,,,,,,,,,,,,,,,,,,,,,
+QJRZY,Wilhelm Heckmann,Wilhelm,,,,Heckmann,Heckmann,Male,Y,,,,,,,,,,,Known,1922,6,4,,Known,2011,12,18,,I35GU,Irene Brenner,Wife,Known,1948,1,18,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+VNPTT,Gerhard Hinz,Gerhard,,,,Hinz,Hinz,Male,,,,,,,,,,,,Known,1949,3,29,,,,,,,IMLK5,Helena Brechtel,Late partner,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+QE4VU,Jochen Hinz,Jochen,,,,Hinz,Hinz,Male,,IMLK5,Helena Brechtel,VNPTT,Gerhard Hinz,,,,,,,Known,1984,2,4,,,,,,,AXI2L,Sarah Hinz,Wife,Known,2009,5,22,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+SPKUQ,Jonas A. H. Hinz,Jonas A. H.,,,,Hinz,Hinz,Male,,AXI2L,Sarah Hinz,QE4VU,Jochen Hinz,,,,,,,Known,2015,3,26,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+C1WO0,Niklas Ph. A. Hinz,Niklas Ph. A.,,,,Hinz,Hinz,Male,,AXI2L,Sarah Hinz,QE4VU,Jochen Hinz,,,,,,,Known,2016,6,29,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+DPSOE,Sandra Hinz,Sandra,,,,Hinz,Hinz,Female,,IMLK5,Helena Brechtel,VNPTT,Gerhard Hinz,,,,,,,Known,1980,2,28,,,,,,,V3507,Steffen Usler,Husband,Known,2005,6,17,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+AXI2L,Sarah Hinz,Sarah,,,,Hinz,Neumann,Female,,,,,,,,,,,,Known,1984,12,20,,,,,,,QE4VU,Jochen Hinz,Husband,Known,2009,5,22,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+RUR4H,Felix Hook,Felix,,,,Hook,Hook,Male,,Y1SQ8,Bärbel Flessner,U2PHE,Roger Hook,,,,,,,Known,1992,8,17,,,,,,,GA8W6,Hanna Banzhaf,Wife,Known,2021,9,24,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+AFHQB,Larissa Hook,Larissa,,,,Hook,Hook,Female,,Y1SQ8,Bärbel Flessner,U2PHE,Roger Hook,,,,,,,Known,1989,12,11,,,,,,,UMI61,Julian Preuß,Husband,Known,2018,9,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+QLCA4,Oskar Hook,Oskar,,,,Hook,Hook,Male,,GA8W6,Hanna Banzhaf,RUR4H,Felix Hook,,,,,,,Known,2021,12,26,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+U2PHE,Roger Hook,Roger,,,,Hook,Hook,Male,,,,,,,,,,,,Known,1961,8,23,,,,,,,Y1SQ8,Bärbel Flessner,Wife,Known,1988,4,9,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+XQG3Q,Eva Häussler,Eva,,,,Häussler,Häussler,Female,,W2RT1,Helga Heckmann,DSEEE,Werner Häussler,,,,,,,Known,1980,10,18,,,,,,,DMIWZ,Tobias Buchwald,Husband,Known,2015,8,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+NJXP6,Tom Häussler,Tom,,,,Häussler,Häussler,Male,,XQG3Q,Eva Häussler,DMIWZ,Tobias Buchwald,,,,,,,Known,2018,8,9,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+DSEEE,Werner Häussler,Werner,,,,Häussler,Häussler,Male,,,,,,,,,,,,Known,1947,8,12,,,,,,,W2RT1,Helga Heckmann,Wife,Known,1972,3,18,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 EQHZT,Anna Kirchner,Anna,,,,Kirchner,Maria,Female,Y,,,,,,,,,,,Known,1672,,,,Known,1750,2,22,,Z975C,Johann Kirchner,Husband,Known,1699,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+HZW86,Anna Kirchner,Anna,,,,Kirchner,Schorn,Female,Y,RPW6L,Maria Franziska Schorn,TJE68,Kaspar Joh. Schorn,,,,,,,Known,1713,8,7,,Known,1777,3,12,,EQQ8Z,Leonhard Joh. Kirchner,Husband,Known,1731,3,28,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 IDNRD,Franz Kirchner,Franz,,,,Kirchner,Kirchner III,Male,Y,EOBOA,Elisabeth Kirchner III,B0YV2,Valentin Kirchner III,,,,,,,Known,1845,1,28,,Known,1922,11,24,,A7JPY,Katharina Kirchner,Wife,Known,1871,1,12,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Z975C,Johann Kirchner,Johann,,,,Kirchner,Kirchner,Male,Y,,,,,,,,,,,Known,1651,,,,Known,1713,11,3,,EQHZT,Anna Kirchner,Wife,Known,1699,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 A7JPY,Katharina Kirchner,Katharina,,,,Kirchner,Martin,Female,Y,OL46N,Agnes Martin,H3EPP,Josef Martin,,,,,,,Known,1850,10,27,,Known,1929,3,26,,IDNRD,Franz Kirchner,Husband,Known,1871,1,12,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -6150,21 +7421,45 @@ WI95K,Anna Marg. Platz,Anna Marg.,,,,Platz,Cläsel,Female,Y,,,,,,,,,,,Known,1678
 VNPHA,Johannes Gg. Platz,Johannes Gg.,,,,Platz,Platz,Male,Y,,,,,,,,,,,Known,1669,9,15,,Known,1173,2,22,,WI95K,Anna Marg. Platz,Wife,Known,1696,5,4,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 KQAZS,Maria Magd. Platz,Maria Magd.,,,,Platz,Kercher,Female,Y,,,,,,,,,,,Known,1704,3,16,,Known,1785,1,11,,VIPS6,Georg Joh. Platz Jr.,Husband,Known,1722,11,24,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 VIPS6,Georg Joh. Platz Jr.,Georg Joh.,,,,Platz Jr.,Platz Jr.,Male,Y,,,,,,,,,,,Known,1697,11,26,,Known,1766,2,26,,KQAZS,Maria Magd. Platz,Wife,Known,1722,11,24,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+S8RB2,Joshua Preuß,Joshua,,,,Preuß,Preuß,Male,,AFHQB,Larissa Hook,UMI61,Julian Preuß,,,,,,,Known,2020,12,13,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+UMI61,Julian Preuß,Julian,,,,Preuß,Preuß,Male,,,,,,,,,,,,Known,1989,2,4,,,,,,,AFHQB,Larissa Hook,Wife,Known,2018,9,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+BXQBN,Mattheo Preuß,Mattheo,,,,Preuß,Preuß,Male,,AFHQB,Larissa Hook,UMI61,Julian Preuß,,,,,,,Known,2019,5,4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 HYY4S,Anna Marg. Renz,Anna Marg.,,,,Renz,Schwärzler,Female,Y,,,,,,,,,,,Known,1744,10,23,,Known,1804,9,22,,SZ2SW,Johann Renz,Husband,Known,1773,2,2,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 SZ2SW,Johann Renz,Johann,,,,Renz,Renz,Male,Y,,,,,,,,,,,Known,1747,,,,Known,1806,4,9,,HYY4S,Anna Marg. Renz,Wife,Known,1773,2,2,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 WBA8H,Barbara Roth,Barbara,,,,Roth,Adler,Female,Y,,,,,,,,,,,Known,1816,6,9,,Known,1872,1,17,,M42E5,Franz Roth,Husband,Known,1838,8,21,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 M42E5,Franz Roth,Franz,,,,Roth,Roth I,Male,Y,,,,,,,,,,,Known,1812,,,,Known,1876,11,17,,WBA8H,Barbara Roth,Wife,Known,1838,8,21,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+XZLZV,Bernd Schneidel,Bernd,,,,Schneidel,Schneidel,Male,,ETHTF,Ursula Brechtel,EPH8R,Edmund Schneidel,,,,,,,Known,1986,4,26,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+EPH8R,Edmund Schneidel,Edmund,,,,Schneidel,Schneidel,Male,,,,,,,,,,,,Known,1956,12,21,,,,,,,ETHTF,Ursula Brechtel,Wife,Known,1984,10,26,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+JHKSF,Jörg Schneidel,Jörg,,,,Schneidel,Schneidel,Male,,ETHTF,Ursula Brechtel,EPH8R,Edmund Schneidel,,,,,,,Known,1991,8,20,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+E4K3L,Peter Schneidel,Peter,,,,Schneidel,Schneidel,Male,,ETHTF,Ursula Brechtel,EPH8R,Edmund Schneidel,,,,,,,Known,1988,3,21,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Q5OI5,Amina Schollmeier,Amina,,,,Schollmeier,Reinhardt,Female,,D7VKC,Sina Schollmeier,Q0OX5,Tobias Schollmeier,,,,,,,Known,2019,11,26,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+WGI5L,Barbara Schollmeier,Barbara,,,,Schollmeier,Fuchs,Female,,,,,,,,,,,,Known,1967,7,1,,,,,,,O7E7G,Dieter Schollmeier,Husband,Known,1989,5,5,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+O92V5,Carina Schollmeier,Carina,,,,Schollmeier,Schollmeier,Female,,WGI5L,Barbara Schollmeier,O7E7G,Dieter Schollmeier,,,,,,,Known,1995,9,2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+PJFJ4,Christian Schollmeier,Christian,,,,Schollmeier,Schollmeier,Male,,WGI5L,Barbara Schollmeier,O7E7G,Dieter Schollmeier,,,,,,,Known,1992,3,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+O7E7G,Dieter Schollmeier,Dieter,,,,Schollmeier,Schollmeier,Male,,DPXN0,Johanna Brechtel,VDEOD,Karl Schollmeier,,,,,,,Known,1960,7,19,,,,,,,WGI5L,Barbara Schollmeier,Wife,Known,1989,5,5,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+BU12N,Gabi Schollmeier,Gabi,,,,Schollmeier,Halblaub,Female,,,,,,,,,,,,Known,1957,5,7,,,,,,,OY27Y,Klaus Schollmeier,Husband,Known,1986,5,31,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+XVLQ9,Jago Schollmeier,Jago,,,,Schollmeier,Schollmeier,Male,,D7VKC,Sina Schollmeier,Q0OX5,Tobias Schollmeier,,,,,,,Known,2021,7,17,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+VDEOD,Karl Schollmeier,Karl,,,,Schollmeier,Schollmeier,Male,Y,,,,,,,,,,,Known,1927,5,3,,Known,1990,7,31,,DPXN0,Johanna Brechtel,Wife,Known,1955,8,14,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+OY27Y,Klaus Schollmeier,Klaus,,,,Schollmeier,Schollmeier,Male,,DPXN0,Johanna Brechtel,VDEOD,Karl Schollmeier,,,,,,,Known,1957,3,7,,,,,,,BU12N,Gabi Schollmeier,Wife,Known,1986,5,31,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+D7VKC,Sina Schollmeier,Sina,,,,Schollmeier,Schollmeier,Female,,BU12N,Gabi Schollmeier,OY27Y,Klaus Schollmeier,,,,,,,Known,1989,12,17,,,,,,,Q0OX5,Tobias Schollmeier,Husband,Known,2016,10,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+TP31S,Tanja Schollmeier,Tanja,,,,Schollmeier,Schollmeier,Female,,BU12N,Gabi Schollmeier,OY27Y,Klaus Schollmeier,,,,,,,Known,1988,1,19,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Q0OX5,Tobias Schollmeier,Tobias,,,,Schollmeier,Reinhardt,Male,,,,,,,,,,,,Known,1986,7,13,,,,,,,D7VKC,Sina Schollmeier,Wife,Known,2016,10,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 TJE68,Kaspar Joh. Schorn,Kaspar Joh.,,,,Schorn,Schorn,Male,Y,,,,,,,,,,,Known,1683,8,8,,Known,1740,2,11,,RPW6L,Maria Franziska Schorn,Wife,Known,1711,5,5,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 RPW6L,Maria Franziska Schorn,Maria Franziska,,,,Schorn,Braun,Female,Y,,,,,,,,,,,Known,1686,,,,Known,1752,5,3,,TJE68,Kaspar Joh. Schorn,Husband,Known,1711,5,5,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 YJRZI,Johannes Barth. Thomas,Johannes Barth.,,,,Thomas,Thomas,Male,Y,,,,,,,,,,,Known,1769,4,29,,Known,1843,11,27,,YHEWC,Magdalena Thomas,Wife,Known,1799,4,21,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 YHEWC,Magdalena Thomas,Magdalena,,,,Thomas,Effler,Female,Y,,,,,,,,,,,Known,1780,5,16,,Known,1843,5,17,,YJRZI,Johannes Barth. Thomas,Husband,Known,1799,4,21,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+AFKGQ,Emma Johanna Usler,Emma Johanna,,,,Usler,Usler,Female,,DPSOE,Sandra Hinz,V3507,Steffen Usler,,,,,,,Known,2006,2,4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+KVEG7,Luisa Valentina Usler,Luisa Valentina,,,,Usler,Usler,Female,,DPSOE,Sandra Hinz,V3507,Steffen Usler,,,,,,,Known,2008,7,8,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+V3507,Steffen Usler,Steffen,,,,Usler,Usler,Male,,,,,,,,,,,,Known,1975,11,20,,,,,,,DPSOE,Sandra Hinz,Wife,Known,2005,6,17,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+ADC3F,Adolf Weis,Adolf,,,,Weis,Weis,Male,Y,,,,,,,,,,,Known,1910,7,5,,Known,1997,5,6,,DJBD5,Elisabeth Brechtel,Partner,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+DWVYN,Doris Weis,Doris,,,,Weis,Weis,Female,,DJBD5,Elisabeth Brechtel,ADC3F,Adolf Weis,,,,,,,Known,1943,9,4,,,,,,,SG32W,Werner Dewald,Late husband,Known,1967,9,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 
 ">
 <INPUT TYPE="hidden" ID="text" VALUE="
 
 My Family
 
-Plain text downloaded by Henning on 22 Jul 2022.
+Plain text downloaded by Henning on 9 Aug 2022.
 
 This file should be viewed as Unicode (UTF-8) character encoding.
 
@@ -6177,6 +7472,13 @@ Gender:             Female (deceased)
 Husband:            Johann Brechtel (married 1647)
 Birth date:         Approx 1619
 Death date:         25 Apr 1689
+
+----------------------------------------------------------------------------
+
+Full name:          Hanna Banzhaf
+Gender:             Female
+Husband:            Felix Hook (married 24 Sep 2021)
+Birth date:         16 Jul 1992
 
 ----------------------------------------------------------------------------
 
@@ -6197,6 +7499,16 @@ Gender:             Female (deceased)
 Husband:            Johannes Jakob Brechtel (married 7 Apr 1682)
 Birth date:         1656
 Death date:         5 Feb 1707
+
+----------------------------------------------------------------------------
+
+Full name:          Anna Brechtel
+Gender:             Female (deceased)
+Mother:             Cäcilia Brechtel
+Father:             Adam Brechtel
+Husband:            Heinrich Brenner (married May 1926)
+Birth date:         11 Apr 1906
+Death date:         23 May 1969
 
 ----------------------------------------------------------------------------
 
@@ -6244,14 +7556,12 @@ Death date:         17 Jun 1879
 
 ----------------------------------------------------------------------------
 
-Full name:          Cäcilia Brechtel
-Surname at birth:   Thomas
-Gender:             Female (deceased)
-Mother:             Magdalena Thomas
-Father:             Johannes Barth. Thomas
-Husband:            Friedrich Brechtel (married 30 Jan 1831)
-Birth date:         9 Nov 1804
-Death date:         6 Nov 1871
+Full name:          Christa Brechtel
+Gender:             Female
+Mother:             Magdalena Brechtel IV
+Father:             Adam Brechtel IV
+Late husband:       Gerd Flessner (married 13 Aug 1961)
+Birth date:         11 Aug 1937
 
 ----------------------------------------------------------------------------
 
@@ -6266,6 +7576,36 @@ Death date:         12 Jan 1908
 
 ----------------------------------------------------------------------------
 
+Full name:          Cäcilia Brechtel
+Surname at birth:   Thomas
+Gender:             Female (deceased)
+Mother:             Magdalena Thomas
+Father:             Johannes Barth. Thomas
+Husband:            Friedrich Brechtel (married 30 Jan 1831)
+Birth date:         9 Nov 1804
+Death date:         6 Nov 1871
+
+----------------------------------------------------------------------------
+
+Full name:          Elisabeth Brechtel
+Gender:             Female (deceased)
+Mother:             Magdalena Brechtel
+Father:             Adam Brechtel
+Partner:            Adolf Weis
+Birth date:         30 Oct 1918
+Death date:         25 Nov 1988
+
+----------------------------------------------------------------------------
+
+Full name:          Ernst Ludwig Brechtel
+Gender:             Male (deceased)
+Mother:             Magdalena Brechtel
+Father:             Adam Brechtel
+Birth date:         2 Mar 1922
+Death date:         4 Feb 1923
+
+----------------------------------------------------------------------------
+
 Full name:          Friedrich Brechtel
 Gender:             Male (deceased)
 Mother:             Anna Maria Brechtel
@@ -6276,11 +7616,40 @@ Death date:         11 Nov 1895
 
 ----------------------------------------------------------------------------
 
+Full name:          Hannelore Brechtel
+Gender:             Female
+Mother:             Wilhelmine Brechtel
+Father:             Peter Philipp Brechtel
+Late husband:       Herbert Gaal (married 17 Apr 1982)
+Birth date:         10 Apr 1952
+
+----------------------------------------------------------------------------
+
+Full name:          Helena Brechtel
+Gender:             Female (deceased)
+Mother:             Wilhelmine Brechtel
+Father:             Peter Philipp Brechtel
+Partner:            Gerhard Hinz
+Birth date:         5 Jan 1954
+Death date:         10 Aug 2013
+
+----------------------------------------------------------------------------
+
 Full name:          Johann Brechtel
 Gender:             Male (deceased)
 Wife:               Dorothea (married 1647)
 Birth date:         Approx 1615
 Death date:         Approx 1668
+
+----------------------------------------------------------------------------
+
+Full name:          Johanna Brechtel
+Gender:             Female (deceased)
+Mother:             Magdalena Brechtel IV
+Father:             Adam Brechtel IV
+Husband:            Karl Schollmeier (married 14 Aug 1955)
+Birth date:         18 Oct 1934
+Death date:         14 Sep 1997
 
 ----------------------------------------------------------------------------
 
@@ -6315,6 +7684,23 @@ Death date:         2 Mar 1956
 
 ----------------------------------------------------------------------------
 
+Full name:          Marion Brechtel
+Surname at birth:   Schrimpf
+Gender:             Female
+Husband:            Michael Brechtel (married 1 Sep 1987)
+Birth date:         26 Jan 1951
+
+----------------------------------------------------------------------------
+
+Full name:          Michael Brechtel
+Gender:             Male
+Mother:             Wilhelmine Brechtel
+Father:             Peter Philipp Brechtel
+Wife:               Marion Brechtel (married 1 Sep 1987)
+Birth date:         21 May 1960
+
+----------------------------------------------------------------------------
+
 Full name:          Michael Brechtel
 Gender:             Male (deceased)
 Mother:             Anna Marg. Brechtel
@@ -6322,6 +7708,42 @@ Father:             Johannes Philip Brechtel
 Wife:               Anna Maria Brechtel (married 5 Feb 1771)
 Birth date:         15 Jul 1723
 Death date:         24 Nov 1776
+
+----------------------------------------------------------------------------
+
+Full name:          Peter Philipp Brechtel
+Gender:             Male (deceased)
+Mother:             Cäcilia Brechtel
+Father:             Adam Brechtel
+Wife:               Wilhelmine Brechtel (married 7 Jul 1951)
+Birth date:         4 Dec 1907
+Death date:         14 Sep 1994
+
+----------------------------------------------------------------------------
+
+Full name:          Phillip Brechtel
+Gender:             Female
+Mother:             Marion Brechtel
+Father:             Michael Brechtel
+Birth date:         24 Mar 1988
+
+----------------------------------------------------------------------------
+
+Full name:          Ursula Brechtel
+Gender:             Female
+Mother:             Wilhelmine Brechtel
+Father:             Peter Philipp Brechtel
+Husband:            Edmund Schneidel (married 26 Oct 1984)
+Birth date:         4 Jan 1962
+
+----------------------------------------------------------------------------
+
+Full name:          Wilhelmine Brechtel
+Surname at birth:   Dauenheimer
+Gender:             Female (deceased)
+Husband:            Peter Philipp Brechtel (married 7 Jul 1951)
+Birth date:         29 Nov 1923
+Death date:         20 Jul 2000
 
 ----------------------------------------------------------------------------
 
@@ -6345,6 +7767,50 @@ Death date:         5 Nov 1899
 
 ----------------------------------------------------------------------------
 
+Full name:          Adam Brechtel IV
+Gender:             Male (deceased)
+Mother:             Cäcilia Brechtel
+Father:             Adam Brechtel
+Wife:               Magdalena Brechtel IV (married 19 Nov 1931)
+Birth date:         22 Apr 1905
+Death date:         25 Feb 1984
+
+----------------------------------------------------------------------------
+
+Full name:          Magdalena Brechtel IV
+Surname at birth:   Wunder
+Gender:             Female (deceased)
+Husband:            Adam Brechtel IV (married 19 Nov 1931)
+Birth date:         21 Sep 1908
+Death date:         9 Apr 1984
+
+----------------------------------------------------------------------------
+
+Full name:          Heinrich Brenner
+Gender:             Male (deceased)
+Wife:               Anna Brechtel (married May 1926)
+Birth date:         26 Sep 1899
+Death date:         28 Jan 1968
+
+----------------------------------------------------------------------------
+
+Full name:          Irene Brenner
+Gender:             Female (deceased)
+Mother:             Anna Brechtel
+Father:             Heinrich Brenner
+Husband:            Wilhelm Heckmann (married 18 Jan 1948)
+Birth date:         8 Aug 1926
+Death date:         8 May 2016
+
+----------------------------------------------------------------------------
+
+Full name:          Tobias Buchwald
+Gender:             Male
+Wife:               Eva Häussler (married 1 Aug 2015)
+Birth date:         10 Aug 1979
+
+----------------------------------------------------------------------------
+
 Full name:          Anna Kath. Burkert
 Surname at birth:   Adler
 Gender:             Female (deceased)
@@ -6362,14 +7828,313 @@ Death date:         9 Jan 1796
 
 ----------------------------------------------------------------------------
 
-Full name:          Anna Kirchner
-Surname at birth:   Schorn
-Gender:             Female (deceased)
-Mother:             Maria Franziska Schorn
-Father:             Kaspar Joh. Schorn
-Husband:            Leonhard Joh. Kirchner (married 28 Mar 1731)
-Birth date:         7 Aug 1713
-Death date:         12 Mar 1777
+Full name:          Linda Dewald
+Gender:             Female
+Mother:             Doris Weis
+Father:             Werner Dewald
+Birth date:         18 Aug 1970
+
+----------------------------------------------------------------------------
+
+Full name:          Melanie Dewald
+Gender:             Female
+Mother:             Beate Fanese
+Father:             Michael Dewald
+Birth date:         16 Feb 1993
+
+----------------------------------------------------------------------------
+
+Full name:          Michael Dewald
+Gender:             Male
+Mother:             Doris Weis
+Father:             Werner Dewald
+Ex-wife:            Beate Fanese (married 15 Aug 1992, divorced)
+Birth date:         9 Aug 1969
+
+----------------------------------------------------------------------------
+
+Full name:          Werner Dewald
+Gender:             Male (deceased)
+Widow:              Doris Weis (married 1 Sep 1967)
+Birth date:         15 Jun 1944
+Death date:         22 Dec 1998
+
+----------------------------------------------------------------------------
+
+Full name:          Edith Dörr
+Gender:             Female
+Husband:            Heinz Heckmann (married 22 Aug 1980)
+Birth date:         2 Sep 1957
+
+----------------------------------------------------------------------------
+
+Full name:          Beate Fanese
+Gender:             Female
+Ex-husband:         Michael Dewald (married 15 Aug 1992, divorced)
+Birth date:         19 Jul 1971
+
+----------------------------------------------------------------------------
+
+Full name:          Bärbel Flessner
+Gender:             Female
+Mother:             Christa Brechtel
+Father:             Gerd Flessner
+Husband:            Roger Hook (married 9 Apr 1988)
+Birth date:         11 Mar 1963
+
+----------------------------------------------------------------------------
+
+Full name:          Gerd Flessner
+Gender:             Male (deceased)
+Widow:              Christa Brechtel (married 13 Aug 1961)
+Birth date:         19 Jul 1935
+Death date:         13 Oct 2015
+
+----------------------------------------------------------------------------
+
+Full name:          Sabine Flessner
+Surname at birth:   Sponagel
+Gender:             Female
+Husband:            Ulrich Flessner (married 27 Jun 1998)
+Birth date:         24 Sep 1965
+
+----------------------------------------------------------------------------
+
+Full name:          Torben Flessner
+Gender:             Male
+Mother:             Sabine Flessner
+Father:             Ulrich Flessner
+Birth date:         10 Jun 2003
+
+----------------------------------------------------------------------------
+
+Full name:          Ulrich Flessner
+Gender:             Male
+Mother:             Christa Brechtel
+Father:             Gerd Flessner
+Wife:               Sabine Flessner (married 27 Jun 1998)
+Birth date:         12 Nov 1965
+
+----------------------------------------------------------------------------
+
+Full name:          Jarle Malte Fröscher
+Gender:             Male
+Mother:             Kathrin Fröscher
+Father:             Stefan Heckmann
+Birth date:         2 Jun 2020
+
+----------------------------------------------------------------------------
+
+Full name:          Jule Alicia Fröscher
+Gender:             Female
+Mother:             Kathrin Fröscher
+Father:             Stefan Heckmann
+Birth date:         2 Jan 2018
+
+----------------------------------------------------------------------------
+
+Full name:          Kathrin Fröscher
+Gender:             Female
+Husband:            Stefan Heckmann (married 1 Aug 2017)
+Birth date:         1 Jul 1982
+
+----------------------------------------------------------------------------
+
+Full name:          Andreas Gaal
+Gender:             Male
+Mother:             Hannelore Brechtel
+Father:             Herbert Gaal
+Ex-wife:            Nicole Gaal (married 19 May 2018, divorced)
+Birth date:         20 Mar 1984
+
+----------------------------------------------------------------------------
+
+Full name:          Herbert Gaal
+Gender:             Male (deceased)
+Widow:              Hannelore Brechtel (married 17 Apr 1982)
+Birth date:         18 Aug 1950
+Death date:         13 Jan 2013
+
+----------------------------------------------------------------------------
+
+Full name:          Magdalena Gaal
+Gender:             Female
+Mother:             Nicole Gaal
+Father:             Andreas Gaal
+Birth date:         27 Feb 2017
+
+----------------------------------------------------------------------------
+
+Full name:          Nicole Gaal
+Surname at birth:   Pörschmann
+Gender:             Female
+Ex-husband:         Andreas Gaal (married 19 May 2018, divorced)
+Birth date:         6 Aug 1988
+
+----------------------------------------------------------------------------
+
+Full name:          Sarah Grandke
+Gender:             Female
+Ex-husband:         Stefan Heckmann (married Dec 2007, divorced 1 Jan 2008)
+Birth date:         15 Oct 1982
+
+----------------------------------------------------------------------------
+
+Full name:          Britta Zoe Heckmann
+Gender:             Female
+Mother:             Irene Brenner
+Father:             Wilhelm Heckmann
+Birth date:         25 Jun 1984
+
+----------------------------------------------------------------------------
+
+Full name:          Heinz Heckmann
+Gender:             Male
+Mother:             Irene Brenner
+Father:             Wilhelm Heckmann
+Wife:               Edith Dörr (married 22 Aug 1980)
+Birth date:         21 Jan 1956
+
+----------------------------------------------------------------------------
+
+Full name:          Helga Heckmann
+Gender:             Female
+Mother:             Irene Brenner
+Father:             Wilhelm Heckmann
+Husband:            Werner Häussler (married 18 Mar 1972)
+Birth date:         20 Aug 1949
+
+----------------------------------------------------------------------------
+
+Full name:          Joshua Finley Heckmann
+Gender:             Male
+Mother:             Sarah Grandke
+Father:             Stefan Heckmann
+Birth date:         1 May 2008
+
+----------------------------------------------------------------------------
+
+Full name:          Stefan Heckmann
+Gender:             Male
+Mother:             Edith Dörr
+Father:             Heinz Heckmann
+Wife:               Kathrin Fröscher (married 1 Aug 2017)
+Ex-wife:            Sarah Grandke (married Dec 2007, divorced 1 Jan 2008)
+Birth date:         21 Sep 1982
+
+----------------------------------------------------------------------------
+
+Full name:          Wilhelm Heckmann
+Gender:             Male (deceased)
+Wife:               Irene Brenner (married 18 Jan 1948)
+Birth date:         4 Jun 1922
+Death date:         18 Dec 2011
+
+----------------------------------------------------------------------------
+
+Full name:          Gerhard Hinz
+Gender:             Male
+Late partner:       Helena Brechtel
+Birth date:         29 Mar 1949
+
+----------------------------------------------------------------------------
+
+Full name:          Jochen Hinz
+Gender:             Male
+Mother:             Helena Brechtel
+Father:             Gerhard Hinz
+Wife:               Sarah Hinz (married 22 May 2009)
+Birth date:         4 Feb 1984
+
+----------------------------------------------------------------------------
+
+Full name:          Jonas A. H. Hinz
+Gender:             Male
+Mother:             Sarah Hinz
+Father:             Jochen Hinz
+Birth date:         26 Mar 2015
+
+----------------------------------------------------------------------------
+
+Full name:          Niklas Ph. A. Hinz
+Gender:             Male
+Mother:             Sarah Hinz
+Father:             Jochen Hinz
+Birth date:         29 Jun 2016
+
+----------------------------------------------------------------------------
+
+Full name:          Sandra Hinz
+Gender:             Female
+Mother:             Helena Brechtel
+Father:             Gerhard Hinz
+Husband:            Steffen Usler (married 17 Jun 2005)
+Birth date:         28 Feb 1980
+
+----------------------------------------------------------------------------
+
+Full name:          Sarah Hinz
+Surname at birth:   Neumann
+Gender:             Female
+Husband:            Jochen Hinz (married 22 May 2009)
+Birth date:         20 Dec 1984
+
+----------------------------------------------------------------------------
+
+Full name:          Felix Hook
+Gender:             Male
+Mother:             Bärbel Flessner
+Father:             Roger Hook
+Wife:               Hanna Banzhaf (married 24 Sep 2021)
+Birth date:         17 Aug 1992
+
+----------------------------------------------------------------------------
+
+Full name:          Larissa Hook
+Gender:             Female
+Mother:             Bärbel Flessner
+Father:             Roger Hook
+Husband:            Julian Preuß (married 1 Sep 2018)
+Birth date:         11 Dec 1989
+
+----------------------------------------------------------------------------
+
+Full name:          Oskar Hook
+Gender:             Male
+Mother:             Hanna Banzhaf
+Father:             Felix Hook
+Birth date:         26 Dec 2021
+
+----------------------------------------------------------------------------
+
+Full name:          Roger Hook
+Gender:             Male
+Wife:               Bärbel Flessner (married 9 Apr 1988)
+Birth date:         23 Aug 1961
+
+----------------------------------------------------------------------------
+
+Full name:          Eva Häussler
+Gender:             Female
+Mother:             Helga Heckmann
+Father:             Werner Häussler
+Husband:            Tobias Buchwald (married 1 Aug 2015)
+Birth date:         18 Oct 1980
+
+----------------------------------------------------------------------------
+
+Full name:          Tom Häussler
+Gender:             Male
+Mother:             Eva Häussler
+Father:             Tobias Buchwald
+Birth date:         9 Aug 2018
+
+----------------------------------------------------------------------------
+
+Full name:          Werner Häussler
+Gender:             Male
+Wife:               Helga Heckmann (married 18 Mar 1972)
+Birth date:         12 Aug 1947
 
 ----------------------------------------------------------------------------
 
@@ -6379,6 +8144,17 @@ Gender:             Female (deceased)
 Husband:            Johann Kirchner (married 1699)
 Birth date:         1672
 Death date:         22 Feb 1750
+
+----------------------------------------------------------------------------
+
+Full name:          Anna Kirchner
+Surname at birth:   Schorn
+Gender:             Female (deceased)
+Mother:             Maria Franziska Schorn
+Father:             Kaspar Joh. Schorn
+Husband:            Leonhard Joh. Kirchner (married 28 Mar 1731)
+Birth date:         7 Aug 1713
+Death date:         12 Mar 1777
 
 ----------------------------------------------------------------------------
 
@@ -6571,6 +8347,29 @@ Death date:         26 Feb 1766
 
 ----------------------------------------------------------------------------
 
+Full name:          Joshua Preuß
+Gender:             Male
+Mother:             Larissa Hook
+Father:             Julian Preuß
+Birth date:         13 Dec 2020
+
+----------------------------------------------------------------------------
+
+Full name:          Julian Preuß
+Gender:             Male
+Wife:               Larissa Hook (married 1 Sep 2018)
+Birth date:         4 Feb 1989
+
+----------------------------------------------------------------------------
+
+Full name:          Mattheo Preuß
+Gender:             Male
+Mother:             Larissa Hook
+Father:             Julian Preuß
+Birth date:         4 May 2019
+
+----------------------------------------------------------------------------
+
 Full name:          Anna Marg. Renz
 Surname at birth:   Schwärzler
 Gender:             Female (deceased)
@@ -6606,6 +8405,137 @@ Death date:         17 Nov 1876
 
 ----------------------------------------------------------------------------
 
+Full name:          Bernd Schneidel
+Gender:             Male
+Mother:             Ursula Brechtel
+Father:             Edmund Schneidel
+Birth date:         26 Apr 1986
+
+----------------------------------------------------------------------------
+
+Full name:          Edmund Schneidel
+Gender:             Male
+Wife:               Ursula Brechtel (married 26 Oct 1984)
+Birth date:         21 Dec 1956
+
+----------------------------------------------------------------------------
+
+Full name:          Jörg Schneidel
+Gender:             Male
+Mother:             Ursula Brechtel
+Father:             Edmund Schneidel
+Birth date:         20 Aug 1991
+
+----------------------------------------------------------------------------
+
+Full name:          Peter Schneidel
+Gender:             Male
+Mother:             Ursula Brechtel
+Father:             Edmund Schneidel
+Birth date:         21 Mar 1988
+
+----------------------------------------------------------------------------
+
+Full name:          Amina Schollmeier
+Surname at birth:   Reinhardt
+Gender:             Female
+Mother:             Sina Schollmeier
+Father:             Tobias Schollmeier
+Birth date:         26 Nov 2019
+
+----------------------------------------------------------------------------
+
+Full name:          Barbara Schollmeier
+Surname at birth:   Fuchs
+Gender:             Female
+Husband:            Dieter Schollmeier (married 5 May 1989)
+Birth date:         1 Jul 1967
+
+----------------------------------------------------------------------------
+
+Full name:          Carina Schollmeier
+Gender:             Female
+Mother:             Barbara Schollmeier
+Father:             Dieter Schollmeier
+Birth date:         2 Sep 1995
+
+----------------------------------------------------------------------------
+
+Full name:          Christian Schollmeier
+Gender:             Male
+Mother:             Barbara Schollmeier
+Father:             Dieter Schollmeier
+Birth date:         1 Mar 1992
+
+----------------------------------------------------------------------------
+
+Full name:          Dieter Schollmeier
+Gender:             Male
+Mother:             Johanna Brechtel
+Father:             Karl Schollmeier
+Wife:               Barbara Schollmeier (married 5 May 1989)
+Birth date:         19 Jul 1960
+
+----------------------------------------------------------------------------
+
+Full name:          Gabi Schollmeier
+Surname at birth:   Halblaub
+Gender:             Female
+Husband:            Klaus Schollmeier (married 31 May 1986)
+Birth date:         7 May 1957
+
+----------------------------------------------------------------------------
+
+Full name:          Jago Schollmeier
+Gender:             Male
+Mother:             Sina Schollmeier
+Father:             Tobias Schollmeier
+Birth date:         17 Jul 2021
+
+----------------------------------------------------------------------------
+
+Full name:          Karl Schollmeier
+Gender:             Male (deceased)
+Wife:               Johanna Brechtel (married 14 Aug 1955)
+Birth date:         3 May 1927
+Death date:         31 Jul 1990
+
+----------------------------------------------------------------------------
+
+Full name:          Klaus Schollmeier
+Gender:             Male
+Mother:             Johanna Brechtel
+Father:             Karl Schollmeier
+Wife:               Gabi Schollmeier (married 31 May 1986)
+Birth date:         7 Mar 1957
+
+----------------------------------------------------------------------------
+
+Full name:          Sina Schollmeier
+Gender:             Female
+Mother:             Gabi Schollmeier
+Father:             Klaus Schollmeier
+Husband:            Tobias Schollmeier (married 1 Oct 2016)
+Birth date:         17 Dec 1989
+
+----------------------------------------------------------------------------
+
+Full name:          Tanja Schollmeier
+Gender:             Female
+Mother:             Gabi Schollmeier
+Father:             Klaus Schollmeier
+Birth date:         19 Jan 1988
+
+----------------------------------------------------------------------------
+
+Full name:          Tobias Schollmeier
+Surname at birth:   Reinhardt
+Gender:             Male
+Wife:               Sina Schollmeier (married 1 Oct 2016)
+Birth date:         13 Jul 1986
+
+----------------------------------------------------------------------------
+
 Full name:          Kaspar Joh. Schorn
 Gender:             Male (deceased)
 Wife:               Maria Franziska Schorn (married 5 May 1711)
@@ -6637,6 +8567,46 @@ Gender:             Female (deceased)
 Husband:            Johannes Barth. Thomas (married 21 Apr 1799)
 Birth date:         16 May 1780
 Death date:         17 May 1843
+
+----------------------------------------------------------------------------
+
+Full name:          Emma Johanna Usler
+Gender:             Female
+Mother:             Sandra Hinz
+Father:             Steffen Usler
+Birth date:         4 Feb 2006
+
+----------------------------------------------------------------------------
+
+Full name:          Luisa Valentina Usler
+Gender:             Female
+Mother:             Sandra Hinz
+Father:             Steffen Usler
+Birth date:         8 Jul 2008
+
+----------------------------------------------------------------------------
+
+Full name:          Steffen Usler
+Gender:             Male
+Wife:               Sandra Hinz (married 17 Jun 2005)
+Birth date:         20 Nov 1975
+
+----------------------------------------------------------------------------
+
+Full name:          Adolf Weis
+Gender:             Male (deceased)
+Partner:            Elisabeth Brechtel
+Birth date:         5 Jul 1910
+Death date:         6 May 1997
+
+----------------------------------------------------------------------------
+
+Full name:          Doris Weis
+Gender:             Female
+Mother:             Elisabeth Brechtel
+Father:             Adolf Weis
+Late husband:       Werner Dewald (married 1 Sep 1967)
+Birth date:         4 Sep 1943
 
 ----------------------------------------------------------------------------
 
@@ -6715,6 +8685,10 @@ Death date:         17 May 1843
 							<br/>&nbsp; &nbsp; <INPUT ID="detail_0lq" TYPE="checkbox" onChange="parent.ECD(this);"> <LABEL FOR="detail_0lq">Surname</LABEL>
 							<br/><INPUT ID="detail_r" TYPE="checkbox" onChange="parent.ECD(this);"> <LABEL FOR="detail_r">Photo</LABEL>
 							<br/><INPUT ID="detail_age" TYPE="checkbox" onChange="parent.ECD(this);"> <LABEL FOR="detail_age">Age</LABEL>
+							<SELECT ID="otherage" onChange="parent.ECA();">
+								<OPTION VALUE="">now</OPTION>
+								<OPTION VALUE="on">on...</OPTION>
+							</SELECT>
 							<br/><INPUT ID="detail_bd" TYPE="checkbox" onChange="parent.ECD(this);"> <LABEL FOR="detail_bd">Life years</LABEL>
 						</TD>
 						<TD NOWRAP>
@@ -6756,9 +8730,10 @@ Death date:         17 May 1843
 						
 						<TD STYLE="text-align:right; padding-right:16px;" NOWRAP>
 							<SPAN CLASS="oleft">Surnames:</SPAN>
-							<SELECT ID="showbirthname" CLASS="oright" onChange="parent.ESN();" TITLE="Which surname receives priority for display">
+							<SELECT ID="showbirthname" CLASS="oright" onChange="parent.ESN();" TITLE="Which surname to display">
 								<OPTION VALUE="0">Now</OPTION>
 								<OPTION VALUE="1">At birth</OPTION>
+								<OPTION VALUE="2">Both</OPTION>
 							</SELECT><br><SPAN CLASS="oleft">Given names:</SPAN>
 							<SELECT ID="showsurnamefirst" CLASS="oright" onChange="parent.ESF();" TITLE="Show given names before or after surname">
 								<OPTION VALUE="0">Before</OPTION>
@@ -7271,10 +9246,11 @@ Death date:         17 May 1843
 				<DIV ID="pathdiv" CLASS="dleft lbody" STYLE="text-align:center; display:none;">
 					<DIV STYLE="padding:6px;">
 						<DIV ID="pathtitle" CLASS="sname" STYLE="margin-bottom:12px;"></DIV>
-						<!--<INPUT TYPE="submit" VALUE="Change start person" ID="changepathstart" CLASS="sbutton" STYLE="margin-bottom:6px;" onClick="SPS(); return false;">-->
 						<SELECT ID="pathstartid" CLASS="sfield" onChange="SSS();"></SELECT>
 						<DIV ID="pathcontent" STYLE="margin-bottom:12px;"></DIV>
-						<INPUT TYPE="submit" VALUE="Done" CLASS="sbutton" onClick="parent.ESM('view'); return false;">
+						<!--<INPUT TYPE="checkbox" ID="pathmarried" VALUE="1" CHECKED onChange="STM();">
+						<LABEL FOR="pathmarried">Include partner relationships</LABEL>-->
+						<INPUT TYPE="submit" VALUE="Done" CLASS="sbutton" STYLE="margin-top:12px;" onClick="parent.ESM('view'); return false;">
 					</DIV>
 				</DIV>
 				
@@ -7289,7 +9265,7 @@ Death date:         17 May 1843
 			<TR HEIGHT="8">
 				<TD STYLE="border-top:solid #666666 1px; padding:8px;" VALIGN="middle">
 					<DIV STYLE="float:left;">
-Read-only HTML downloaded by Henning on 22 Jul 2022 &ndash; <a href="#" id="export_show_" class="selbold" onclick="return EES('');">View Tree</a> &ndash; <a href="#" id="export_show_gedcom" onclick="return EES('gedcom');">GEDCOM</a> &ndash; <a href="#" id="export_show_newscript" onclick="return EES('newscript');">FamilyScript</a> &ndash; <a href="#" id="export_show_csv" onclick="return EES('csv');">CSV</a> &ndash; <a href="#" id="export_show_text" onclick="return EES('text');">Plain Text</a>					</DIV>
+Read-only HTML downloaded by Henning on 9 Aug 2022 &ndash; <a href="#" id="export_show_" class="selbold" onclick="return EES('');">View Tree</a> &ndash; <a href="#" id="export_show_gedcom" onclick="return EES('gedcom');">GEDCOM</a> &ndash; <a href="#" id="export_show_newscript" onclick="return EES('newscript');">FamilyScript</a> &ndash; <a href="#" id="export_show_csv" onclick="return EES('csv');">CSV</a> &ndash; <a href="#" id="export_show_text" onclick="return EES('text');">Plain Text</a>					</DIV>
 					<DIV STYLE="float:right;">
 <A HREF="http://www.familyecho.com/" TITLE="Family Echo - Free Online Family Tree Maker"><IMG SRC="data:;base64,R0lGODlhUAAQAPcAAIwyM6llZqZub6Z3eLeam9q7vNy+v8evsObP0Mq3uOza2+vb3NbLzPTr7N3b3Pz7/c7N1fHw+Ojn89DP3cXE0a2syayrw7W0ywsKdg8OeRAPeBIReRgXfRsafyAffiQjgy8uhDAvhDg3jT8+j0ZFl0pJlE9OmVNSlGpprWtqrXFwrHZ1sn9+uIKBuY6NtaCfy5eWv6inzR8fgSMjgCwsiSoqgysrhCwshDExhkVFmFRVn0xMj15epGJip11dnWlprG5ur29vsGNjnWlppH19tHJypIaGvIeHvIuLvYCAq4mJtpWVxI+PuZ6eyJSUu5mZvpmZuJ6evaKiwLS01KenwsLC3sfH4MrK4sbG3c7O5dHR5tTU57u7ytra6bq6xuTk8eHh7tLS3uvr9ebm7+3t8+rq8Onp7/X1+eXl6d3d4fn5/Pj4+/Hx8+Li5G1uqaChys7P4O3u9Pj+/uTq6vb7+/D09Ojs7P3///T29u7w8Pr7+/X5+Pn7+vb28/Dw7fv7+e3t6////v38+vv49/Xs6+vc27GLinYLC3oPD3kQEHcREXwSEn0VFXoVFXwXF4EaGoEcHIMdHYEeHoIfH4QhIYIjI4YmJYImJowuLo4xMY81NYk2NZI9PY07O40+Pos9PZNEQ5pKSpFIR5JISKJXV6RZWaNZWZ5YWJZVVaVfX5lZWaBfX5pdXZteXq5sa5xhYaRnZ6NrarF2dqp1dLqCgqVzc7J9fal5eax9fKp9fKyBgb2OjraKia2CgrOIiMOVlb6RkbSNja+JibmUlMqjo8+srNSysti3t9a1tcGjo9m6uta5ucWrq9q/v+LJyd7Fxcexsd/Hx823t+TOztjDw+LNzdnGxtG/v827u97Ly+TT0+va2ubV1dTFxefX1+DR0ezd3erd3fHl5e7i4tHHx/Xr6/Lo6Ozk5NzV1fbv7+rj4+fg4Pjy8vbx8e3o6Pn19ejk5Pv4+Pr39/37+/j29tfV1f79/fDv7+Df3/////7+/vz8/Pn5+ezs7Ovr6+bm5iwAAAAAUAAQAAAI/wDzCRxIsKDBgwgTKlzIsKHDhxAjHrTnDUFFZ84MONMnUeA8gYWIAdOj8IwVK1qyXLFSpctBCVNWlGloL9qpR6MMBRPQaV3HBaGUBSKGCBUehWumjOjgw4USHybYGMRCo0aah8gQDZBz586vbh2fOdJ1RxAmVnsYtsBAJVCgP0quGvwBos3DAotuDWx3r2O+bPjyDdLEig7DIxosDCQj1WCKug+V5c1nb9e5fPGmPWMnUNACb+aOicuXTtk0gubA5ZOnqdU9cenE2TM3zlwggkYyUMknBslRgRGuXHmQDwWONFm0FPxiZUtBZY86yUp1yQG4UMMEcNJm75elVbxAaf8qBkzVpF364u2y5EuwplfuUlHChUcbJ198CB7JUEIFiRH9CDSFElSIwAM/QNjggg8yrECSPUswcYEOPZAxkDKMtEJON7AwYAAqc8gTySz5cAOJKna4A8AmDuARQCXw2NMMI7pgRtgd0SyCC2Wz1MPRQPslAQEXQlylhQgU5BODEH4E8QEF7RCxQZJNiBAYGB+4sY9AkuUiUDjo5LOHN8hQEssd6VBSyx35kPKJP/n80ggD+YAzSS/uFZZPKpWoo8AwhuGWmEBwoJEPCyH8k48+fdiDQgh2VcFBFIHkcEIfAq0wg6H5SHYLm/ncYY4rsWCj5h2EnJqPKW/G6Qg5+Wz/Iwmeg6GVTzSM2EIMWAUhpthAYqQwg10DoQAZFh1AEYgIJWCazxIeOCBQAYgIQBAtitRDTyRephNJLQKV8kkecc5ZJyR4zpMJK3IIFAAis9Rh0FpSDPQCEzBg4ARw+aRgg6JWcABFPkBwEIZALewAiGC2JLLJMu8IRMshugLgSTbPSCKKN+mAcok08sjSyDDyGOMIKuNMU8km1NiTTzWSEADqQGCQsIEJTRyhww1ekGFCBysgAUMXJHhQgRpvbDAEGWCMYEIXWwzBxW3lJGN1Mj7l08AuwqDzTTAMaIPNAdeMIw00zJxjDTbMqFNNAsx0o00CB0iD6TywhFnQFlJYPiCFE0kkwQWmcTxRBBT/jHHB4mZgYQEVE+RDBgwuVJDGHwfNHCpDM2tOEEfHBBMoRG41VLpffr0zC6yoRxQQADs=" WIDTH="80" HEIGHT="16" BORDER="0" ALT="Family Echo" ALIGN="ABSBOTTOM"></A> &copy; Familiality 2007-2022 - All rights reserved					</DIV>
 				</TD>
