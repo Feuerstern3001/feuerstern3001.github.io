@@ -1,10 +1,13 @@
 ---
 layout: default
-title: Feuerstern3001/Personal Site
+title: Familienstammbaum Viernheimer Brechtels
 ---
 
-## Forest Map Locations
-[Directory](./forest/forest.md)
+## Familienstammbaum
+[Stammbaum](./family/tree.html)
 
-## Family Tree
-[Baum](./tree.html)
+## Fotoalbum 
+[Bilder](./family/pics.html)
+
+# Kontakt
+[Kontakt](./family/contact)
