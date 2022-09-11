@@ -3,11 +3,11 @@ layout: default
 title: Familienstammbaum Viernheimer Brechtels
 ---
 
-## Familienstammbaum
+# Familienstammbaum
 [Stammbaum](./family/tree.html)
 
-## Fotoalbum 
+# Fotoalbum 
 [Bilder](./family/pics.html)
 
-### Kontakt
-[Kontakt](./family/contact)
+## Kontakt
+[Kontakt](./family/contact.html)
