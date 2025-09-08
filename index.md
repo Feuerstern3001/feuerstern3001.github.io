@@ -11,3 +11,6 @@ title: Familienstammbaum Viernheimer Brechtels
 
 ## Kontakt
 [Kontakt](./family/contact.html)
+
+## Escape Room
+[Stranded Astronaut](./escape_room/test.html)
