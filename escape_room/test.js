@@ -1,14 +1,11 @@
-const button = document.querySelector("input");
-const paragraph = document.querySelector("p");
-
-button.addEventListener("click", updateButton);
-
-function updateButton() {
-  if (button.value === "Start machine") {
-    button.value = "Stop machine";
-    paragraph.textContent = "The machine has started!";
-  } else {
-    button.value = "Start machine";
-    paragraph.textContent = "The machine is stopped.";
-  }
+function check(){
+eingabe = document.getElementById('input');
+if(eingabe.value == ""){
+alert('Bitte gebe erst etwas ein...');
+}
+else if(eingabe.value == 20){
+alert('Korrekt');
+}else{
+alert('inkorrekt');
+}
 }
