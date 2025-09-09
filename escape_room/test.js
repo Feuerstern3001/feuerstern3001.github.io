@@ -1,3 +1,5 @@
+'use strict';
+window.onload = start;
 function check(){
 eingabe = document.getElementById('input');
 if(eingabe.value == ""){
