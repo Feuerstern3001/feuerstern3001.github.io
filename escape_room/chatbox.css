@@ -1,0 +1,125 @@
+input[type="text"]:disabled {
+  background-color:#ffffff;
+  color:#000000
+}
+input[type="button"]:disabled {
+  background-color:#aabbcc;
+  color:#444444
+}
+.pointer {
+  cursor: pointer;
+}
+.container {
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+  max-width: 90%;
+  word-wrap: break-word;
+}
+.chat-msgs {
+  padding: 1%;
+  border: 5px solid #000000;
+  overflow-y:auto;
+  min-height: 888px;
+  max-height: 888px;
+}
+.text-field {
+  min-height: 40px;
+  max-height: 40px;
+  min-width: 35%;
+  max-width: 35%;
+}
+.send-button {
+  min-height: 40px;
+  max-height: 40px;
+  min-width: 10%;
+  max-width: 10%;
+  background-color: #aaccaa;
+}
+.sat-boxL {
+  float: left;
+  min-height: 30%;
+  max-height: 30%;
+  min-width: 30%;
+  max-width: 30%;
+  padding: 2%;
+  border: 3px solid #000055;
+  overflow-y:auto;
+}
+.sat-boxR {
+  float: right;
+  min-height: 30%;
+  max-height: 30%;
+  min-width: 45%;
+  max-width: 45%;
+  padding: 1%;
+  position: relative;
+  border: 3px solid #000055;
+  overflow-y:auto;
+}
+.sat-box-spacerR {
+  float: right;
+  min-height: 10%;
+  max-height: 10%;
+  min-width: 60%;
+  max-width: 60%;
+  overflow-y:auto;
+}
+.sat-box-spacerL {
+  float: left;
+  min-height: 10%;
+  max-height: 10%;
+  min-width: 45%;
+  max-width: 45%;
+  overflow-y:auto;
+}
+.sat-box-spacer {
+  background:color: #ffffff;
+  color: #ffffff;
+  float: right;
+}
+.sat-name {
+  float: right;
+  font-size: 200%;
+  border: 2px solid #000000;
+  padding 1%;
+}
+.connect-button {
+  background-color: #aaffaa;
+  padding: 5%;
+  float: right;
+}
+.launch-button {
+  background-color: #ffaaaa;
+  padding: 5%;
+  float: right;
+}
+.stern-button {
+  background-color: #aaaaff;
+  padding: 5%;
+  float: right;
+}
+.nav-buttons {
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+}
+.admin-button {
+  float: right;
+  background-color: #aaffff;
+  color: #ffffff;
+  border: 0px solid #dedede;
+}
+.login-box {
+  border: 2px solid #000000;
+  max-width: 25%;
+  padding: 1%
+}
+.sat-pin {
+  float: left;
+  font-size: 150%;
+}
