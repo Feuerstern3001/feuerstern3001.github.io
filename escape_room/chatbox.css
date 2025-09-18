@@ -40,66 +40,46 @@ input[type="button"]:disabled {
 }
 .sat-boxL {
   float: left;
-  min-height: 30%;
-  max-height: 30%;
-  min-width: 30%;
-  max-width: 30%;
-  padding: 2%;
-  border: 3px solid #000055;
-  overflow-y:auto;
-}
-.sat-boxR {
-  float: right;
-  min-height: 30%;
-  max-height: 30%;
-  min-width: 45%;
-  max-width: 45%;
+  min-width: 475px;
+  max-width: 475px;
   padding: 1%;
-  position: relative;
   border: 3px solid #000055;
   overflow-y:auto;
-}
-.sat-box-spacerR {
-  float: right;
-  min-height: 10%;
-  max-height: 10%;
-  min-width: 60%;
-  max-width: 60%;
-  overflow-y:auto;
-}
-.sat-box-spacerL {
-  float: left;
-  min-height: 10%;
-  max-height: 10%;
-  min-width: 45%;
-  max-width: 45%;
-  overflow-y:auto;
-}
-.sat-box-spacer {
-  background:color: #ffffff;
-  color: #ffffff;
-  float: right;
+  margin: 0.5%;
 }
 .sat-name {
   float: right;
-  font-size: 200%;
+  font-size: 150%;
   border: 2px solid #000000;
   padding 1%;
+  min-height: 30%;
+  max-height: 30%;
+  min-width: 100%;
+  max-width: 100%;
+}
+.quad-name {
+  font-size: 100%;
+  border: 2px solid #000000;
+  padding 2%;
+  float: left;
 }
 .connect-button {
   background-color: #aaffaa;
   padding: 5%;
   float: right;
+  margin: 1%;
 }
 .launch-button {
   background-color: #ffaaaa;
   padding: 5%;
   float: right;
+  margin: 1%;
 }
 .stern-button {
   background-color: #aaaaff;
-  padding: 5%;
-  float: right;
+  padding: 10%;
+  min-width: 75%;
+  margin-top: 3%;
 }
 .nav-buttons {
   border: 2px solid #dedede;
@@ -108,6 +88,23 @@ input[type="button"]:disabled {
   padding: 10px;
   margin: 10px 0;
 }
+.nav-buttons-notif {
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+  animation-name: notification;
+  animation-duration: 1s;
+}
+@keyframes notification {
+  0% {background-color: orange;}
+  20% {background-color: #f1f1f1;}
+  40% {background-color: orange;}
+  60% {background-color: #f1f1f1;}
+  80% {background-color: orange;}
+  100% {background-color: #f1f1f1;}
+}
 .admin-button {
   float: right;
   background-color: #aaffff;
@@ -115,11 +112,9 @@ input[type="button"]:disabled {
   border: 0px solid #dedede;
 }
 .login-box {
-  border: 2px solid #000000;
-  max-width: 25%;
-  padding: 1%
+  padding: 1%;
 }
 .sat-pin {
   float: left;
-  font-size: 150%;
+  font-size: 130%;
 }

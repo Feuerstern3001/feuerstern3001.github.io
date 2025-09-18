@@ -183,22 +183,22 @@
 <div id="sats" style="display: none;">
 	<div class="sat-boxL">
 		<img src="./sat2.jpg" alt="Avatar">
-		<div style="float: right; max-width: 52%; background-color: #ff0000;">
+		<div style="float: right; max-width: 45%;">
 			<div class="sat-name">
-				<wbr> AMWPCMTT_9429 <wbr>
+				<wbr> AMPLQTT.2029 <wbr>
 			</div>
 			<div class="sat-pin">
-				<br> PIN <br><input type="text" size="5">
+				PIN <br><input type="text" size="5">
 			</div>
-			<div class='sat-box-spacerR'><br><br></div>
 			<input type="button" value="Launch" class="launch-button" onclick="preConnect();">
-			<p class='sat-box-spacer'>------</p>
 			<input type="button" value="Connect" class="connect-button" onclick="connectRocketWrong();">
+			<div class='sat-box-spacerR'><br></div>
+			<br><br>
+			<input type="button" value="Sternkarte" class="stern-button" onclick="preConnect();">
+			<input type="text" size="1" placeholder="⛔️" disabled style="float: right; font-size: 130%;">
 		</div>
-		<div style="float: right; max-width: 45%; background-color: #ff0000;">
-			<p><input type="button" value="Sternkarte" class="stern-button" onclick="preConnect();"></p>	
-		</div>
-		<br><br><input type="text" placeholder="Navigationsquadrant; Aufenthaltsort" disabled size="30">
+		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<wbr> <wbr>
 		<select name="quad" id="quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
@@ -216,7 +216,8 @@
 		  <option value="sextant">Sextant</option>
 		  <option value="perseus">Perseus</option>
 		</select>
-		<br><br><input type="text" placeholder="Orientierungsquadrant; Nah liegend" disabled size="30">
+		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<wbr> <wbr>
 		<select name="quad" id="quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
@@ -234,7 +235,8 @@
 		  <option value="sextant">Sextant</option>
 		  <option value="perseus">Perseus</option>
 		</select>
-		<br><br><input type="text" placeholder="Orientierungsquadrant; Fern liegend" disabled size="30">
+		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<wbr> <wbr>
 		<select name="quad" id="quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
@@ -253,88 +255,24 @@
 		  <option value="perseus">Perseus</option>
 		</select>
 	</div>
-	<div class="sat-boxR">
-		<img src="./sat1.jpg" alt="Avatar">
-		<div class="sat-name">
-			<input type="text" placeholder="NBGEELO_1992" disabled size="20">
-			<br>PIN<input type="text" size="20">
-			<br><br><input type="button" value="Connect" class="connect-button" onclick="connectRocketWrong();">
-			<input type="button" value="Launch" class="launch-button" onclick="preConnect();">
-			<p style="float: right; visibility: hidden;">i</p>
-			<p style="float: right; visibility: hidden;">i</p>
-			<input type="text" size="1" placeholder="⛔️" disabled style="float: right;">
-			<br><br><input type="button" value="Sternkarte" class="stern-button" onclick="preConnect();">
-		</div>
-		<br><br><input type="text" placeholder="Navigationsquadrant; Aufenthaltsort" disabled size="30">
-		<select name="quad" id="quad">
-		  <option value="nan">--------------------------</option>
-		  <option value="fliege">Fliege</option>
-		  <option value="sichel">Grabsichel</option>
-		  <option value="segel">Segel</option>
-		  <option value="orion">Orion</option>
-		  <option value="kHund">Kleiner Hund</option>
-		  <option value="gHund">Großer Hund</option>
-		  <option value="löwe">Löwe</option>
-		  <option value="heck">Schifsheck</option>
-		  <option value="kiel">Schifskiel</option>
-		  <option value="pumpe">Luftpumpe</option>
-		  <option value="rabe">Rabe</option>
-		  <option value="eck">Dreieck</option>
-		  <option value="sextant">Sextant</option>
-		  <option value="perseus">Perseus</option>
-		</select>
-		<br><br><input type="text" placeholder="Orientierungsquadrant; Nah liegend" disabled size="30">
-		<select name="quad" id="quad">
-		  <option value="nan">--------------------------</option>
-		  <option value="fliege">Fliege</option>
-		  <option value="sichel">Grabsichel</option>
-		  <option value="segel">Segel</option>
-		  <option value="orion">Orion</option>
-		  <option value="kHund">Kleiner Hund</option>
-		  <option value="gHund">Großer Hund</option>
-		  <option value="löwe">Löwe</option>
-		  <option value="heck">Schifsheck</option>
-		  <option value="kiel">Schifskiel</option>
-		  <option value="pumpe">Luftpumpe</option>
-		  <option value="rabe">Rabe</option>
-		  <option value="eck">Dreieck</option>
-		  <option value="sextant">Sextant</option>
-		  <option value="perseus">Perseus</option>
-		</select>
-		<br><br><input type="text" placeholder="Orientierungsquadrant; Fern liegend" disabled size="30">
-		<select name="quad" id="quad">
-		  <option value="nan">--------------------------</option>
-		  <option value="fliege">Fliege</option>
-		  <option value="sichel">Grabsichel</option>
-		  <option value="segel">Segel</option>
-		  <option value="orion">Orion</option>
-		  <option value="kHund">Kleiner Hund</option>
-		  <option value="gHund">Großer Hund</option>
-		  <option value="löwe">Löwe</option>
-		  <option value="heck">Schifsheck</option>
-		  <option value="kiel">Schifskiel</option>
-		  <option value="pumpe">Luftpumpe</option>
-		  <option value="rabe">Rabe</option>
-		  <option value="eck">Dreieck</option>
-		  <option value="sextant">Sextant</option>
-		  <option value="perseus">Perseus</option>
-		</select>
-	</div>
-	<div class="sat-box-spacerL"><br></div>
-	<div class="sat-box-spacerR"><br></div>
 	<div class="sat-boxL">
-		<img src="./sat3.jpg" alt="Avatar">
-		<div class="sat-name">
-			<input type="text" placeholder="TRVSUIO_2412" disabled size="20">
-			<br>PIN<input type="text" size="20">
-			<br><br><input type="button" value="Connect" class="connect-button" onclick="connectRocketWrong();">
+		<img src="./sat2.jpg" alt="Avatar">
+		<div style="float: right; max-width: 45%;">
+			<div class="sat-name">
+				<wbr> AMWPCMTT.7429 <wbr>
+			</div>
+			<div class="sat-pin">
+				PIN <br><input type="text" size="5">
+			</div>
 			<input type="button" value="Launch" class="launch-button" onclick="preConnect();">
-			<p style="float: right; visibility: hidden;">i</p>
-			<p style="float: right; visibility: hidden;">i</p>
-			<input type="text" size="1" placeholder="⛔️" disabled style="float: right;">
-			<br><br><input type="button" value="Sternkarte" class="stern-button" onclick="preConnect();">
+			<input type="button" value="Connect" class="connect-button" onclick="connectRocketWrong();">
+			<div class='sat-box-spacerR'><br></div>
+			<br><br>
+			<input type="button" value="Sternkarte" class="stern-button" onclick="preConnect();">
+			<input type="text" size="1" placeholder="⛔️" disabled style="float: right; font-size: 130%;">
 		</div>
-		<br><br><input type="text" placeholder="Navigationsquadrant; Aufenthaltsort" disabled size="30">
+		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<wbr> <wbr>
 		<select name="quad" id="quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
@@ -352,7 +290,8 @@
 		  <option value="sextant">Sextant</option>
 		  <option value="perseus">Perseus</option>
 		</select>
-		<br><br><input type="text" placeholder="Orientierungsquadrant; Nah liegend" disabled size="30">
+		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<wbr> <wbr>
 		<select name="quad" id="quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
@@ -370,7 +309,8 @@
 		  <option value="sextant">Sextant</option>
 		  <option value="perseus">Perseus</option>
 		</select>
-		<br><br><input type="text" placeholder="Orientierungsquadrant; Fern liegend" disabled size="30">
+		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<wbr> <wbr>
 		<select name="quad" id="quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
@@ -389,19 +329,97 @@
 		  <option value="perseus">Perseus</option>
 		</select>
 	</div>
-	<div class="sat-boxR">
-		<img src="./sat3.jpg" alt="Avatar">
-		<div class="sat-name">
-			<input type="text" placeholder="AMWPCMTT_6800" disabled size="20">
-			<br>PIN<input type="text" size="20" id="passwort">
-			<br><br><input type="button" onclick="connectRocket();" value="Connect" class="connect-button">
-			<input type="button" onclick="startRocket();" value="Launch" class="launch-button" id="launchButton">
-			<p style="float: right; visibility: hidden;">i</p>
-			<p style="float: right; visibility: hidden;">i</p>
-			<input type="text" size="1" placeholder="⛔️" disabled id="polSelect" style="float: right;">
-			<br><br><input type="button" onclick="saveSats();" value="Sternkarte" class="stern-button"" id="sternButton">
+	<div class="sat-boxL">
+		<img src="./sat2.jpg" alt="Avatar">
+		<div style="float: right; max-width: 45%;">
+			<div class="sat-name">
+				<wbr> TRVSUIO.2412 <wbr>
+			</div>
+			<div class="sat-pin">
+				PIN <br><input type="text" size="5">
+			</div>
+			<input type="button" value="Launch" class="launch-button" onclick="preConnect();">
+			<input type="button" value="Connect" class="connect-button" onclick="connectRocketWrong();">
+			<div class='sat-box-spacerR'><br></div>
+			<br><br>
+			<input type="button" value="Sternkarte" class="stern-button" onclick="preConnect();">
+			<input type="text" size="1" placeholder="⛔️" disabled style="float: right; font-size: 130%;">
 		</div>
-		<br><br><input type="text" placeholder="Navigationsquadrant; Aufenthaltsort" disabled size="30">
+		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<wbr> <wbr>
+		<select name="quad" id="quad">
+		  <option value="nan">--------------------------</option>
+		  <option value="fliege">Fliege</option>
+		  <option value="sichel">Grabsichel</option>
+		  <option value="segel">Segel</option>
+		  <option value="orion">Orion</option>
+		  <option value="kHund">Kleiner Hund</option>
+		  <option value="gHund">Großer Hund</option>
+		  <option value="löwe">Löwe</option>
+		  <option value="heck">Schifsheck</option>
+		  <option value="kiel">Schifskiel</option>
+		  <option value="pumpe">Luftpumpe</option>
+		  <option value="rabe">Rabe</option>
+		  <option value="eck">Dreieck</option>
+		  <option value="sextant">Sextant</option>
+		  <option value="perseus">Perseus</option>
+		</select>
+		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<wbr> <wbr>
+		<select name="quad" id="quad">
+		  <option value="nan">--------------------------</option>
+		  <option value="fliege">Fliege</option>
+		  <option value="sichel">Grabsichel</option>
+		  <option value="segel">Segel</option>
+		  <option value="orion">Orion</option>
+		  <option value="kHund">Kleiner Hund</option>
+		  <option value="gHund">Großer Hund</option>
+		  <option value="löwe">Löwe</option>
+		  <option value="heck">Schifsheck</option>
+		  <option value="kiel">Schifskiel</option>
+		  <option value="pumpe">Luftpumpe</option>
+		  <option value="rabe">Rabe</option>
+		  <option value="eck">Dreieck</option>
+		  <option value="sextant">Sextant</option>
+		  <option value="perseus">Perseus</option>
+		</select>
+		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<wbr> <wbr>
+		<select name="quad" id="quad">
+		  <option value="nan">--------------------------</option>
+		  <option value="fliege">Fliege</option>
+		  <option value="sichel">Grabsichel</option>
+		  <option value="segel">Segel</option>
+		  <option value="orion">Orion</option>
+		  <option value="kHund">Kleiner Hund</option>
+		  <option value="gHund">Großer Hund</option>
+		  <option value="löwe">Löwe</option>
+		  <option value="heck">Schifsheck</option>
+		  <option value="kiel">Schifskiel</option>
+		  <option value="pumpe">Luftpumpe</option>
+		  <option value="rabe">Rabe</option>
+		  <option value="eck">Dreieck</option>
+		  <option value="sextant">Sextant</option>
+		  <option value="perseus">Perseus</option>
+		</select>
+	</div>
+	<div class="sat-boxL">
+		<img src="./sat2.jpg" alt="Avatar">
+		<div style="float: right; max-width: 45%;">
+			<div class="sat-name">
+				<wbr> AMWPCMTT.6800 <wbr>
+			</div>
+			<div class="sat-pin">
+				PIN <br><input type="text" size="5" id="passwort">
+			</div>
+			<input type="button" value="Launch" class="launch-button" onclick="startRocket();">
+			<input type="button" value="Connect" class="connect-button" onclick="connectRocket();">
+			<br><br>
+			<input type="button" value="Sternkarte" class="stern-button" onclick="saveSats();">
+			<input type="text" id="polSelect" size="1" placeholder="⛔️" disabled style="float: right; font-size: 130%;">
+		</div>
+		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<wbr> <wbr>
 		<select name="nav_quad" id="nav_quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
@@ -419,7 +437,8 @@
 		  <option value="sextant">Sextant</option>
 		  <option value="perseus">Perseus</option>
 		</select>
-		<br><br><input type="text" placeholder="Orientierungsquadrant; Nah liegend" disabled size="30">
+		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<wbr> <wbr>
 		<select name="nah_quad" id="nah_quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
@@ -437,7 +456,8 @@
 		  <option value="sextant">Sextant</option>
 		  <option value="perseus">Perseus</option>
 		</select>
-		<br><br><input type="text" placeholder="Orientierungsquadrant; Fern liegend" disabled size="30">
+		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<wbr> <wbr>
 		<select name="fern_quad" id="fern_quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
@@ -456,21 +476,24 @@
 		  <option value="perseus">Perseus</option>
 		</select>
 	</div>
-	<div class="sat-box-spacerL"><br></div>
-	<div class="sat-box-spacerR"><br></div>
 	<div class="sat-boxL">
-		<img src="./sat1.jpg" alt="Avatar">
-		<div class="sat-name">
-			<input type="text" placeholder="LMNOPAA_1866" disabled size="20">
-			<br>PIN<input type="text" size="20">
-			<br><br><input type="button" value="Connect" class="connect-button" onclick="connectRocketWrong();">
+		<img src="./sat2.jpg" alt="Avatar">
+		<div style="float: right; max-width: 45%;">
+			<div class="sat-name">
+				<wbr> LMNOPAA.1866 <wbr>
+			</div>
+			<div class="sat-pin">
+				PIN <br><input type="text" size="5">
+			</div>
 			<input type="button" value="Launch" class="launch-button" onclick="preConnect();">
-			<p style="float: right; visibility: hidden;">i</p>
-			<p style="float: right; visibility: hidden;">i</p>
-			<input type="text" size="1" placeholder="⛔️" disabled style="float: right;">
-			<br><br><input type="button" value="Sternkarte" class="stern-button" onclick="preConnect();">
+			<input type="button" value="Connect" class="connect-button" onclick="connectRocketWrong();">
+			<div class='sat-box-spacerR'><br></div>
+			<br><br>
+			<input type="button" value="Sternkarte" class="stern-button" onclick="preConnect();">
+			<input type="text" size="1" placeholder="⛔️" disabled style="float: right; font-size: 130%;">
 		</div>
-		<br><br><input type="text" placeholder="Navigationsquadrant; Aufenthaltsort" disabled size="30">
+		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<wbr> <wbr>
 		<select name="quad" id="quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
@@ -488,7 +511,8 @@
 		  <option value="sextant">Sextant</option>
 		  <option value="perseus">Perseus</option>
 		</select>
-		<br><br><input type="text" placeholder="Orientierungsquadrant; Nah liegend" disabled size="30">
+		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<wbr> <wbr>
 		<select name="quad" id="quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
@@ -506,7 +530,8 @@
 		  <option value="sextant">Sextant</option>
 		  <option value="perseus">Perseus</option>
 		</select>
-		<br><br><input type="text" placeholder="Orientierungsquadrant; Fern liegend" disabled size="30">
+		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<wbr> <wbr>
 		<select name="quad" id="quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
@@ -525,19 +550,24 @@
 		  <option value="perseus">Perseus</option>
 		</select>
 	</div>
-	<div class="sat-boxR">
+	<div class="sat-boxL">
 		<img src="./sat2.jpg" alt="Avatar">
-		<div class="sat-name">
-			<input type="text" placeholder="HJQUYN_0005" disabled size="20">
-			<br>PIN<input type="text" size="20">
-			<br><br><input type="button" value="Connect" class="connect-button" onclick="connectRocketWrong();">
+		<div style="float: right; max-width: 45%;">
+			<div class="sat-name">
+				<wbr> HJQUYN.0005 <wbr>
+			</div>
+			<div class="sat-pin">
+				PIN <br><input type="text" size="5">
+			</div>
 			<input type="button" value="Launch" class="launch-button" onclick="preConnect();">
-			<p style="float: right; visibility: hidden;">i</p>
-			<p style="float: right; visibility: hidden;">i</p>
-			<input type="text" size="1" placeholder="⛔️" disabled style="float: right;">
-			<br><br><input type="button" value="Sternkarte" class="stern-button" onclick="preConnect();">
+			<input type="button" value="Connect" class="connect-button" onclick="connectRocketWrong();">
+			<div class='sat-box-spacerR'><br></div>
+			<br><br>
+			<input type="button" value="Sternkarte" class="stern-button" onclick="preConnect();">
+			<input type="text" size="1" placeholder="⛔️" disabled style="float: right; font-size: 130%;">
 		</div>
-		<br><br><input type="text" placeholder="Navigationsquadrant; Aufenthaltsort" disabled size="30">
+		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<wbr> <wbr>
 		<select name="quad" id="quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
@@ -555,7 +585,8 @@
 		  <option value="sextant">Sextant</option>
 		  <option value="perseus">Perseus</option>
 		</select>
-		<br><br><input type="text" placeholder="Orientierungsquadrant; Nah liegend" disabled size="30">
+		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<wbr> <wbr>
 		<select name="quad" id="quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
@@ -573,7 +604,230 @@
 		  <option value="sextant">Sextant</option>
 		  <option value="perseus">Perseus</option>
 		</select>
-		<br><br><input type="text" placeholder="Orientierungsquadrant; Fern liegend" disabled size="30">
+		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<wbr> <wbr>
+		<select name="quad" id="quad">
+		  <option value="nan">--------------------------</option>
+		  <option value="fliege">Fliege</option>
+		  <option value="sichel">Grabsichel</option>
+		  <option value="segel">Segel</option>
+		  <option value="orion">Orion</option>
+		  <option value="kHund">Kleiner Hund</option>
+		  <option value="gHund">Großer Hund</option>
+		  <option value="löwe">Löwe</option>
+		  <option value="heck">Schifsheck</option>
+		  <option value="kiel">Schifskiel</option>
+		  <option value="pumpe">Luftpumpe</option>
+		  <option value="rabe">Rabe</option>
+		  <option value="eck">Dreieck</option>
+		  <option value="sextant">Sextant</option>
+		  <option value="perseus">Perseus</option>
+		</select>
+	</div>
+	<div class="sat-boxL">
+		<img src="./sat2.jpg" alt="Avatar">
+		<div style="float: right; max-width: 45%;">
+			<div class="sat-name">
+				<wbr> GTHZJUKI.2003 <wbr>
+			</div>
+			<div class="sat-pin">
+				PIN <br><input type="text" size="5">
+			</div>
+			<input type="button" value="Launch" class="launch-button" onclick="preConnect();">
+			<input type="button" value="Connect" class="connect-button" onclick="connectRocketWrong();">
+			<div class='sat-box-spacerR'><br></div>
+			<br><br>
+			<input type="button" value="Sternkarte" class="stern-button" onclick="preConnect();">
+			<input type="text" size="1" placeholder="⛔️" disabled style="float: right; font-size: 130%;">
+		</div>
+		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<wbr> <wbr>
+		<select name="quad" id="quad">
+		  <option value="nan">--------------------------</option>
+		  <option value="fliege">Fliege</option>
+		  <option value="sichel">Grabsichel</option>
+		  <option value="segel">Segel</option>
+		  <option value="orion">Orion</option>
+		  <option value="kHund">Kleiner Hund</option>
+		  <option value="gHund">Großer Hund</option>
+		  <option value="löwe">Löwe</option>
+		  <option value="heck">Schifsheck</option>
+		  <option value="kiel">Schifskiel</option>
+		  <option value="pumpe">Luftpumpe</option>
+		  <option value="rabe">Rabe</option>
+		  <option value="eck">Dreieck</option>
+		  <option value="sextant">Sextant</option>
+		  <option value="perseus">Perseus</option>
+		</select>
+		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<wbr> <wbr>
+		<select name="quad" id="quad">
+		  <option value="nan">--------------------------</option>
+		  <option value="fliege">Fliege</option>
+		  <option value="sichel">Grabsichel</option>
+		  <option value="segel">Segel</option>
+		  <option value="orion">Orion</option>
+		  <option value="kHund">Kleiner Hund</option>
+		  <option value="gHund">Großer Hund</option>
+		  <option value="löwe">Löwe</option>
+		  <option value="heck">Schifsheck</option>
+		  <option value="kiel">Schifskiel</option>
+		  <option value="pumpe">Luftpumpe</option>
+		  <option value="rabe">Rabe</option>
+		  <option value="eck">Dreieck</option>
+		  <option value="sextant">Sextant</option>
+		  <option value="perseus">Perseus</option>
+		</select>
+		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<wbr> <wbr>
+		<select name="quad" id="quad">
+		  <option value="nan">--------------------------</option>
+		  <option value="fliege">Fliege</option>
+		  <option value="sichel">Grabsichel</option>
+		  <option value="segel">Segel</option>
+		  <option value="orion">Orion</option>
+		  <option value="kHund">Kleiner Hund</option>
+		  <option value="gHund">Großer Hund</option>
+		  <option value="löwe">Löwe</option>
+		  <option value="heck">Schifsheck</option>
+		  <option value="kiel">Schifskiel</option>
+		  <option value="pumpe">Luftpumpe</option>
+		  <option value="rabe">Rabe</option>
+		  <option value="eck">Dreieck</option>
+		  <option value="sextant">Sextant</option>
+		  <option value="perseus">Perseus</option>
+		</select>
+	</div>
+	<div class="sat-boxL">
+		<img src="./sat2.jpg" alt="Avatar">
+		<div style="float: right; max-width: 45%;">
+			<div class="sat-name">
+				<wbr> DAPMCSNK.1809 <wbr>
+			</div>
+			<div class="sat-pin">
+				PIN <br><input type="text" size="5">
+			</div>
+			<input type="button" value="Launch" class="launch-button" onclick="preConnect();">
+			<input type="button" value="Connect" class="connect-button" onclick="connectRocketWrong();">
+			<div class='sat-box-spacerR'><br></div>
+			<br><br>
+			<input type="button" value="Sternkarte" class="stern-button" onclick="preConnect();">
+			<input type="text" size="1" placeholder="⛔️" disabled style="float: right; font-size: 130%;">
+		</div>
+		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<wbr> <wbr>
+		<select name="quad" id="quad">
+		  <option value="nan">--------------------------</option>
+		  <option value="fliege">Fliege</option>
+		  <option value="sichel">Grabsichel</option>
+		  <option value="segel">Segel</option>
+		  <option value="orion">Orion</option>
+		  <option value="kHund">Kleiner Hund</option>
+		  <option value="gHund">Großer Hund</option>
+		  <option value="löwe">Löwe</option>
+		  <option value="heck">Schifsheck</option>
+		  <option value="kiel">Schifskiel</option>
+		  <option value="pumpe">Luftpumpe</option>
+		  <option value="rabe">Rabe</option>
+		  <option value="eck">Dreieck</option>
+		  <option value="sextant">Sextant</option>
+		  <option value="perseus">Perseus</option>
+		</select>
+		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<wbr> <wbr>
+		<select name="quad" id="quad">
+		  <option value="nan">--------------------------</option>
+		  <option value="fliege">Fliege</option>
+		  <option value="sichel">Grabsichel</option>
+		  <option value="segel">Segel</option>
+		  <option value="orion">Orion</option>
+		  <option value="kHund">Kleiner Hund</option>
+		  <option value="gHund">Großer Hund</option>
+		  <option value="löwe">Löwe</option>
+		  <option value="heck">Schifsheck</option>
+		  <option value="kiel">Schifskiel</option>
+		  <option value="pumpe">Luftpumpe</option>
+		  <option value="rabe">Rabe</option>
+		  <option value="eck">Dreieck</option>
+		  <option value="sextant">Sextant</option>
+		  <option value="perseus">Perseus</option>
+		</select>
+		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<wbr> <wbr>
+		<select name="quad" id="quad">
+		  <option value="nan">--------------------------</option>
+		  <option value="fliege">Fliege</option>
+		  <option value="sichel">Grabsichel</option>
+		  <option value="segel">Segel</option>
+		  <option value="orion">Orion</option>
+		  <option value="kHund">Kleiner Hund</option>
+		  <option value="gHund">Großer Hund</option>
+		  <option value="löwe">Löwe</option>
+		  <option value="heck">Schifsheck</option>
+		  <option value="kiel">Schifskiel</option>
+		  <option value="pumpe">Luftpumpe</option>
+		  <option value="rabe">Rabe</option>
+		  <option value="eck">Dreieck</option>
+		  <option value="sextant">Sextant</option>
+		  <option value="perseus">Perseus</option>
+		</select>
+	</div>
+	<div class="sat-boxL">
+		<img src="./sat2.jpg" alt="Avatar">
+		<div style="float: right; max-width: 45%;">
+			<div class="sat-name">
+				<wbr> MPIGMCM.1649 <wbr>
+			</div>
+			<div class="sat-pin">
+				PIN <br><input type="text" size="5">
+			</div>
+			<input type="button" value="Launch" class="launch-button" onclick="preConnect();">
+			<input type="button" value="Connect" class="connect-button" onclick="connectRocketWrong();">
+			<div class='sat-box-spacerR'><br></div>
+			<br><br>
+			<input type="button" value="Sternkarte" class="stern-button" onclick="preConnect();">
+			<input type="text" size="1" placeholder="⛔️" disabled style="float: right; font-size: 130%;">
+		</div>
+		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<wbr> <wbr>
+		<select name="quad" id="quad">
+		  <option value="nan">--------------------------</option>
+		  <option value="fliege">Fliege</option>
+		  <option value="sichel">Grabsichel</option>
+		  <option value="segel">Segel</option>
+		  <option value="orion">Orion</option>
+		  <option value="kHund">Kleiner Hund</option>
+		  <option value="gHund">Großer Hund</option>
+		  <option value="löwe">Löwe</option>
+		  <option value="heck">Schifsheck</option>
+		  <option value="kiel">Schifskiel</option>
+		  <option value="pumpe">Luftpumpe</option>
+		  <option value="rabe">Rabe</option>
+		  <option value="eck">Dreieck</option>
+		  <option value="sextant">Sextant</option>
+		  <option value="perseus">Perseus</option>
+		</select>
+		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<wbr> <wbr>
+		<select name="quad" id="quad">
+		  <option value="nan">--------------------------</option>
+		  <option value="fliege">Fliege</option>
+		  <option value="sichel">Grabsichel</option>
+		  <option value="segel">Segel</option>
+		  <option value="orion">Orion</option>
+		  <option value="kHund">Kleiner Hund</option>
+		  <option value="gHund">Großer Hund</option>
+		  <option value="löwe">Löwe</option>
+		  <option value="heck">Schifsheck</option>
+		  <option value="kiel">Schifskiel</option>
+		  <option value="pumpe">Luftpumpe</option>
+		  <option value="rabe">Rabe</option>
+		  <option value="eck">Dreieck</option>
+		  <option value="sextant">Sextant</option>
+		  <option value="perseus">Perseus</option>
+		</select>
+		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<wbr> <wbr>
 		<select name="quad" id="quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>

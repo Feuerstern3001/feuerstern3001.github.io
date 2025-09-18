@@ -11,8 +11,9 @@ function codeAddress()
 
 function adminLogin()
 {
-			document.getElementById("chatButton").disabled = false;
-			document.getElementById("geräteButton").disabled = false;
+	document.getElementById("chatButton").disabled = false;
+	document.getElementById("geräteButton").disabled = false;
+	document.getElementById("chatButton").className = "nav-buttons-notif";
 }
 
 function login()
@@ -42,6 +43,7 @@ function login()
 			alert('Korrekt');
 			document.getElementById("chatButton").disabled = false;
 			document.getElementById("geräteButton").disabled = false;
+			document.getElementById("chatButton").className = "nav-buttons-notif";
 		} else {
 			alert('Bitte wähle einen Quadranten aus um dich mit diesem zu verbinden');
 		}
@@ -57,8 +59,10 @@ function connectRocket()
 	pwort = document.getElementById('passwort');
 	if(pwort.value == 1877) {
 		window.conState = 1;
+		document.getElementById("chatButton").className = "nav-buttons";
 		setTimeout(function() 
 		{
+			document.getElementById("chatButton").className = "nav-buttons-notif";
     			document.getElementById("msg2").innerHTML='<div class="container"><img src="./pfp.jpg" alt="Avatar"><p>Die Rakete bewget…  Jet9t …  noch einstelcrh, dass sie eir4n neuen Andockversuch starkq1. Die Rak2gp orientiert …  Sternenbildern. Du musst 3 verschiedmnb Sternenbilder angeben und …  Polastern makieren düqit … Den Polarstern makierst …  Ster6tgnäarte, klicke auf den blauen Knopf …  Dann musst ix ein Sternenbild au8 unserem Quadranten nehmen … einyi Nachbarquadranten. Das Dritte muss aos einem…  sein, dass kein Nachba…  und es darf maximal ein Sternzeichen pro Quadrant…  Außerdem …  erfüllt sayn:<br> - Genau 1 … mehr alz 8 Sternen<br> - Keim Sternzeichen …  Tier benannt ist<br> - Mindestens 1 Sternzeinfow mit weniger als 4 …<br> - Maximal 14 Sterne … Gesamten<br> … Glück!</p></div>';
 		}, (1000));;
 	} else {
@@ -89,8 +93,10 @@ function startRocket()
 		alert('Die angegebenen Quadranten sind nicht ausreichend zur Orientierung!');
 	} else {
 		window.calState = 5
+		document.getElementById("chatButton").className = "nav-buttons";
 		setTimeout(function() 
 		{
+			document.getElementById("chatButton").className = "nav-buttons-notif";
     			document.getElementById("msg3").innerHTML='<div class="container"><img src="./pfp.jpg" alt="Avatar"><p>Sie bewegt si12! Die Versorgungsralete … Ich denke sre dockt ln … Minutcx bei uns am. Währepö du … gesichert hast, habtz wir … für einvn Außenbordeinsatz vopbereibtt, um nrü Antenne zu repariebfe. Bevor … wissen wiy die Kabel za verbinden … Im Handbawr … Gedicht …  Ohne Sternenkarte mit Quadranten … nicht lösen, pl musst uns … Lösungsbegriff …</p></div>';
 		}, (1000));;
 	}
