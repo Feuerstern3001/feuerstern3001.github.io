@@ -1,15 +1,23 @@
 <script src="chatbox.js"></script>
 <link rel="stylesheet" href="chatbox.css">
+
+  <!-- Navigation Buttons und ein Admin Button um das Eingeben des Passworts zu umgehen (Zeit sparen sonst nichts) -->
 <input type="button" value="Quadranten Auswahl" onclick="showLogin();" class="nav-buttons">
 <input type="button" value="Chat" onclick="showChat();" id="chatButton" class="nav-buttons">
 <input type="button" value="Gerätepanel" onclick="showGeräte();" id="geräteButton" class="nav-buttons">
 <input type="button" value="admin" onclick="adminLogin();" class="admin-button">
+
+  <!-- Dieses DIV ist das einzige, welches man sieht, die eigentlichen Seiten werden hinein kopiert -->
 <div id="display">
 
 </div>
+
+  <!-- Zwischenspeicher, wenn die Sternenkarte geöffnet wird -->
 <div id="saveSatsDiv" style="display: none;">
 
 </div>
+
+  <!-- Auswahl des Quadranten, Passworteingabe um das Chat- und Gerätefenster frei zu schalten -->
 <div id="login" style="display: none;">
 	<div class="login-box">
 		<label for="quad">Bitte wähle einen Quadranten: </label>
@@ -32,104 +40,36 @@
 		  id="zahl1"
 		  required
 		  minlength="1"
-		  maxlength="1"
-		  size="1" />
+		  maxlength="4"
+		  size="4" 
+		  placeholder="XXXX"/>
+		-
 		<input
 		  type="text"
 		  id="zahl2"
 		  required
 		  minlength="1"
-		  maxlength="1"
-		  size="1" />
-		<input
-	  	  type="text"
-	  	  id="zahl3"
-	  	  required
-	  	  minlength="1"
-	  	  maxlength="1"
-	  	  size="1" />
-		<input
-	  	  type="text"
-	  	  id="zahl4"
-	  	  required
-	  	  minlength="1"
-	  	  maxlength="1"
-	  	  size="1" />
+		  maxlength="6"
+		  size="6"
+		  placeholder="XXXXXX" />
 		-
 		<input
 		  type="text"
-		  id="zahl5"
+		  id="zahl3"
 		  required
 		  minlength="1"
-		  maxlength="1"
-		  size="1" />
-		<input
-		  type="text"
-		  id="zahl6"
-		  required
-		  minlength="1"
-		  maxlength="1"
-		  size="1" />
-		<input
-		  type="text"
-		  id="zahl7"
-		  required
-		  minlength="1"
-		  maxlength="1"
-		  size="1" />
-		<input
-		  type="text"
-		  id="zahl8"
-		  required
-		  minlength="1"
-		  maxlength="1"
-		  size="1" />
-		<input
-		  type="text"
-		  id="zahl9"
-	 	  required
-		  minlength="1"
-		  maxlength="1"
-		  size="1" />
-		<input
-		  type="text"
-		  id="zahl10"
-		  required
-		  minlength="1"
-		  maxlength="1"
-		  size="1" />
-		-
-		<input
-		  type="text"
-		  id="zahl11"
-		  required
-		  minlength="1"
-		  maxlength="1"
-		  size="1" />
-		<input
-		  type="text"
-		  id="zahl12"
-		  required
-		  minlength="1"
-		  maxlength="1"
-		  size="1" />
-		<input
-		  type="text"
-		  id="zahl13"
-		  required
-		  minlength="1"
-		  maxlength="1"
-		  size="1" />
-		<input
-		  type="text"
-		  id="zahl14"
-		  required
-		  minlength="1"
-		  maxlength="1"
-		  size="1" />
+		  maxlength="4"
+		  size="4"
+		  placeholder="XXXX" />
 		<br><br><input type='button' onclick='login();' value='Mit Quadranten verbinden' id="login"><br>
 	</div>
 </div>
+
+  <!-- 
+  Chatfenster, für jede Nachricht (quasi) ist ein leeres DIV angelegt, welches per Javascript gefüllt wird 
+  nur quasi, da die b Nachrichten sowohl verwendet werden, für die Nachrichten die der Nutzer schreibt,
+  als auch für wenn ein Lösungsversuch nicht stimmt. Diese Mittteilung wird von der richtigen Nachricht überschrieben
+  -->
 <div id="chat" style="display: none;">
 	<div id="msg_box" class="chat-msgs">
 		<div id="msg1">
@@ -176,13 +116,23 @@
 		</div>
 	</div>
 	<br><div>
-		<input type="text" class="text-field" id="textField">
 		<input type="button" onclick="sendMsg();" value="Senden" class="send-button">
+		<input type="text" class="text-field" id="textField">
 	</div>
 </div>
+
+  <!-- 
+  Gerätepanel, Erklärung beispielhaft an erstem DIV, gilt für alle bis auf das, welches die Lösung ist
+  an diesem ist eine spezielle Beschreibung
+  -->
 <div id="sats" style="display: none;">
+	  <!--
+	  Mehrere DIV zum gestalten eines Anzeigekastens, mehrere Buttons die als Ziel nur eine Fehlermeldung erzeugen
+	  und das PIN Feld welches zwar beschrieben werden kann aber keinen wirklichen Nutzen
+	  Außerdem eine disabled Textbox, hier ohne Nutzen (außer optisch)
+	  -->
 	<div class="sat-boxL">
-		<img src="./sat2.jpg" alt="Avatar">
+		<img src="./sat (1).jpg" alt="Avatar">
 		<div style="float: right; max-width: 45%;">
 			<div class="sat-name">
 				<wbr> AMPLQTT.2029 <wbr>
@@ -197,6 +147,7 @@
 			<input type="button" value="Sternkarte" class="stern-button" onclick="preConnect();">
 			<input type="text" size="1" placeholder="⛔️" disabled style="float: right; font-size: 130%;">
 		</div>
+		  <!-- Auswahl und Beschriftung für die Quadranten -->
 		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
 		<wbr> <wbr>
 		<select name="quad" id="quad">
@@ -255,8 +206,9 @@
 		  <option value="perseus">Perseus</option>
 		</select>
 	</div>
+
 	<div class="sat-boxL">
-		<img src="./sat2.jpg" alt="Avatar">
+		<img src="./sat (2).jpg" alt="Avatar">
 		<div style="float: right; max-width: 45%;">
 			<div class="sat-name">
 				<wbr> AMWPCMTT.7429 <wbr>
@@ -329,8 +281,9 @@
 		  <option value="perseus">Perseus</option>
 		</select>
 	</div>
+
 	<div class="sat-boxL">
-		<img src="./sat2.jpg" alt="Avatar">
+		<img src="./sat (3).jpg" alt="Avatar">
 		<div style="float: right; max-width: 45%;">
 			<div class="sat-name">
 				<wbr> TRVSUIO.2412 <wbr>
@@ -403,10 +356,16 @@
 		  <option value="perseus">Perseus</option>
 		</select>
 	</div>
+
+  <!-- 
+  Diese Box hat einige Unterschiede, da sie die Lösung eines Rätsels ist 
+  Im Endeffekt bedeutet das einfach, die Buttons haben hier ein "echtes Ziel"
+  Außerdem wird das disabled Text Feld benutzt, um zu zeigen oder der Polarstern ausgewählt wurde
+  -->
 	<div class="sat-boxL">
-		<img src="./sat2.jpg" alt="Avatar">
+		<img src="./sat (4).jpg" alt="Avatar">
 		<div style="float: right; max-width: 45%;">
-			<div class="sat-name">
+			<div id="satName" class="sat-name">
 				<wbr> AMWPCMTT.6800 <wbr>
 			</div>
 			<div class="sat-pin">
@@ -476,8 +435,9 @@
 		  <option value="perseus">Perseus</option>
 		</select>
 	</div>
+
 	<div class="sat-boxL">
-		<img src="./sat2.jpg" alt="Avatar">
+		<img src="./sat (5).jpg" alt="Avatar">
 		<div style="float: right; max-width: 45%;">
 			<div class="sat-name">
 				<wbr> LMNOPAA.1866 <wbr>
@@ -550,8 +510,9 @@
 		  <option value="perseus">Perseus</option>
 		</select>
 	</div>
+
 	<div class="sat-boxL">
-		<img src="./sat2.jpg" alt="Avatar">
+		<img src="./sat (6).jpg" alt="Avatar">
 		<div style="float: right; max-width: 45%;">
 			<div class="sat-name">
 				<wbr> HJQUYN.0005 <wbr>
@@ -624,8 +585,9 @@
 		  <option value="perseus">Perseus</option>
 		</select>
 	</div>
+
 	<div class="sat-boxL">
-		<img src="./sat2.jpg" alt="Avatar">
+		<img src="./sat (7).jpg" alt="Avatar">
 		<div style="float: right; max-width: 45%;">
 			<div class="sat-name">
 				<wbr> GTHZJUKI.2003 <wbr>
@@ -698,8 +660,9 @@
 		  <option value="perseus">Perseus</option>
 		</select>
 	</div>
+
 	<div class="sat-boxL">
-		<img src="./sat2.jpg" alt="Avatar">
+		<img src="./sat (8).jpg" alt="Avatar">
 		<div style="float: right; max-width: 45%;">
 			<div class="sat-name">
 				<wbr> DAPMCSNK.1809 <wbr>
@@ -772,8 +735,9 @@
 		  <option value="perseus">Perseus</option>
 		</select>
 	</div>
+
 	<div class="sat-boxL">
-		<img src="./sat2.jpg" alt="Avatar">
+		<img src="./sat (9).jpg" alt="Avatar">
 		<div style="float: right; max-width: 45%;">
 			<div class="sat-name">
 				<wbr> MPIGMCM.1649 <wbr>
@@ -847,6 +811,12 @@
 		</select>
 	</div>
 </div>
+
+  <!-- 
+  Die Sternkarte besteht aus einer Image Map, an der die meisten größeren Sterne (mind. 5 Pixel Durchmesser)
+  zu Klickflächen gemacht wurde, alle außer dem Polar Stern laden einfach das Gerätepanel zurück
+  ins Display DIV, der Polarstern setzt außerdem die Anzeige auf Grün und setzt eine Variable
+  -->
 <div id="sternKarte" style="display: none;">
 	<img src="./polStern.png" alt="Sternkarte" usemap="#polStern">
 	<map name="polStern">

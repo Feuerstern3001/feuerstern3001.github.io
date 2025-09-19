@@ -15,8 +15,21 @@ input[type="button"]:disabled {
   border-radius: 5px;
   padding: 10px;
   margin: 10px 0;
-  max-width: 90%;
+  min-width: 80%;
+  max-width: 80%;
   word-wrap: break-word;
+  float: left;
+}
+.containerR {
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+  min-width: 80%;
+  max-width: 80%;
+  word-wrap: break-word;
+  float: right;
 }
 .chat-msgs {
   padding: 1%;
@@ -28,8 +41,10 @@ input[type="button"]:disabled {
 .text-field {
   min-height: 40px;
   max-height: 40px;
-  min-width: 35%;
-  max-width: 35%;
+  min-width: 65%;
+  max-width: 65%;
+  float: right;
+  margin-right: 1%;
 }
 .send-button {
   min-height: 40px;
@@ -37,6 +52,7 @@ input[type="button"]:disabled {
   min-width: 10%;
   max-width: 10%;
   background-color: #aaccaa;
+  float: right;
 }
 .sat-boxL {
   float: left;
@@ -56,6 +72,17 @@ input[type="button"]:disabled {
   max-height: 30%;
   min-width: 100%;
   max-width: 100%;
+}
+.sat-name-connect {
+  float: right;
+  font-size: 150%;
+  border: 2px solid #000000;
+  padding 1%;
+  min-height: 30%;
+  max-height: 30%;
+  min-width: 100%;
+  max-width: 100%;
+  color: #00cc33;
 }
 .quad-name {
   font-size: 100%;

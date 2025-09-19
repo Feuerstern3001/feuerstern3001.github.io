@@ -1,3 +1,4 @@
+// Diese Funktion wird direkt beim Start der Seite ausgeführt, füllt die erste Nachricht aus, setzt die Navigations Buttons auf disabled, lädt die Login Seite inns Display DIV
 function codeAddress() 
 {
 	setTimeout(function() 
@@ -9,6 +10,7 @@ function codeAddress()
 	}, (1));;
 }
 
+// Zum umgehen der Passworteingabe
 function adminLogin()
 {
 	document.getElementById("chatButton").disabled = false;
@@ -16,26 +18,13 @@ function adminLogin()
 	document.getElementById("chatButton").className = "nav-buttons-notif";
 }
 
+// Überprüfen des Passworts und der Quadrantenauswahl
 function login()
 {
 	eingabe1 = document.getElementById('zahl1');
 	eingabe2 = document.getElementById('zahl2');
 	eingabe3 = document.getElementById('zahl3');
-	eingabe4 = document.getElementById('zahl4');
-	eingabe5 = document.getElementById('zahl5');
-	eingabe6 = document.getElementById('zahl6');
-	eingabe7 = document.getElementById('zahl7');
-	eingabe8 = document.getElementById('zahl8');
-	eingabe9 = document.getElementById('zahl9');
-	eingabe10 = document.getElementById('zahl10');
-	eingabe11 = document.getElementById('zahl11');
-	eingabe12 = document.getElementById('zahl12');
-	eingabe13 = document.getElementById('zahl13');
-	eingabe14 = document.getElementById('zahl14');
-	if(eingabe1.value == 1 && eingabe2.value == 9 && eingabe3.value == 6 && eingabe4.value == 9 &&
-	   eingabe5.value == 3 && eingabe6.value == 8 && eingabe7.value == 4 && eingabe8.value == 0 &&
-	   eingabe9.value == 0 && eingabe10.value == 0 && eingabe11.value == 3 && eingabe12.value == 7 &&
-	   eingabe13.value == 0 && eingabe14.value == 0)
+	if(eingabe1.value == 1969 && eingabe2.value == 384000 && eingabe3.value == 3700)
 	{
 		var quadWahl = document.getElementById("quad");
 		if (quadWahl.value == "lime")
@@ -54,12 +43,80 @@ function login()
 	}
 }
 
+// Lädt die Login Seite ins Display DIV
+function showLogin()
+{
+	var firstDivContent = document.getElementById('login');
+	var secondDivContent = document.getElementById('display');
+	secondDivContent.innerHTML = firstDivContent.innerHTML;
+}
+
+// Lädt die Chat Seite ins Display DIV
+function showChat()
+{
+	var firstDivContent = document.getElementById('chat');
+	var secondDivContent = document.getElementById('display');
+	secondDivContent.innerHTML = firstDivContent.innerHTML;
+}
+
+// Lädt die Gerätepanel Seite ins Display DIV
+function showGeräte()
+{
+	var firstDivContent = document.getElementById('sats');
+	var secondDivContent = document.getElementById('display');
+	secondDivContent.innerHTML = firstDivContent.innerHTML;
+}
+
+
+// Die Gerätepanel Seite wird zwischen gespeichert, aus einem dritten DIV wird die Sternkarte in das Display DIV geladen
+function saveSats()
+{
+	if (window.conState === 1) {
+		var firstDivContent = document.getElementById('display');
+		var secondDivContent = document.getElementById('saveSatsDiv');
+		var thirdDivContent = document.getElementById('sternKarte');
+		secondDivContent.innerHTML = firstDivContent.innerHTML;
+		firstDivContent.innerHTML = thirdDivContent.innerHTML;
+
+	// Falls nicht zuvor richtige PIN eingegeben, Fehlermeldung
+	} else {
+		alert('Bitte verbinde dich erst mit der PIN, bevor du mit diesem Gerät interagierst!');
+	}
+}
+
+// Lädt die Gerätepanel Seite zurück ins Display DIV, wenn auf der Sternenkarten der falsche Stern ausgewählt wird, setzt außerdem polState auf 0, da nicht Polarstern
+function reloadSats()
+{
+	var firstDivContent = document.getElementById('display');
+	var secondDivContent = document.getElementById('saveSatsDiv');
+	firstDivContent.innerHTML = secondDivContent.innerHTML;
+	window.polState = 0
+}
+
+// Ruft reloadSats, setzt aber mit etwas Verzögerung polSelect auf 1, da nun der Polarstern gefunden wurde
+function polFound()
+{
+	reloadSats();
+	setTimeout(function()		
+	{
+		window.polState = 1
+		document.getElementById("polSelect").value='✅';
+	}, (10));;
+}
+
+// Setzt conState auf 1 um den nächsten Schritt freizuschalten, außerdem setzt es die zweite Nachricht ein und bringt den Chat Button zum blinken
 function connectRocket()
 {
 	pwort = document.getElementById('passwort');
 	if(pwort.value == 1877) {
 		window.conState = 1;
+
+		// Der Chat Button muss zunächste die "notif" class entfernt bekommen, damit sie neu hinzugefügt werden kann um die Animation neu zu starten
 		document.getElementById("chatButton").className = "nav-buttons";
+		document.getElementById("satName").className = "sat-name-connect";
+		var firstDivContent = document.getElementById('display');
+		var secondDivContent = document.getElementById('sats');
+		secondDivContent.innerHTML = firstDivContent.innerHTML;
 		setTimeout(function() 
 		{
 			document.getElementById("chatButton").className = "nav-buttons-notif";
@@ -70,27 +127,39 @@ function connectRocket()
 	}
 }
 
+// Fehlermeldung wenn man mit einem der Connect Buttons auf dem Gerätepanel interagiert, welche keine Funktion brauchen im Rahmen des Escape Rooms
 function connectRocketWrong()
 {
 	alert('Falsche PIN!');
 }
 
+// Fehlermeldung wenn man mit einem der Buttons interagiert, bevor man die PIN eingegeben hat bzw. im Falle der Buttons ohne benötigte Funktion wird gar nicht erst die PIN gecheckt, es kommt direkt die Fehlermeldung
 function preConnect()
 {
 	alert('Bitte verbinde dich erst mit der PIN, bevor du mit diesem Gerät interagierst!');
 }
 
+
+// Funktion des "Launch" Buttons
 function startRocket()
 {
 	var navQ = document.getElementById('nav_quad');
 	var nahQ = document.getElementById('nah_quad');
 	var ferQ = document.getElementById('fern_quad');
+
+	// Kontrolle ob die PIN korrekt eingegeben wurde, sowie auf "Connect" geklickt wurde, wenn nein, Fehlermeldung
 	if (window.conState === 0) {
 		alert('Bitte verbinde dich erst mit der PIN, bevor du mit diesem Gerät interagierst!');
+
+	// Kontrolle ob der Polarstern ausgewählt wurde, wenn nein, Fehlermeldung
 	} else if (window.polState === 0) {
 		alert('Bitte wähle den Polarstern aus, damit das Gerät den Standort bestimmen kann!');
+
+	// Kontrolle ob die richtigen Quadranten ausgewählt sind, wenn nein, Fehlermeldung
 	} else if (window.polState === 1 && (navQ.value != "sichel" || nahQ.value != "heck" || ferQ.value != "pumpe")) {
 		alert('Die angegebenen Quadranten sind nicht ausreichend zur Orientierung!');
+
+	// Wenn alles korrekt, setzte calState auf 5 für nächsten Schritt, Chat Button blinkt, nächste Nachricht
 	} else {
 		window.calState = 5
 		document.getElementById("chatButton").className = "nav-buttons";
@@ -103,71 +172,28 @@ function startRocket()
 
 }
 
-function saveSats()
-{
-	if (window.conState === 1) {
-		var firstDivContent = document.getElementById('display');
-		var secondDivContent = document.getElementById('saveSatsDiv');
-		var thirdDivContent = document.getElementById('sternKarte');
-		secondDivContent.innerHTML = firstDivContent.innerHTML;
-		firstDivContent.innerHTML = thirdDivContent.innerHTML;
-	} else {
-		alert('Bitte verbinde dich erst mit der PIN, bevor du mit diesem Gerät interagierst!');
-	}
-}
-
-function showLogin()
-{
-	var firstDivContent = document.getElementById('login');
-	var secondDivContent = document.getElementById('display');
-	secondDivContent.innerHTML = firstDivContent.innerHTML;
-}
-
-function showChat()
-{
-	var firstDivContent = document.getElementById('chat');
-	var secondDivContent = document.getElementById('display');
-	secondDivContent.innerHTML = firstDivContent.innerHTML;
-}
-
-function showGeräte()
-{
-	var firstDivContent = document.getElementById('sats');
-	var secondDivContent = document.getElementById('display');
-	secondDivContent.innerHTML = firstDivContent.innerHTML;
-}
-
-function reloadSats()
-{
-	var firstDivContent = document.getElementById('display');
-	var secondDivContent = document.getElementById('saveSatsDiv');
-	firstDivContent.innerHTML = secondDivContent.innerHTML;
-	window.polState = 0
-}
-
-function polFound()
-{
-	reloadSats();
-	setTimeout(function()		
-	{
-		window.polState = 1
-		document.getElementById("polSelect").value='✅';
-	}, (10));;
-}
-
+// Funktion zum Verwalten der Chatnachrichten, welche der Nutzer schreibt und die jewiligen Antworten
 function sendMsg()
 {
+
+	// Fehlermeldung, wenn man auf den Sendenknopf drückt, bevor er verwendet werden soll
 	if (window.calState === 0) {
 		alert('Fehler 33x404:								Keine Verbindung möglich');
 		document.getElementById("textField").value='';
 	}
+
+	// calState = 5, Nutzer muss "Oriosn Gürtel" eingeben als Antwort auf das Rätsel mit den Kabeln
 	if (window.calState === 5) {
 		const container = document.getElementById('textField');
+
+		// Wenn richtige Lösung angegeben, Textfeld löschen und nächste Nachricht in das passende DIV kopieren
 		if (container.value.includes('Orions Gürtel')) {
-			document.getElementById("msg3b").innerHTML='<div class="container"><img src="./pfp2.jpg" alt="Avatar"><p>Orions Gürtel</p></div>';
+			document.getElementById("msg3b").innerHTML='<div class="containerR"><img src="./pfp2.jpg" alt="Avatar"><p>Orions Gürtel</p></div>';
 			document.getElementById("textField").value='';
 			setTimeout(function()		
 			{
+
+				// calState inkrementieren, den Inhalt des Display DIV ins Chat DIV kopieren, um die neue Nachricht permanent zu speichern, statt nur temporär im Display DIV
     				document.getElementById("msg4").innerHTML='<div class="container"><img src="./pfp.jpg" alt="Avatar"><p>Die Antenne ist repariert! Jetzt haben wir endlich ein stabiles Signal, aber momentan können wir den Kanal nicht wechseln, da die Antenne erst noch kallibriert werden muss. Ich gebe dir jetzt immer ein Datum, eine Uhrzeit und eine Himmelsrichtung. Du musst mir dann sagen welches Sternenbild dort zu sehen ist.</p></div>';
 				window.calState = 1
 				var firstDivContent = document.getElementById('display');
@@ -175,13 +201,19 @@ function sendMsg()
 				secondDivContent.innerHTML = firstDivContent.innerHTML;
 				setTimeout(function()		
 				{
+
+					// Nochmals eine neue Nachricht ins passende DIV, Display wird in Chat kopiert um die Nachricht permanent zu haben
     					document.getElementById("msg5").innerHTML='<div class="container"><img src="./pfp.jpg" alt="Avatar"><p>10.08 2 Uhr, Norden</p></div>';
 					var firstDivContent = document.getElementById('display');
 					var secondDivContent = document.getElementById('chat');
 					secondDivContent.innerHTML = firstDivContent.innerHTML;
 				}, (5000));;
 			}, (1000));;
+		
+		// Fehlermeldung, wenn die Nachricht nicht die gesuchte Antwort enthält
 		} else {
+			
+			// Textfeld wird geleert, sowie das DIV für die Nachricht, damit auch bei einem zweiten falschen Lösungsversuch die Nachricht neu erscheint
 			document.getElementById("textField").value='';
 			document.getElementById("msg3b").innerHTML='';
 			setTimeout(function()		
@@ -193,7 +225,7 @@ function sendMsg()
 	if (window.calState === 1) {
 		const container = document.getElementById('textField');
 		if (container.value.includes('Großer Wagen')) {
-			document.getElementById("msg5b").innerHTML='<div class="container"><img src="./pfp2.jpg" alt="Avatar"><p>Großer Wagen</p></div>';
+			document.getElementById("msg5b").innerHTML='<div class="containerR"><img src="./pfp2.jpg" alt="Avatar"><p>Großer Wagen</p></div>';
 			document.getElementById("textField").value='';
 			setTimeout(function()		
 			{
@@ -215,7 +247,7 @@ function sendMsg()
 	if (window.calState === 2) {
 		const container = document.getElementById('textField');
 		if (container.value.includes('Hase')) {
-			document.getElementById("msg6b").innerHTML='<div class="container"><img src="./pfp2.jpg" alt="Avatar"><p>Hase</p></div>';
+			document.getElementById("msg6b").innerHTML='<div class="containerR"><img src="./pfp2.jpg" alt="Avatar"><p>Hase</p></div>';
 			document.getElementById("textField").value='';
 			setTimeout(function()		
 			{
@@ -237,7 +269,7 @@ function sendMsg()
 	if (window.calState === 3) {
 		const container = document.getElementById('textField');
 		if (container.value.includes('Kleiner Hund')) {
-			document.getElementById("msg7b").innerHTML='<div class="container"><img src="./pfp2.jpg" alt="Avatar"><p>Kleiner Hund</p></div>';
+			document.getElementById("msg7b").innerHTML='<div class="containerR"><img src="./pfp2.jpg" alt="Avatar"><p>Kleiner Hund</p></div>';
 			document.getElementById("textField").value='';
 			setTimeout(function()		
 			{
@@ -260,7 +292,7 @@ function sendMsg()
 	if (window.calState === 4) {
 		const container = document.getElementById('textField');
 		if (container.value.includes('Löwe')) {
-			document.getElementById("msg8b").innerHTML='<div class="container"><img src="./pfp2.jpg" alt="Avatar"><p>Löwe</p></div>';
+			document.getElementById("msg8b").innerHTML='<div class="containerR"><img src="./pfp2.jpg" alt="Avatar"><p>Löwe</p></div>';
 			document.getElementById("textField").value='';
 			setTimeout(function()		
 			{
@@ -281,6 +313,7 @@ function sendMsg()
 	}
 }
 
+// Initaliesierung einiger Variablen, starten der Funktion, um alles richtig aufzusetzten
 window.onload = codeAddress;
 window.calState = 0;
 window.conState = 0;
