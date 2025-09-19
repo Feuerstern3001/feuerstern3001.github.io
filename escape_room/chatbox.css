@@ -114,6 +114,7 @@ input[type="button"]:disabled {
   border-radius: 5px;
   padding: 10px;
   margin: 10px 0;
+  position: sticky;
 }
 .nav-buttons-notif {
   border: 2px solid #dedede;
@@ -121,6 +122,7 @@ input[type="button"]:disabled {
   border-radius: 5px;
   padding: 10px;
   margin: 10px 0;
+  position: sticky;
   animation-name: notification;
   animation-duration: 1s;
 }
@@ -144,4 +146,10 @@ input[type="button"]:disabled {
 .sat-pin {
   float: left;
   font-size: 130%;
+}
+.pol-show {
+  float: right;
+  margin-top: 12%;
+  border: 2px solid #000000;
+  padding: 1%;
 }

@@ -100,7 +100,7 @@ function polFound()
 	setTimeout(function()		
 	{
 		window.polState = 1
-		document.getElementById("polSelect").value='✅';
+		document.getElementById("polSelect").innerHTML='✅';
 	}, (10));;
 }
 
@@ -173,6 +173,7 @@ function startRocket()
 }
 
 // Funktion zum Verwalten der Chatnachrichten, welche der Nutzer schreibt und die jewiligen Antworten
+// Erklärung beispielhaft am ersten Fall (calState = 5), bis auf ein if-Statement (extra erwähnt) jeweils identsich
 function sendMsg()
 {
 
@@ -203,7 +204,8 @@ function sendMsg()
 				{
 
 					// Nochmals eine neue Nachricht ins passende DIV, Display wird in Chat kopiert um die Nachricht permanent zu haben
-    					document.getElementById("msg5").innerHTML='<div class="container"><img src="./pfp.jpg" alt="Avatar"><p>10.08 2 Uhr, Norden</p></div>';
+    					// Diese extra Nachricht existiert nur bei diesem Schritt, in den späteren wurde alles in einem gelöst
+					document.getElementById("msg5").innerHTML='<div class="container"><img src="./pfp.jpg" alt="Avatar"><p>10.08 2 Uhr, Norden</p></div>';
 					var firstDivContent = document.getElementById('display');
 					var secondDivContent = document.getElementById('chat');
 					secondDivContent.innerHTML = firstDivContent.innerHTML;
