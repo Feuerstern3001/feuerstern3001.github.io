@@ -55,12 +55,12 @@ input[type="button"]:disabled {
   float: right;
 }
 .sat-boxL {
-  float: left;
+  display: inline-block;
   min-width: 475px;
   max-width: 475px;
   padding: 1%;
   border: 3px solid #000055;
-  overflow-y:auto;
+  overflow-y: auto;
   margin: 0.5%;
 }
 .sat-name {
@@ -115,6 +115,7 @@ input[type="button"]:disabled {
   padding: 10px;
   margin: 10px 0;
   position: sticky;
+  top: 10;
 }
 .nav-buttons-notif {
   border: 2px solid #dedede;
@@ -123,6 +124,7 @@ input[type="button"]:disabled {
   padding: 10px;
   margin: 10px 0;
   position: sticky;
+  top: 10;
   animation-name: notification;
   animation-duration: 1s;
 }
