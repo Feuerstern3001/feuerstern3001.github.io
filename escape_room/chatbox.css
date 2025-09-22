@@ -37,6 +37,8 @@ input[type="button"]:disabled {
   overflow-y:auto;
   min-height: 888px;
   max-height: 888px;
+  display: flex;
+  flex-direction: column-reverse;
 }
 .text-field {
   min-height: 40px;
@@ -136,12 +138,6 @@ input[type="button"]:disabled {
   80% {background-color: orange;}
   100% {background-color: #f1f1f1;}
 }
-.admin-button {
-  float: right;
-  background-color: #aaffff;
-  color: #ffffff;
-  border: 0px solid #dedede;
-}
 .login-box {
   padding: 1%;
 }
@@ -154,4 +150,16 @@ input[type="button"]:disabled {
   margin-top: 12%;
   border: 2px solid #000000;
   padding: 1%;
+}
+.start-button {
+  background-color: #22dd88;
+  color: #ffffff;
+  padding: 2%;
+  font-size: 150%;
+}
+.end-button {
+  background-color: #dd2222;
+  color: #ffffff;
+  padding: 2%;
+  font-size: 150%;
 }

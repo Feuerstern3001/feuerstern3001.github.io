@@ -1,11 +1,12 @@
 <script src="chatbox.js"></script>
 <link rel="stylesheet" href="chatbox.css">
 
-  <!-- Navigation Buttons und ein Admin Button um das Eingeben des Passworts zu umgehen (Zeit sparen sonst nichts) -->
-<input type="button" value="Quadranten Auswahl" onclick="showLogin();" class="nav-buttons">
+  <!-- Navigation Buttons -->
+<input type="button" value="Quadranten Auswahl" id="loginButton" onclick="showLogin();" class="nav-buttons">
 <input type="button" value="Chat" onclick="showChat();" id="chatButton" class="nav-buttons">
 <input type="button" value="Gerätepanel" onclick="showGeräte();" id="geräteButton" class="nav-buttons">
-<input type="button" value="admin" onclick="adminLogin();" class="admin-button">
+<input type="button" class="nav-buttons">
+<input type="button" value="Rätsel Ressourcen" onclick="showRess();" id="ressButton" class="nav-buttons">
 
   <!-- Dieses DIV ist das einzige, welches man sieht, die eigentlichen Seiten werden hinein kopiert -->
 <div id="display">
@@ -71,7 +72,8 @@
   als auch für wenn ein Lösungsversuch nicht stimmt. Diese Mittteilung wird von der richtigen Nachricht überschrieben
   -->
 <div id="chat" style="display: none;">
-	<div id="msg_box" class="chat-msgs">
+	<div class="chat-msgs">
+	<div id="msg_box" >
 		<div id="msg1">
 
 		</div>
@@ -115,6 +117,7 @@
 
 		</div>
 	</div>
+	</div>
 	<br><div>
 		<input type="button" onclick="sendMsg();" value="Senden" class="send-button">
 		<input type="text" class="text-field" id="textField">
@@ -132,6 +135,8 @@
 	  Außerdem eine disabled Textbox, hier ohne Nutzen (außer optisch)
 	  -->
 	<div class="sat-boxL">
+
+		<!-- Bilder müssen eine Auflösung von 240 x 158 haben, damit die Skalierung der anderen Elemente passt -->
 		<img src="./sat (1).jpg" alt="Avatar">
 		<div style="float: right; max-width: 45%;">
 			<div class="sat-name">
@@ -154,7 +159,7 @@
 		<select name="quad" id="quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
-		  <option value="sichel">Grabsichel</option>
+		  <option value="stichel">Grabstichel</option>
 		  <option value="segel">Segel</option>
 		  <option value="orion">Orion</option>
 		  <option value="kHund">Kleiner Hund</option>
@@ -173,7 +178,7 @@
 		<select name="quad" id="quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
-		  <option value="sichel">Grabsichel</option>
+		  <option value="stichel">Grabstichel</option>
 		  <option value="segel">Segel</option>
 		  <option value="orion">Orion</option>
 		  <option value="kHund">Kleiner Hund</option>
@@ -192,7 +197,7 @@
 		<select name="quad" id="quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
-		  <option value="sichel">Grabsichel</option>
+		  <option value="stichel">Grabstichel</option>
 		  <option value="segel">Segel</option>
 		  <option value="orion">Orion</option>
 		  <option value="kHund">Kleiner Hund</option>
@@ -229,7 +234,7 @@
 		<select name="quad" id="quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
-		  <option value="sichel">Grabsichel</option>
+		  <option value="stichel">Grabstichel</option>
 		  <option value="segel">Segel</option>
 		  <option value="orion">Orion</option>
 		  <option value="kHund">Kleiner Hund</option>
@@ -248,7 +253,7 @@
 		<select name="quad" id="quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
-		  <option value="sichel">Grabsichel</option>
+		  <option value="stichel">Grabstichel</option>
 		  <option value="segel">Segel</option>
 		  <option value="orion">Orion</option>
 		  <option value="kHund">Kleiner Hund</option>
@@ -267,7 +272,7 @@
 		<select name="quad" id="quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
-		  <option value="sichel">Grabsichel</option>
+		  <option value="stichel">Grabstichel</option>
 		  <option value="segel">Segel</option>
 		  <option value="orion">Orion</option>
 		  <option value="kHund">Kleiner Hund</option>
@@ -304,7 +309,7 @@
 		<select name="quad" id="quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
-		  <option value="sichel">Grabsichel</option>
+		  <option value="stichel">Grabstichel</option>
 		  <option value="segel">Segel</option>
 		  <option value="orion">Orion</option>
 		  <option value="kHund">Kleiner Hund</option>
@@ -323,7 +328,7 @@
 		<select name="quad" id="quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
-		  <option value="sichel">Grabsichel</option>
+		  <option value="stichel">Grabstichel</option>
 		  <option value="segel">Segel</option>
 		  <option value="orion">Orion</option>
 		  <option value="kHund">Kleiner Hund</option>
@@ -342,7 +347,7 @@
 		<select name="quad" id="quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
-		  <option value="sichel">Grabsichel</option>
+		  <option value="stichel">Grabstichel</option>
 		  <option value="segel">Segel</option>
 		  <option value="orion">Orion</option>
 		  <option value="kHund">Kleiner Hund</option>
@@ -382,7 +387,7 @@
 		<select name="nav_quad" id="nav_quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
-		  <option value="sichel">Grabsichel</option>
+		  <option value="stichel">Grabstichel</option>
 		  <option value="segel">Segel</option>
 		  <option value="orion">Orion</option>
 		  <option value="kHund">Kleiner Hund</option>
@@ -401,7 +406,7 @@
 		<select name="nah_quad" id="nah_quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
-		  <option value="sichel">Grabsichel</option>
+		  <option value="stichel">Grabstichel</option>
 		  <option value="segel">Segel</option>
 		  <option value="orion">Orion</option>
 		  <option value="kHund">Kleiner Hund</option>
@@ -420,7 +425,7 @@
 		<select name="fern_quad" id="fern_quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
-		  <option value="sichel">Grabsichel</option>
+		  <option value="stichel">Grabstichel</option>
 		  <option value="segel">Segel</option>
 		  <option value="orion">Orion</option>
 		  <option value="kHund">Kleiner Hund</option>
@@ -457,7 +462,7 @@
 		<select name="quad" id="quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
-		  <option value="sichel">Grabsichel</option>
+		  <option value="stichel">Grabstichel</option>
 		  <option value="segel">Segel</option>
 		  <option value="orion">Orion</option>
 		  <option value="kHund">Kleiner Hund</option>
@@ -476,7 +481,7 @@
 		<select name="quad" id="quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
-		  <option value="sichel">Grabsichel</option>
+		  <option value="stichel">Grabstichel</option>
 		  <option value="segel">Segel</option>
 		  <option value="orion">Orion</option>
 		  <option value="kHund">Kleiner Hund</option>
@@ -495,7 +500,7 @@
 		<select name="quad" id="quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
-		  <option value="sichel">Grabsichel</option>
+		  <option value="stichel">Grabstichel</option>
 		  <option value="segel">Segel</option>
 		  <option value="orion">Orion</option>
 		  <option value="kHund">Kleiner Hund</option>
@@ -532,7 +537,7 @@
 		<select name="quad" id="quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
-		  <option value="sichel">Grabsichel</option>
+		  <option value="stichel">Grabstichel</option>
 		  <option value="segel">Segel</option>
 		  <option value="orion">Orion</option>
 		  <option value="kHund">Kleiner Hund</option>
@@ -551,7 +556,7 @@
 		<select name="quad" id="quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
-		  <option value="sichel">Grabsichel</option>
+		  <option value="stichel">Grabstichel</option>
 		  <option value="segel">Segel</option>
 		  <option value="orion">Orion</option>
 		  <option value="kHund">Kleiner Hund</option>
@@ -570,7 +575,7 @@
 		<select name="quad" id="quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
-		  <option value="sichel">Grabsichel</option>
+		  <option value="stichel">Grabstichel</option>
 		  <option value="segel">Segel</option>
 		  <option value="orion">Orion</option>
 		  <option value="kHund">Kleiner Hund</option>
@@ -607,7 +612,7 @@
 		<select name="quad" id="quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
-		  <option value="sichel">Grabsichel</option>
+		  <option value="stichel">Grabstichel</option>
 		  <option value="segel">Segel</option>
 		  <option value="orion">Orion</option>
 		  <option value="kHund">Kleiner Hund</option>
@@ -626,7 +631,7 @@
 		<select name="quad" id="quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
-		  <option value="sichel">Grabsichel</option>
+		  <option value="stichel">Grabstichel</option>
 		  <option value="segel">Segel</option>
 		  <option value="orion">Orion</option>
 		  <option value="kHund">Kleiner Hund</option>
@@ -645,7 +650,7 @@
 		<select name="quad" id="quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
-		  <option value="sichel">Grabsichel</option>
+		  <option value="stichel">Grabstichel</option>
 		  <option value="segel">Segel</option>
 		  <option value="orion">Orion</option>
 		  <option value="kHund">Kleiner Hund</option>
@@ -682,7 +687,7 @@
 		<select name="quad" id="quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
-		  <option value="sichel">Grabsichel</option>
+		  <option value="stichel">Grabstichel</option>
 		  <option value="segel">Segel</option>
 		  <option value="orion">Orion</option>
 		  <option value="kHund">Kleiner Hund</option>
@@ -701,7 +706,7 @@
 		<select name="quad" id="quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
-		  <option value="sichel">Grabsichel</option>
+		  <option value="stichel">Grabstichel</option>
 		  <option value="segel">Segel</option>
 		  <option value="orion">Orion</option>
 		  <option value="kHund">Kleiner Hund</option>
@@ -720,7 +725,7 @@
 		<select name="quad" id="quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
-		  <option value="sichel">Grabsichel</option>
+		  <option value="stichel">Grabstichel</option>
 		  <option value="segel">Segel</option>
 		  <option value="orion">Orion</option>
 		  <option value="kHund">Kleiner Hund</option>
@@ -757,7 +762,7 @@
 		<select name="quad" id="quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
-		  <option value="sichel">Grabsichel</option>
+		  <option value="stichel">Grabstichel</option>
 		  <option value="segel">Segel</option>
 		  <option value="orion">Orion</option>
 		  <option value="kHund">Kleiner Hund</option>
@@ -776,7 +781,7 @@
 		<select name="quad" id="quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
-		  <option value="sichel">Grabsichel</option>
+		  <option value="stichel">Grabstichel</option>
 		  <option value="segel">Segel</option>
 		  <option value="orion">Orion</option>
 		  <option value="kHund">Kleiner Hund</option>
@@ -795,7 +800,7 @@
 		<select name="quad" id="quad">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
-		  <option value="sichel">Grabsichel</option>
+		  <option value="stichel">Grabstichel</option>
 		  <option value="segel">Segel</option>
 		  <option value="orion">Orion</option>
 		  <option value="kHund">Kleiner Hund</option>
@@ -820,24 +825,102 @@
 <div id="sternKarte" style="display: none;">
 	<img src="./polStern.png" alt="Sternkarte" usemap="#polStern">
 	<map name="polStern">
-		<area shape="circle" coords="1119,848,5" onclick="polFound()" class="pointer">
-		<area shape="circle" coords="1496,816,5" onclick="reloadSats()" class="pointer">
-		<area shape="circle" coords="1562,910,5" onclick="reloadSats()" class="pointer">
-		<area shape="circle" coords="1390,687,5" onclick="reloadSats()" class="pointer">
-		<area shape="circle" coords="1878,992,7" onclick="reloadSats()" class="pointer">
-		<area shape="circle" coords="1624,150,5" onclick="reloadSats()" class="pointer">
-		<area shape="circle" coords="1183,230,5" onclick="reloadSats()" class="pointer">
-		<area shape="circle" coords="1209,190,6" onclick="reloadSats()" class="pointer">
-		<area shape="circle" coords="1010,77,5" onclick="reloadSats()" class="pointer">
-		<area shape="circle" coords="694,207,6" onclick="reloadSats()" class="pointer">
-		<area shape="circle" coords="858,19,7" onclick="reloadSats()" class="pointer">
-		<area shape="circle" coords="768,44,5" onclick="reloadSats()" class="pointer">
-		<area shape="circle" coords="874,254,5" onclick="reloadSats()" class="pointer">
-		<area shape="circle" coords="934,429,7" onclick="reloadSats()" class="pointer">
-		<area shape="circle" coords="1004,390,5" onclick="reloadSats()" class="pointer">
-		<area shape="circle" coords="799,581,5" onclick="reloadSats()" class="pointer">
-		<area shape="circle" coords="810,828,5" onclick="reloadSats()" class="pointer">
-		<area shape="circle" coords="267,356,5" onclick="reloadSats()" class="pointer">
-		<area shape="circle" coords="479,556,5" onclick="reloadSats()" class="pointer">
+		<area shape="circle" coords="1119,848,10" onclick="polFound()" class="pointer">
+		<area shape="circle" coords="1496,816,10" onclick="reloadSats()" class="pointer">
+		<area shape="circle" coords="1562,910,10" onclick="reloadSats()" class="pointer">
+		<area shape="circle" coords="1390,687,10" onclick="reloadSats()" class="pointer">
+		<area shape="circle" coords="1878,992,14" onclick="reloadSats()" class="pointer">
+		<area shape="circle" coords="1624,150,10" onclick="reloadSats()" class="pointer">
+		<area shape="circle" coords="1183,230,10" onclick="reloadSats()" class="pointer">
+		<area shape="circle" coords="1209,190,12" onclick="reloadSats()" class="pointer">
+		<area shape="circle" coords="1010,77,10" onclick="reloadSats()" class="pointer">
+		<area shape="circle" coords="694,207,12" onclick="reloadSats()" class="pointer">
+		<area shape="circle" coords="858,19,14" onclick="reloadSats()" class="pointer">
+		<area shape="circle" coords="768,44,10" onclick="reloadSats()" class="pointer">
+		<area shape="circle" coords="874,254,10" onclick="reloadSats()" class="pointer">
+		<area shape="circle" coords="934,429,14" onclick="reloadSats()" class="pointer">
+		<area shape="circle" coords="1004,390,10" onclick="reloadSats()" class="pointer">
+		<area shape="circle" coords="799,581,10" onclick="reloadSats()" class="pointer">
+		<area shape="circle" coords="810,828,10" onclick="reloadSats()" class="pointer">
+		<area shape="circle" coords="267,356,10" onclick="reloadSats()" class="pointer">
+		<area shape="circle" coords="479,556,10" onclick="reloadSats()" class="pointer">
 	</map>
+</div>
+
+  <!-- Alle benötigten Ressourcen zum Lösen der Rätsel -->
+<div id="ress" style="display: none;">
+	<input type="button" value="Mond Fakten" onclick="mondFakten();">
+	<input type="button" value="Mars Fakten" onclick="marsFakten();">
+	<input type="button" value="Quadranten Karte" onclick="quandMap();">
+	<input type="button" value="Sternbilder mit Sternnamen" onclick="sternBilder();">
+	<input type="button" value="Kabel und das Gedicht" onclick="wiresPoem();">
+	<button class="btn btn-success" onclick=" window.open('https://www2.mpia-hd.mpg.de/homes/tmueller/projects/other/virtualtour/?pan=Sternkarte&visible')"> Interaktive Sternkarte</button>
+
+</form>
+
+	<div id="ressShow" style="font-size: 150%; margin: 1%;">
+		
+	</div>
+</div>
+
+<div id="mondF" style="display: none;">
+☾ MOND FAKTEN ☾<br><br>
+Der Mond ist der einzige natürliche Satellit, oder Trabant, der Erde. Weil die natürlichen Satelliten anderer Planeten des Sonnensystems meist ebenfalls als Monde bezeichnet werden, spricht man manchmal auch vom Erdmond.<br><br>
+Der Mond umkreist die Erde in einem mittleren Abstand von nur rund 384.000 Kilometern (etwa 30 Erddurchmesser). Das ist trotzdem genug Abstand, dass die restlichen Planeten des Sonnensystems zwischen den Mond und die Erde passen.<br><br>
+Sein astronomisches Symbol ☾ ist die nach rechts offene (abnehmende) Mondstichel, wie sie als Mondphase von der Nordhalbkugel der Erde aus gesehen im letzten Viertel erscheint.<br><br>
+Der Mond hat einen Durchmesser von etwa 3475 km und ist somit der fünftgrößte Mond des Sonnensystems. Im Verhältnis zu seinem Zentralkörper, also zu dem Planeten den er umkreist,  ist er mit über einem Viertel des Erddurchmessers sogar der größte.<br><br>
+Der Mond leuchtet nicht selbst. Er erscheint deswegen so hell im Nachthimmel, weil die Sonne ihn anscheint und er das Licht auf die Erde zurück wirft.<br><br>
+Aufgrund seiner Nähe ist er der am besten erforschte fremde Himmelskörper, und auch der bisher einzige, den Menschen betreten haben, das erste Mal 1969 von 2 US-Amerikanern, Neil Armstrong und Buzz Aldrin.<br><br>
+Der Mond umkreist die Erde in durchschnittlich etwa 27 Tagen und 8 Stunden. Er umläuft die Erde von Westen nach Osten im gleichen Drehsinn, mit dem die Erde um ihre Achse rotiert. Er umkreist die Erde für einen menschlichen Beobachter wegen ihrer viel schnelleren Rotation scheinbar an einem Tag.<br><br>
+</div>
+
+<div id="marsF" style="display: none;">
+♂ MARS FAKTEN ♂<br><br>
+Der Mars ist, von der Sonne aus gezählt, der vierte Planet im Sonnensystem und der äußere Nachbar der Erde. Er zählt zu den erdähnlichen (terrestrischen) Planeten.<br><br>
+Mit einem Durchmesser von knapp 6800 Kilometern ist er etwa halb so groß wie die Erde und sein Volumen beträgt gut ein Siebtel des Erdvolumens, womit der Mars nach dem Merkur der zweitkleinste Planet des Sonnensystems ist.<br><br>
+Die Masse des Mars beträgt etwa ein Zehntel der Erdmasse. Die Anziehungskraft auf seiner Oberfläche beträgt 3,69 m/s², dies entspricht etwa 38 % der Erdanziehung.<br><br>
+Er weist eine vielfältige Geologie sowie die höchsten Vulkane des Sonnensystems auf. Mit einer durchschnittlichen Entfernung von 228 Millionen Kilometern ist er rund 1,5-mal so weit von der Sonne entfernt wie die Erde.<br><br>
+Der Mars besitzt zwei kleine, unregelmäßig geformte Monde, die 1877 entdeckt wurden: Phobos und Deimos (griechisch für Furcht und Schrecken).<br><br>
+Der Mars wird auch als der Rote Planet bezeichnet. Diese Färbung geht auf Eisenoxid-Staub (Rost) zurück, der sich auf der Oberfläche und in der dünnen CO2-Atmosphäre verteilt hat.<br><br>
+Seine orange- bis blutrote Farbe und seine Helligkeitsschwankungen am irdischen Nachthimmel sind auch der Grund für seine Namensgebung nach dem römischen Kriegsgott Mars.<br><br>
+Das astronomische Symbol des Mars ist ♂.<br><br>
+In größeren Fernrohren deutlich sichtbar sind die zwei Polkappen und mehrere dunkle Ebenen, die sich im Frühjahr etwas verfärben. Fotos von Raumsonden zeigen eine teilweise mit Kratern bedeckte Oberfläche und starke Spuren früherer Tektonik (tiefe Canyons und einen über 20 km hohen Vulkan). Marsroboter haben schon mehrere Gebiete geologisch untersucht.
+</div>
+
+<div id="wires" style="display: none;">
+	<div style="float: left;">
+		Der Tag startet bei Minkar<br>
+		Schau, der Luchs ist schon da<br><br>
+		Des Widders Hörner sind scharf<br>
+		Wie die Scheren aus Acubens und Altarf<br><br>
+		Überall, von Canopus<br>
+		Bis zum Eridanus Fluß<br><br>
+		Alle Tiere treffen sich<br>
+		Keiner geht gegen den Strich<br><br>
+		Selbst der Löwe ist da<br>
+		Er bringt Freunde mit, von Mimosa<br><br>
+		Es wird spät, der Paradiesvogel fliegt los<br>
+		Er will nach Hause, nach Naos<br><br>
+		Für die Giraffe geht es schneller<br>
+		Auch sie muss heim, nach Capella<br><br>
+	</div>
+	<div style="float: right; border: 3px solid #000000">
+		<img src="./wires.png" alt="Kabelrätsel">
+	</div>
+</div>
+
+  <!-- Startfenster -->
+<div id="startDIV" style="display: none;">
+	<input type="button" value="Starte den Escape Room" class="start-button" onclick="startTimer();">
+	<output id="timer"></output>
+</div>
+
+  <!-- Gewonnen Grafik und Timer -->
+<div id="winDIV" style="display: none;">
+	<img src="./win.jpg" alt="Gewonnen Grafik">
+	<div style="font-size: 200%; float: right;">
+		Herzlichen Glückwunsch, <br>
+		du hast den Escape Room abgeschlossen! <br>
+		Deine Abschlusszeit: <p id="timeOut"></p>
+	</div>
 </div>
