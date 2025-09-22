@@ -174,12 +174,13 @@ function startRocket()
 		alert('Bitte wähle den Polarstern aus, damit das Gerät den Standort bestimmen kann!');
 
 	// Kontrolle ob die richtigen Quadranten ausgewählt sind, wenn nein, Fehlermeldung
-	} else if (window.polState === 1 && (navQ.value != "sichel" || (nahQ.value != "heck" || nahQ.value != "kiel") || ferQ.value != "pumpe")) {
+	} else if (window.polState === 1 && (navQ.value === "sichel" || !(nahQ.value === "heck" || nahQ.value === "kiel") || ferQ.value != "pumpe")) {
 		alert('Die angegebenen Quadranten sind nicht ausreichend zur Orientierung!');
 
 	// Wenn alles korrekt, setzte calState auf 5 für nächsten Schritt, Chat Button blinkt, nächste Nachricht
 	} else {
 		window.calState = 5
+		alert('Versorgungsrakete neu gestartet. Zweiter Dockingversuch in ca. 5:27 Minuten');
 		document.getElementById("chatButton").className = "nav-buttons";
 		setTimeout(function() 
 		{
