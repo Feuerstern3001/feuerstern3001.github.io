@@ -45,7 +45,7 @@ function login()
 			document.getElementById("geräteButton").disabled = false;
 			document.getElementById("chatButton").className = "nav-buttons-notif";
 		} else {
-			alert('Bitte wähle einen Quadranten aus um dich mit diesem zu verbinden');
+			alert('Quadrant und Passwort stimmen nicht überein! Gehe sicher dass du den richtigen Quadranten ausgewählt hast.');
 		}
 	}
 	else
@@ -407,6 +407,14 @@ function endTimer()
 	document.getElementById("geräteButton").disabled = true;
 	document.getElementById("loginButton").disabled = true;
 	document.getElementById("ressButton").disabled = true;
+}
+
+// Zeigt den Starttext
+function einLeitung()
+{
+	var firstDivContent = document.getElementById('preamble');
+	var secondDivContent = document.getElementById('ressShow');
+	secondDivContent.innerHTML = firstDivContent.innerHTML;
 }
 
 // Zeigt die Mondfakten
