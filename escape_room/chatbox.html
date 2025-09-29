@@ -14,12 +14,12 @@
 </div>
 
   <!-- Zwischenspeicher, wenn die Sternenkarte geöffnet wird -->
-<div id="saveSatsDiv" style="display: none;">
+<div id="saveSatsDiv" class="invis">
 
 </div>
 
   <!-- Auswahl des Quadranten, Passworteingabe um das Chat- und Gerätefenster frei zu schalten -->
-<div id="login" style="display: none;">
+<div id="login" class="invis">
 	<div class="login-box">
 		<label for="quad">Bitte wähle einen Quadranten: </label>
 		<select name="quad" id="quad">
@@ -71,7 +71,7 @@
   nur quasi, da die b Nachrichten sowohl verwendet werden, für die Nachrichten die der Nutzer schreibt,
   als auch für wenn ein Lösungsversuch nicht stimmt. Diese Mittteilung wird von der richtigen Nachricht überschrieben
   -->
-<div id="chat" style="display: none;">
+<div id="chat" class="invis">
 	<div class="chat-msgs">
 	<div id="msg_box" >
 		<div id="msg1">
@@ -128,17 +128,17 @@
   Gerätepanel, Erklärung beispielhaft an erstem DIV, gilt für alle bis auf das, welches die Lösung ist
   an diesem ist eine spezielle Beschreibung
   -->
-<div id="sats" style="display: none;">
+<div id="sats" class="invis">
 	  <!--
 	  Mehrere DIV zum gestalten eines Anzeigekastens, mehrere Buttons die als Ziel nur eine Fehlermeldung erzeugen
-	  und das PIN Feld welches zwar beschrieben werden kann aber keinen wirklichen Nutzen
+	  und das PIN Feld welches zwar beschrieben werden kann aber keinen wirklichen Nutzen hat
 	  Außerdem eine disabled Textbox, hier ohne Nutzen (außer optisch)
 	  -->
 	<div class="sat-boxL">
 
 		<!-- Bilder müssen eine Auflösung von 240 x 158 haben, damit die Skalierung der anderen Elemente passt -->
 		<img src="./sat (1).jpg" alt="Avatar">
-		<div style="float: right; max-width: 45%;">
+		<div class="sat-ordering">
 			<div class="sat-name">
 				<wbr> AMPLQTT.2029 <wbr>
 			</div>
@@ -156,7 +156,7 @@
 		  <!-- Auswahl und Beschriftung für die Quadranten -->
 		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
 		<wbr> <wbr>
-		<select name="quad" id="quad">
+		<select class="quad-dropdown">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
 		  <option value="stichel">Grabstichel</option>
@@ -173,9 +173,9 @@
 		  <option value="sextant">Sextant</option>
 		  <option value="perseus">Perseus</option>
 		</select>
-		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<br><br><div class="quad-name"><wbr> Orientierungsquadrant; Nah <wbr></div>
 		<wbr> <wbr>
-		<select name="quad" id="quad">
+		<select class="quad-dropdown">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
 		  <option value="stichel">Grabstichel</option>
@@ -192,9 +192,9 @@
 		  <option value="sextant">Sextant</option>
 		  <option value="perseus">Perseus</option>
 		</select>
-		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<br><br><div class="quad-name"><wbr> Orientierungsquadrant; Fern <wbr></div>
 		<wbr> <wbr>
-		<select name="quad" id="quad">
+		<select class="quad-dropdown">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
 		  <option value="stichel">Grabstichel</option>
@@ -215,7 +215,7 @@
 
 	<div class="sat-boxL">
 		<img src="./sat (2).jpg" alt="Avatar">
-		<div style="float: right; max-width: 45%;">
+		<div class="sat-ordering">
 			<div class="sat-name">
 				<wbr> AMWPCMTT.7429 <wbr>
 			</div>
@@ -231,7 +231,7 @@
 		</div>
 		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
 		<wbr> <wbr>
-		<select name="quad" id="quad">
+		<select class="quad-dropdown">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
 		  <option value="stichel">Grabstichel</option>
@@ -248,9 +248,9 @@
 		  <option value="sextant">Sextant</option>
 		  <option value="perseus">Perseus</option>
 		</select>
-		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<br><br><div class="quad-name"><wbr> Orientierungsquadrant; Nah <wbr></div>
 		<wbr> <wbr>
-		<select name="quad" id="quad">
+		<select class="quad-dropdown">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
 		  <option value="stichel">Grabstichel</option>
@@ -267,9 +267,9 @@
 		  <option value="sextant">Sextant</option>
 		  <option value="perseus">Perseus</option>
 		</select>
-		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<br><br><div class="quad-name"><wbr> Orientierungsquadrant; Fern <wbr></div>
 		<wbr> <wbr>
-		<select name="quad" id="quad">
+		<select class="quad-dropdown">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
 		  <option value="stichel">Grabstichel</option>
@@ -290,7 +290,7 @@
 
 	<div class="sat-boxL">
 		<img src="./sat (3).jpg" alt="Avatar">
-		<div style="float: right; max-width: 45%;">
+		<div class="sat-ordering">
 			<div class="sat-name">
 				<wbr> TRVSUIO.2412 <wbr>
 			</div>
@@ -306,7 +306,7 @@
 		</div>
 		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
 		<wbr> <wbr>
-		<select name="quad" id="quad">
+		<select class="quad-dropdown">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
 		  <option value="stichel">Grabstichel</option>
@@ -323,9 +323,9 @@
 		  <option value="sextant">Sextant</option>
 		  <option value="perseus">Perseus</option>
 		</select>
-		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<br><br><div class="quad-name"><wbr> Orientierungsquadrant; Nah <wbr></div>
 		<wbr> <wbr>
-		<select name="quad" id="quad">
+		<select class="quad-dropdown">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
 		  <option value="stichel">Grabstichel</option>
@@ -342,9 +342,9 @@
 		  <option value="sextant">Sextant</option>
 		  <option value="perseus">Perseus</option>
 		</select>
-		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<br><br><div class="quad-name"><wbr> Orientierungsquadrant; Fern <wbr></div>
 		<wbr> <wbr>
-		<select name="quad" id="quad">
+		<select class="quad-dropdown">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
 		  <option value="stichel">Grabstichel</option>
@@ -369,7 +369,7 @@
   -->
 	<div class="sat-boxL">
 		<img src="./sat (4).jpg" alt="Avatar">
-		<div style="float: right; max-width: 45%;">
+		<div class="sat-ordering">
 			<div id="satName" class="sat-name">
 				<wbr> AMWPCMTT.6800 <wbr>
 			</div>
@@ -384,7 +384,7 @@
 		</div>
 		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
 		<wbr> <wbr>
-		<select name="nav_quad" id="nav_quad">
+		<select name="nav_quad" id="nav_quad" class="quad-dropdown">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
 		  <option value="stichel">Grabstichel</option>
@@ -401,9 +401,9 @@
 		  <option value="sextant">Sextant</option>
 		  <option value="perseus">Perseus</option>
 		</select>
-		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<br><br><div class="quad-name"><wbr> Orientierungsquadrant; Nah <wbr></div>
 		<wbr> <wbr>
-		<select name="nah_quad" id="nah_quad">
+		<select name="nah_quad" id="nah_quad" class="quad-dropdown">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
 		  <option value="stichel">Grabstichel</option>
@@ -420,9 +420,9 @@
 		  <option value="sextant">Sextant</option>
 		  <option value="perseus">Perseus</option>
 		</select>
-		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<br><br><div class="quad-name"><wbr> Orientierungsquadrant; Fern <wbr></div>
 		<wbr> <wbr>
-		<select name="fern_quad" id="fern_quad">
+		<select name="fern_quad" id="fern_quad" class="quad-dropdown">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
 		  <option value="stichel">Grabstichel</option>
@@ -443,7 +443,7 @@
 
 	<div class="sat-boxL">
 		<img src="./sat (5).jpg" alt="Avatar">
-		<div style="float: right; max-width: 45%;">
+		<div class="sat-ordering">
 			<div class="sat-name">
 				<wbr> LMNOPAA.1866 <wbr>
 			</div>
@@ -459,7 +459,7 @@
 		</div>
 		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
 		<wbr> <wbr>
-		<select name="quad" id="quad">
+		<select class="quad-dropdown">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
 		  <option value="stichel">Grabstichel</option>
@@ -476,9 +476,9 @@
 		  <option value="sextant">Sextant</option>
 		  <option value="perseus">Perseus</option>
 		</select>
-		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<br><br><div class="quad-name"><wbr> Orientierungsquadrant; Nah <wbr></div>
 		<wbr> <wbr>
-		<select name="quad" id="quad">
+		<select class="quad-dropdown">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
 		  <option value="stichel">Grabstichel</option>
@@ -495,9 +495,9 @@
 		  <option value="sextant">Sextant</option>
 		  <option value="perseus">Perseus</option>
 		</select>
-		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<br><br><div class="quad-name"><wbr> Orientierungsquadrant; Fern <wbr></div>
 		<wbr> <wbr>
-		<select name="quad" id="quad">
+		<select class="quad-dropdown">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
 		  <option value="stichel">Grabstichel</option>
@@ -518,7 +518,7 @@
 
 	<div class="sat-boxL">
 		<img src="./sat (6).jpg" alt="Avatar">
-		<div style="float: right; max-width: 45%;">
+		<div class="sat-ordering">
 			<div class="sat-name">
 				<wbr> HJQUYN.0005 <wbr>
 			</div>
@@ -534,7 +534,7 @@
 		</div>
 		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
 		<wbr> <wbr>
-		<select name="quad" id="quad">
+		<select class="quad-dropdown">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
 		  <option value="stichel">Grabstichel</option>
@@ -551,9 +551,9 @@
 		  <option value="sextant">Sextant</option>
 		  <option value="perseus">Perseus</option>
 		</select>
-		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<br><br><div class="quad-name"><wbr> Orientierungsquadrant; Nah <wbr></div>
 		<wbr> <wbr>
-		<select name="quad" id="quad">
+		<select class="quad-dropdown">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
 		  <option value="stichel">Grabstichel</option>
@@ -570,9 +570,9 @@
 		  <option value="sextant">Sextant</option>
 		  <option value="perseus">Perseus</option>
 		</select>
-		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<br><br><div class="quad-name"><wbr> Orientierungsquadrant; Fern <wbr></div>
 		<wbr> <wbr>
-		<select name="quad" id="quad">
+		<select class="quad-dropdown">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
 		  <option value="stichel">Grabstichel</option>
@@ -593,7 +593,7 @@
 
 	<div class="sat-boxL">
 		<img src="./sat (7).jpg" alt="Avatar">
-		<div style="float: right; max-width: 45%;">
+		<div class="sat-ordering">
 			<div class="sat-name">
 				<wbr> GTHZJUKI.2003 <wbr>
 			</div>
@@ -609,7 +609,7 @@
 		</div>
 		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
 		<wbr> <wbr>
-		<select name="quad" id="quad">
+		<select class="quad-dropdown">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
 		  <option value="stichel">Grabstichel</option>
@@ -626,9 +626,9 @@
 		  <option value="sextant">Sextant</option>
 		  <option value="perseus">Perseus</option>
 		</select>
-		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<br><br><div class="quad-name"><wbr> Orientierungsquadrant; Nah <wbr></div>
 		<wbr> <wbr>
-		<select name="quad" id="quad">
+		<select class="quad-dropdown">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
 		  <option value="stichel">Grabstichel</option>
@@ -645,9 +645,9 @@
 		  <option value="sextant">Sextant</option>
 		  <option value="perseus">Perseus</option>
 		</select>
-		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<br><br><div class="quad-name"><wbr> Orientierungsquadrant; Fern <wbr></div>
 		<wbr> <wbr>
-		<select name="quad" id="quad">
+		<select class="quad-dropdown">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
 		  <option value="stichel">Grabstichel</option>
@@ -668,7 +668,7 @@
 
 	<div class="sat-boxL">
 		<img src="./sat (8).jpg" alt="Avatar">
-		<div style="float: right; max-width: 45%;">
+		<div class="sat-ordering">
 			<div class="sat-name">
 				<wbr> DAPMCSNK.1809 <wbr>
 			</div>
@@ -684,7 +684,7 @@
 		</div>
 		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
 		<wbr> <wbr>
-		<select name="quad" id="quad">
+		<select class="quad-dropdown">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
 		  <option value="stichel">Grabstichel</option>
@@ -701,9 +701,9 @@
 		  <option value="sextant">Sextant</option>
 		  <option value="perseus">Perseus</option>
 		</select>
-		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<br><br><div class="quad-name"><wbr> Orientierungsquadrant; Nah <wbr></div>
 		<wbr> <wbr>
-		<select name="quad" id="quad">
+		<select class="quad-dropdown">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
 		  <option value="stichel">Grabstichel</option>
@@ -720,9 +720,9 @@
 		  <option value="sextant">Sextant</option>
 		  <option value="perseus">Perseus</option>
 		</select>
-		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<br><br><div class="quad-name"><wbr> Orientierungsquadrant; Fern <wbr></div>
 		<wbr> <wbr>
-		<select name="quad" id="quad">
+		<select class="quad-dropdown">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
 		  <option value="stichel">Grabstichel</option>
@@ -743,7 +743,7 @@
 
 	<div class="sat-boxL">
 		<img src="./sat (9).jpg" alt="Avatar">
-		<div style="float: right; max-width: 45%;">
+		<div class="sat-ordering">
 			<div class="sat-name">
 				<wbr> MPIGMCM.1649 <wbr>
 			</div>
@@ -759,7 +759,7 @@
 		</div>
 		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
 		<wbr> <wbr>
-		<select name="quad" id="quad">
+		<select class="quad-dropdown">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
 		  <option value="stichel">Grabstichel</option>
@@ -776,9 +776,9 @@
 		  <option value="sextant">Sextant</option>
 		  <option value="perseus">Perseus</option>
 		</select>
-		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<br><br><div class="quad-name"><wbr> Orientierungsquadrant; Nah <wbr></div>
 		<wbr> <wbr>
-		<select name="quad" id="quad">
+		<select class="quad-dropdown">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
 		  <option value="stichel">Grabstichel</option>
@@ -795,9 +795,9 @@
 		  <option value="sextant">Sextant</option>
 		  <option value="perseus">Perseus</option>
 		</select>
-		<br><br><div class="quad-name"><wbr> Navigationsquadrant; Aufenthaltsort <wbr></div>
+		<br><br><div class="quad-name"><wbr> Orientierungsquadrant; Fern <wbr></div>
 		<wbr> <wbr>
-		<select name="quad" id="quad">
+		<select class="quad-dropdown">
 		  <option value="nan">--------------------------</option>
 		  <option value="fliege">Fliege</option>
 		  <option value="stichel">Grabstichel</option>
@@ -820,9 +820,9 @@
   <!-- 
   Die Sternkarte besteht aus einer Image Map, an der die meisten größeren Sterne (mind. 5 Pixel Durchmesser)
   zu Klickflächen gemacht wurde, alle außer dem Polar Stern laden einfach das Gerätepanel zurück
-  ins Display DIV, der Polarstern setzt außerdem die Anzeige auf Grün und setzt eine Variable
+  ins Display DIV (rufen reloadSats auf), der Polarstern setzt außerdem die Anzeige auf Grün und eine Variable
   -->
-<div id="sternKarte" style="display: none;">
+<div id="sternKarte" class="invis">
 	<img src="./polStern.png" alt="Sternkarte" usemap="#polStern">
 	<map name="polStern">
 		<area shape="circle" coords="1119,848,10" onclick="polFound()" class="pointer">
@@ -848,7 +848,7 @@
 </div>
 
   <!-- Alle benötigten Ressourcen zum Lösen der Rätsel -->
-<div id="ress" style="display: none;">
+<div id="ress" class="invis">
 	<input type="button" value="Einleitung" onclick="einLeitung();">
 	<input type="button" value="Mond Fakten" onclick="mondFakten();">
 	<input type="button" value="Mars Fakten" onclick="marsFakten();">
@@ -861,7 +861,7 @@
 	</div>
 </div>
 
-<div id="mondF" style="display: none;">
+<div id="mondF" class="invis">
 ☾ MOND FAKTEN ☾<br><br>
 Der Mond ist der einzige natürliche Satellit, oder Trabant, der Erde. Weil die natürlichen Satelliten anderer Planeten des Sonnensystems meist ebenfalls als Monde bezeichnet werden, spricht man manchmal auch vom Erdmond.<br><br>
 Der Mond umkreist die Erde in einem mittleren Abstand von nur rund 384.000 Kilometern (etwa 30 Erddurchmesser). Das ist trotzdem genug Abstand, dass die restlichen Planeten des Sonnensystems zwischen den Mond und die Erde passen.<br><br>
@@ -872,7 +872,7 @@ Aufgrund seiner Nähe ist er der am besten erforschte fremde Himmelskörper, und
 Der Mond umkreist die Erde in durchschnittlich etwa 27 Tagen und 8 Stunden. Er umläuft die Erde von Westen nach Osten im gleichen Drehsinn, mit dem die Erde um ihre Achse rotiert. Er umkreist die Erde für einen menschlichen Beobachter wegen ihrer viel schnelleren Rotation scheinbar an einem Tag.<br><br>
 </div>
 
-<div id="marsF" style="display: none;">
+<div id="marsF" class="invis">
 ♂ MARS FAKTEN ♂<br><br>
 Der Mars ist, von der Sonne aus gezählt, der vierte Planet im Sonnensystem und der äußere Nachbar der Erde. Er zählt zu den erdähnlichen (terrestrischen) Planeten.<br><br>
 Mit einem Durchmesser von knapp 6800 Kilometern ist er etwa halb so groß wie die Erde und sein Volumen beträgt gut ein Siebtel des Erdvolumens, womit der Mars nach dem Merkur der zweitkleinste Planet des Sonnensystems ist.<br><br>
@@ -885,7 +885,7 @@ Das astronomische Symbol des Mars ist ♂.<br><br>
 In größeren Fernrohren deutlich sichtbar sind die zwei Polkappen und mehrere dunkle Ebenen, die sich im Frühjahr etwas verfärben. Fotos von Raumsonden zeigen eine teilweise mit Kratern bedeckte Oberfläche und starke Spuren früherer Tektonik (tiefe Canyons und einen über 20 km hohen Vulkan). Marsroboter haben schon mehrere Gebiete geologisch untersucht.
 </div>
 
-<div id="wires" style="display: none;">
+<div id="wires" class="invis">
 	<div style="float: left;">
 		Der Tag startet bei Minkar<br>
 		Schau, der Luchs ist schon da<br><br>
@@ -907,7 +907,7 @@ In größeren Fernrohren deutlich sichtbar sind die zwei Polkappen und mehrere d
 	</div>
 </div>
 
-<div id="preamble" style="display: none;">
+<div id="preamble" class="invis">
 Eine Gruppe Kinder bekommt eine Führung durch das Planetarium von einem Astronauten. Während die Führung in der Kuppel ist, wird der Astronaut von einem Mitarbeiten nach draußen gerufen. Dabei lässt er sein Handy liegen, welches auf einmal klingelt. Obwohl das Handy dem Astronauten gehört, nimmt eines der Kinder ab.
 <br>Das Handy knistert einen Moment, dann hört man die abgehackte Stimme eines Mannes: <br><br>"Thorsten gu…… Versorgun… verfehlt … Rationen halten nich… Kommunikations Sattelieten … auf der Internet Seite… Planetarium in dem du bist, gib das Passwort ein … Denk an die 3 W des Mondes, Wann … weit . . wie dick! 
 <br>Wir sind im … Quadrant mit dem . . Fisch und dem . . Hund. Aus dem Fenster sehe ich . . ius … "<br><br>
@@ -915,14 +915,14 @@ Auf einmal bricht die Verbindung ab. Die Kinder schauen sich nervös an, bis ein
 
 </div>
 
-  <!-- Startfenster -->
-<div id="startDIV" style="display: none;">
+  <!-- Startfenster mit Button zum Starten des (versteckten) Timers und zum Freischalten der Navigation Buttons-->
+<div id="startDIV" class="invis">
 	<input type="button" value="Starte den Escape Room" class="start-button" onclick="startTimer();">
 	<output id="timer"></output>
 </div>
 
-  <!-- Gewonnen Grafik und Timer -->
-<div id="winDIV" style="display: none;">
+  <!-- Gewonnen Grafik und Timeroutput -->
+<div id="winDIV" class="invis">
 	<img src="./win.jpg" alt="Gewonnen Grafik">
 	<div style="font-size: 200%; float: right;">
 		Herzlichen Glückwunsch, <br>

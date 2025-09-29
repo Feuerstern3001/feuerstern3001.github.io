@@ -9,6 +9,9 @@ input[type="button"]:disabled {
 .pointer {
   cursor: pointer;
 }
+.invis {
+  display: none;
+}
 .container {
   border: 2px solid #dedede;
   background-color: #f1f1f1;
@@ -65,6 +68,10 @@ input[type="button"]:disabled {
   overflow-y: auto;
   margin: 0.5%;
 }
+.sat-ordering {
+  float: right;
+  max-width: 45%;
+}
 .sat-name {
   float: right;
   font-size: 150%;
@@ -74,6 +81,9 @@ input[type="button"]:disabled {
   max-height: 30%;
   min-width: 100%;
   max-width: 100%;
+}
+.quad-dropdown {
+  float: right;
 }
 .sat-name-connect {
   float: right;
