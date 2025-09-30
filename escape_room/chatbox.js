@@ -102,7 +102,7 @@ function saveSats()
 	}
 }
 
-// Lädt die Gerätepanel Seite zurück ins Display DIV, wenn auf der Sternenkarten der falsche Stern ausgewählt wird, setzt außerdem polState auf 0, da nicht Polarstern
+// Lädt die Gerätepanel Seite zurück ins Display DIV, setzt außerdem polState auf 0, da nicht Polarstern
 function reloadSats()
 {
 	var firstDivContent = document.getElementById('display');
@@ -111,7 +111,7 @@ function reloadSats()
 	window.polState = 0
 }
 
-// Ruft reloadSats, setzt aber mit etwas Verzögerung polSelect auf 1, da nun der Polarstern gefunden wurde
+// Ruft reloadSats auf, setzt aber mit etwas Verzögerung polSelect auf 1, da nun der Polarstern gefunden wurde, außerdem setzt es ein Hacken
 function polFound()
 {
 	reloadSats();
@@ -125,6 +125,7 @@ function polFound()
 // Setzt conState auf 1 um den nächsten Schritt freizuschalten, außerdem setzt es die zweite Nachricht ein und bringt den Chat Button zum blinken
 function connectRocket()
 {
+	// Abfrage nach richtiger PIN
 	pwort = document.getElementById('passwort');
 	if(pwort.value == 1877) {
 		window.conState = 1;
@@ -132,6 +133,8 @@ function connectRocket()
 		// Der Chat Button muss zunächste die "notif" class entfernt bekommen, damit sie neu hinzugefügt werden kann um die Animation neu zu starten
 		document.getElementById("chatButton").className = "nav-buttons";
 		document.getElementById("satName").className = "sat-name-connect";
+
+		// Der Inhalt des Display DIV wird in das sats DIV kopiert, um zu speichern, dass mit der Rakete verbunden wude
 		var firstDivContent = document.getElementById('display');
 		var secondDivContent = document.getElementById('sats');
 		secondDivContent.innerHTML = firstDivContent.innerHTML;
@@ -208,7 +211,7 @@ function sendMsg()
 	if (window.calState === 5) {
 		const container = document.getElementById('textField');
 
-		// Wenn richtige Lösung angegeben, Textfeld löschen und nächste Nachricht in das passende DIV kopieren
+		// Wenn richtige Lösung angegeben, Textfeld löschen und nächste Nachricht in das passende DIV füllen
 		if (container.value.toLowerCase().includes('orions gürtel')) {
 			document.getElementById("msg3b").innerHTML='<div class="containerR"><img src="./pfp2.jpg" alt="Avatar"><p>Orions Gürtel</p></div>';
 			document.getElementById("textField").value='';
@@ -225,7 +228,7 @@ function sendMsg()
 				{
 
 					// Nochmals eine neue Nachricht ins passende DIV, Display wird in Chat kopiert um die Nachricht permanent zu haben
-    					// Diese extra Nachricht existiert nur bei diesem Schritt, in den späteren wurde alles in einem gelöst
+    					// Diese extra Nachricht existiert nur bei diesem Schritt, in den späteren werden alle Infos in einer Nachricht gegeben
 					document.getElementById("msg5").innerHTML='<div class="container"><img src="./pfp.jpg" alt="Avatar"><p>10.08 2 Uhr, Norden</p></div>';
 					var firstDivContent = document.getElementById('display');
 					var secondDivContent = document.getElementById('chat');
@@ -399,7 +402,7 @@ function endTimer()
 {
 	var seconds = document.getElementById('timer').value;
 	var firstDivContent = document.getElementById('timeOut');
-	firstDivContent.innerHTML = new Date(seconds * 1000).toISOString().substring(14, 19)
+	firstDivContent.innerHTML = new Date(seconds * 1000).toISOString().substring(11, 19)
 	var firstDivContent = document.getElementById('winDIV');
 	var secondDivContent = document.getElementById('display');
 	secondDivContent.innerHTML = firstDivContent.innerHTML;
@@ -409,6 +412,7 @@ function endTimer()
 	document.getElementById("ressButton").disabled = true;
 }
 
+// Folgende Funktionen behandeln die Ressourcen Ansicht, diese verwendet ein eigenes Display DIV um schnelles wechseln zwischen den Ressourcen zu ermöglichen
 // Zeigt den Starttext
 function einLeitung()
 {
